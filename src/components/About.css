@@ -1,0 +1,14 @@
+.about-section {
+  background-color: #5b95a7;
+  padding: 4rem;
+}
+
+.about-description {
+  margin: 3rem;
+}
+
+@media screen and (max-width: 600px) {
+  div.about-section {
+    font-size: 0.7rem;
+  }
+}

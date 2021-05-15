@@ -1,0 +1,13 @@
+.gallery-section {
+  background-color: #5b95a7;
+  min-height: 70vh;
+  padding: 4rem;
+}
+
+img {
+  transition: transform .35s ease;
+    transition-property: transform;
+    transition-duration: 0.35s;
+    transition-timing-function: ease;
+    transition-delay: 0s;
+}

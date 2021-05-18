@@ -1,9 +1,24 @@
+@font-face {
+  font-family: "OpenSans";
+  src: url("../static/fonts/OpenSans-Light.ttf") format("truetype"),
+    url("../static/fonts/OpenSans-Bold.ttf") format("truetype"),
+    url("../static/fonts/OpenSans-Light.ttf") format("truetype"),
+    url("../static/fonts/OpenSans-Light.ttf") format("truetype"),
+    url("../static/fonts/OpenSans-Light.ttf") format("truetype"),
+    url("../static/fonts/OpenSans-Light.ttf") format("truetype");
+}
+@font-face {
+  font-family: "CloisterBlack";
+  src: url("../static/fonts/CloisterBlack.ttf") format("truetype")
+}
+
 .header {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   font-size: calc(10px + 3.5vmin);
-  font-family: KingthingsItalique;
+  font-family: OpenSans;
+  font-weight: bold;
   color: black;
 }
 

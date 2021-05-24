@@ -37,7 +37,7 @@ export const ShowcaseText = styles.div`
     margin: auto;
     font-size: 1.8rem;
     letter-spacing: 2px;
-    color: #043f7a;
+    color: #043f7a; // previous color
     color: #900d3d;
     
     span:first-child > * {

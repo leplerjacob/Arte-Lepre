@@ -5,11 +5,13 @@ import {
   LeftSideText,
   RightSideImg,
 } from "./home/homeStyles";
+import ReviewsContainer from './ReviewsContainer'
 import case11 from "../images/Case_11.png";
 
 function Home() {
   return (
     <Section>
+      <ReviewsContainer />
       <Content>
         <LeftSideText>
           <h2>Antiques Restoration & Conservation</h2>

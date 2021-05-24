@@ -53,6 +53,8 @@ export const Logo = styles.span`
     font-family: CloisterBlack;
     font-weight: 800;
     color: rgb(231, 67, 67);
+    color: #900d3d;
+    color: whitesmoke;
     font-size: 3rem;
     margin-left: 5vw;
     letter-spacing: 5px;

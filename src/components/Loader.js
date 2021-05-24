@@ -20,6 +20,7 @@ function Loader() {
       <div className="App-loader" id="App-loader">
           {"WELCOME"}
         <img src={logo} className="App-logo" alt="logo" />
+          {"BENVENUTO"}
       </div>
     </CSSTransition>
   );

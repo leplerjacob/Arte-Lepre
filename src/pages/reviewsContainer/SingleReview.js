@@ -5,10 +5,8 @@ import "./reviewTransition.css";
 
 const SingleReview = ({ review }) => {
   const [inProp, setInProp] = useState(false);
-  const [reviewState, setReviewState] = useState("");
 
   useEffect(() => {
-    setReviewState(review);
     setInProp(true);
     // setTimeout(() => {
     //   setInProp(false);

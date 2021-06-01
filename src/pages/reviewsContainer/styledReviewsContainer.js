@@ -1,4 +1,5 @@
 import styles from 'styled-components'
+import { device } from '../../components/breakpoints'
 
 export const StyledReviewsContainer = styles.div`
   position: absolute;
@@ -24,5 +25,21 @@ export const StyledReviewsContainer = styles.div`
   span:last-child {
     color: red;
     align-self: flex-end;
+  }
+
+  @media ${device.tablet} {
+    all: unset;
+    position: absolute;
+    top: 42vh;
+    width: 250px;
+    font-size: 1rem;
+    right: 15px;
+    color: #900d3d;
+
+    span:nth-child(2) {
+      display: none;
+    }
+
+    display: none;
   }
 `;

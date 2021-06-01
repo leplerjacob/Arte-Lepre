@@ -50,10 +50,17 @@ export const Logo = styles.span`
         src: url(${CloisterBlack}) format("truetype")
     }
 
+    @media ${device.mobile} {
+        position: absolute;
+        width: 100%;
+        top: 13px;
+        margin: auto;
+    }
+
     font-family: CloisterBlack;
     font-weight: 800;
-    color: rgb(231, 67, 67);
-    color: #900d3d;
+    color: rgb(231, 67, 67); // keep
+    color: #900d3d; // keep
     color: whitesmoke;
     font-size: 3rem;
     margin-left: 5vw;

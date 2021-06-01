@@ -26,6 +26,10 @@ export const ShowcaseText = styles.div`
         src: url(${OpenSansLight}) format("truetype")
     }
 
+    @media ${device.laptopL} {
+        width: 100vw;
+    }
+
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -46,10 +50,14 @@ export const ShowcaseText = styles.div`
         
         @media ${device.tablet} {
             letter-spacing: 0;
+            font-size: 1.75rem;
         }
     }
-    
-    span:first-child > h3:first-of-type {
+
+    span:first-child {
+        @media ${device.mobileS} {
+            margin-top: 100px;
+        }
     }
 
     span:last-child {
@@ -57,11 +65,14 @@ export const ShowcaseText = styles.div`
         font-size: 1rem;
         position: absolute;
         color: whitesmoke;
-        margin: auto 10px;
         bottom: 0;
         display: flex;
-        font-size: 1.25rem;
-        justify-content: flex-start;
+        font-size: 1rem;
+        justify-content: space-between;
+    }
+
+    h3 {
+        margin: 0 1.25rem;
     }
 
 `;

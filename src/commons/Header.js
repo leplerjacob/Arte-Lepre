@@ -16,7 +16,6 @@ function Header() {
         <StyledNav>
           <div>
             <Logo>Arte Lepre</Logo>
-            {/* <SinceYear>since 1959</SinceYear> */}
           </div>
           <NavBar />
         </StyledNav>

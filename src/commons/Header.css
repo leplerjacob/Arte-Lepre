@@ -12,6 +12,8 @@
   src: url("../static/fonts/CloisterBlack.ttf") format("truetype")
 }
 
+
+
 .header {
   min-height: 100vh;
   display: flex;

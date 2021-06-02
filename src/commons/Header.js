@@ -3,11 +3,12 @@ import Home from "../pages/Home";
 import Gallery from "../components/Gallery";
 import About from "../components/About";
 import Contact from "../components/Contact";
+import ForSale from "../components/ForSale";
 import { default as NavBar } from "./header/Burger";
 import Showcase from "./Showcase";
 import { ChevronDownIcon } from "@heroicons/react/outline";
 
-import { NavWrapper, StyledNav, Logo, SinceYear } from "./header/styledHeader";
+import { NavWrapper, StyledNav, Logo, SinceYear, Icon } from "./header/styledHeader";
 
 function Header() {
   return (
@@ -15,7 +16,8 @@ function Header() {
       <NavWrapper>
         <StyledNav>
           <div>
-            <Logo>Arte Lepre</Logo>
+            <Icon />
+            <Logo>Arte Lepre<SinceYear>since 1959</SinceYear></Logo>
           </div>
           <NavBar />
         </StyledNav>
@@ -33,6 +35,9 @@ function Header() {
         </Route>
         <Route exact path="/contact">
           <Contact />
+        </Route>
+        <Route exact path="/for-sale">
+          <ForSale />
         </Route>
       </Switch>
     </Router>

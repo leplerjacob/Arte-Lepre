@@ -2,11 +2,13 @@ import styles from 'styled-components'
 import { device } from '../../components/breakpoints'
 import CloisterBlack from '../../static/fonts/CloisterBlack.ttf'
 import OpenSansLight from '../../static/fonts/OpenSans-Light.ttf'
+import circle from '../../images/logo310.png'
 
 export const NavWrapper = styles.header`
 position: absolute;
     top: 0;
     width: 100%;
+    background: #282e5f;
 `
 
 export const StyledNav = styles.nav`
@@ -17,12 +19,11 @@ export const StyledNav = styles.nav`
 
     display: flex;
     width: 100vw;
-    flex-direction: row;
-    justify-content: space-between;
+    flex-direction: column;
     align-items: center;
 
     a {
-        color: #fff;
+        color: #CDA715;
         text-decoration: none;
         font-family: OpenSans;
         font-weight: bold;
@@ -31,7 +32,8 @@ export const StyledNav = styles.nav`
     ul {
         list-style: none;
         float: right;
-        margin-right: 1rem;
+        justify-self: flex-end;
+        padding: 0;
     }
 
     li {
@@ -59,17 +61,33 @@ export const Logo = styles.span`
 
     font-family: CloisterBlack;
     font-weight: 800;
-    color: rgb(231, 67, 67); // keep
-    color: #900d3d; // keep
-    color: whitesmoke;
+    color: linear-gradient(to bottom left, #ffffff 0%, #bababa 100%);
+    background: -webkit-linear-gradient(#eee, #999);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
     font-size: 3rem;
-    margin-left: 5vw;
     letter-spacing: 5px;
+    justify-self: flex-start;
+`
+
+export const Icon = styles.div`
+    background: url(${circle});
+    margin: auto;
+    height: 50px;
+    width: 50px;
+    display: block;
+    background-size: contain;
+    position: relative;
+    left: -10px;
 `
 
 export const SinceYear = styles.span`
     font-size: 1rem;
-    font-weight: bold;
-    color: rgb(231, 67, 67);
+    color: linear-gradient(to bottom left, #ffffff 0%, #bababa 100%);
+    background: -webkit-linear-gradient(#eee, #999);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
     align-items: start;
+    position: absolute;
+    top: 5vh;
 `

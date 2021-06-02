@@ -7,9 +7,7 @@ const Ul = styled.ul`
   list-style: none;
   display: flex;
   flex-flow: row nowrap;
-  li {
-    padding: 18px 10px;
-  }
+  margin: 0;
 
   @media ${device.tablet} {
     border-radius: 2px;
@@ -51,6 +49,9 @@ const NavLinks = ({ open }) => {
       </li>
       <li>
         <Link to="/contact">Contact</Link>
+      </li>
+      <li>
+        <Link to="/for-sale">Purchase</Link>
       </li>
     </Ul>
   );

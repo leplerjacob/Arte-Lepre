@@ -5,10 +5,10 @@ import OpenSansLight from '../../static/fonts/OpenSans-Light.ttf'
 import circle from '../../images/logo310.png'
 
 export const NavWrapper = styles.header`
-position: absolute;
     top: 0;
     width: 100%;
     background: #282e5f;
+    z-index: 100;
 `
 
 export const StyledNav = styles.nav`

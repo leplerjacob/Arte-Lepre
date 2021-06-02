@@ -7,18 +7,18 @@ import { device } from "../../components/breakpoints";
 
 const StyledShowcase = styles.div`
     width: 100vw;
-    height: 550px;
-    background: url(${tools}) no-repeat center center/cover; 
+    height: 400px;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
+    overflow: hidden;
 `;
 
 export const ShowcaseOverlay = styles.div`
     width: 100%;
     height: 100%;
-    background: rgba(0,0,0,0.4)
+    background: rgba(0,0,0,0.4);
 `;
 
 export const ShowcaseText = styles.div`
@@ -46,6 +46,10 @@ export const ShowcaseText = styles.div`
     padding-top: 100px;
     margin: auto;
     
+    div:first-child {
+
+    }
+
     span:first-child > * {
         margin: 0;
         letter-spacing: .6rem;

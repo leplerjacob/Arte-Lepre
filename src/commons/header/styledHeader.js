@@ -7,11 +7,13 @@ import circle from "../../images/logo310.png";
 export const NavWrapper = styles.header`
     top: 0;
     width: 100%;
+    max-width: 1024px;
+    background: #2e373d;
     background: #282e5f;
     z-index: 100;
-`;
-
-export const StyledNav = styles.nav`
+    `;
+    
+    export const StyledNav = styles.nav`
     @font-face {
         font-family: "OpenSans";
         src: url(${OpenSansLight}) format("truetype")
@@ -19,6 +21,7 @@ export const StyledNav = styles.nav`
 
     display: flex;
     width: 100vw;
+    max-width: 1024px;
     height: 125px;
     flex-direction: row;
     justify-content: space-around;
@@ -69,7 +72,7 @@ export const Logo = styles.span`
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     font-size: 3rem;
-    letter-spacing: 5px;
+    letter-spacing: 3px;
     justify-self: flex-start;
 `;
 
@@ -81,8 +84,8 @@ export const LogoTextContainer = styles.div`
 export const Icon = styles.div`
     background: url(${circle});
     margin: 0 20px;
-    height: 50px;
-    width: 50px;
+    height: 70px;
+    width: 70px;
     display: block;
     background-size: contain;
 `;

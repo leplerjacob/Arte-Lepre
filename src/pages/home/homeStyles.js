@@ -1,29 +1,33 @@
 import styles from 'styled-components'
+import OpenSansLight from "../../static/fonts/OpenSans-Light.ttf";
 
 export const Section = styles.div`
-  background-color: #dfd4b9;
+  background-color: #6F73BD;
+  background-color: #394387;
+  background-color: #294976;
+  background-color: #EFEDFF;
+  background-color: #FAF9F5;
 `;
 
 export const Content = styles.div`
   display: flex;
   flex-direction: row;
-  justify-content
-  flex: 1
 `;
 
-export const LeftSideText = styles.div`
+export const HomeDescription = styles.div`
+  @font-face {
+    font-family: "OpenSans";
+    src: url(${OpenSansLight}) format("truetype")
+  }
+  text-align: center;
+  font-family: OpenSans;
   display: flex;
   flex-direction: column;
-  
+  align-items: center;
+  color: #CDA715;
+  height: 400px;
+
+  div:last-child {
+    color: black;
+  }
 `;
-
-export const RightSideImg = styles.div`
-    
-
-
-    img {
-        max-width: 35vw
-    }
-
-
-`

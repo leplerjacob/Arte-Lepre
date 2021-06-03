@@ -7,6 +7,7 @@ import { device } from "../../components/breakpoints";
 
 const StyledShowcase = styles.div`
     width: 100vw;
+    max-width: 1024px;
     height: 400px;
     -webkit-background-size: cover;
     -moz-background-size: cover;

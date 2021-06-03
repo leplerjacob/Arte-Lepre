@@ -12,7 +12,6 @@ import case_10 from "../images/Case_10.png";
 import case_11 from "../images/Case_11.png";
 import "./Gallery.css";
 import { SRLWrapper } from "simple-react-lightbox";
-import "./lightbox.min.css";
 
 const style = {
   lightbox: {

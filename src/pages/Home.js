@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { Section, Content, HomeDescription } from "./home/homeStyles";
-import ReviewsContainer from "./ReviewsContainer";
-import case11 from "../images/Case_11.png";
+import ServicesProvided from './home/ServicesProvided'
+import ReviewsContainer from "./home/ReviewsContainer";
 import { CSSTransition } from "react-transition-group";
-import { StyledTransition } from "./reviewsContainer/styledTransition";
+// StyledTransition needed to be on parent of ReviewsContainer for transition to work properly
+import { StyledTransition } from "./home/reviewsContainer/styledTransition";
+// hardcoded reviews from google
 import reviews from "../temp-delete/reviews.json";
 
 function Home() {
@@ -51,6 +53,7 @@ function Home() {
             parts missing through the use of vintage wood in order to restore
             the restored pieces to their original state.
           </div>
+          <ServicesProvided />
         </HomeDescription>
         {/* <RightSideImg>
           <div className="home-photo column">

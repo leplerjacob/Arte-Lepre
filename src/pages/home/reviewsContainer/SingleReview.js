@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { StyledSingleReview } from "./styledSingleReview";
+import { StyledSingleReview } from "./singleReview/styledSingleReview";
 
 const SingleReview = ({ singleReview }) => {
 

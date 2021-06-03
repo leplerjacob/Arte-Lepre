@@ -7,6 +7,7 @@ export const Section = styles.div`
   background-color: #294976;
   background-color: #EFEDFF;
   background-color: #FAF9F5;
+  background-color: #eed8be;
 `;
 
 export const Content = styles.div`

@@ -8,8 +8,8 @@ export const NavWrapper = styles.header`
     top: 0;
     width: 100%;
     max-width: 1024px;
-    background: #2e373d;
-    background: #282e5f;
+    background: #282e5f; // blue
+    background: #2e373d; // black
     z-index: 100;
     `;
     
@@ -29,6 +29,7 @@ export const NavWrapper = styles.header`
 
     a {
         color: #CDA715;
+        color: #d6af63; // Gold
         text-decoration: none;
         font-family: OpenSans;
         font-weight: bold;

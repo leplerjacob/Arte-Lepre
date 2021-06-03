@@ -1,5 +1,5 @@
 import styles from 'styled-components'
-import { device } from '../../components/breakpoints'
+import { device } from '../../../components/breakpoints'
 
 export const StyledReviewsContainer = styles.div`
   position: absolute;

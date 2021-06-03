@@ -1,5 +1,4 @@
 import styles from "styled-components";
-import pitloo from "../../images/Pitloo.jpg";
 import tools from "../../images/17.jpg";
 import banner from "../../images/banner_3.jpeg";
 import OpenSansLight from "../../static/fonts/OpenSans-Light.ttf";

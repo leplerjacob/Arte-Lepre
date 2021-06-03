@@ -8,16 +8,28 @@ import { default as NavBar } from "./header/Burger";
 import Showcase from "./Showcase";
 import { ChevronDownIcon } from "@heroicons/react/outline";
 
-import { NavWrapper, StyledNav, Logo, SinceYear, Icon } from "./header/styledHeader";
+import {
+  NavWrapper,
+  StyledNav,
+  Logo,
+  SinceYear,
+  Icon,
+  LogoTextContainer,
+  SpecialtyText,
+} from "./header/styledHeader";
 
 function Header() {
   return (
     <Router>
       <NavWrapper>
         <StyledNav>
-          <div>
+          <div style={{position: "relative"}}>
             <Icon />
-            <Logo>Arte Lepre<SinceYear>since 1959</SinceYear></Logo>
+            <LogoTextContainer>
+              <SinceYear>since 1959</SinceYear>
+              <Logo>Arte Lepre</Logo>
+              <SpecialtyText>Antique Restoration & Conservation</SpecialtyText>
+            </LogoTextContainer>
           </div>
           <NavBar />
         </StyledNav>

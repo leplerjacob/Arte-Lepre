@@ -20,13 +20,19 @@ export const HomeDescription = styles.div`
     font-family: "OpenSans";
     src: url(${OpenSansLight}) format("truetype")
   }
+
   text-align: center;
   font-family: OpenSans;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: space-around;
   color: #CDA715;
-  height: 400px;
+  color: #d6af63; // Gold
+  height: 450px;
+  width: 100%;
+  max-width: 650px;
+  margin: auto;
 
   div:last-child {
     color: black;

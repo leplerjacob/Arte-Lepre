@@ -1,6 +1,4 @@
 import styles from "styled-components";
-import tools from "../../images/17.jpg";
-import banner from "../../images/banner_3.jpeg";
 import OpenSansLight from "../../static/fonts/OpenSans-Light.ttf";
 import { device } from "../../components/breakpoints";
 

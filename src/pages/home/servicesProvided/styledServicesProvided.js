@@ -1,39 +1,53 @@
 import styles from "styled-components";
-import fretSaw from "../../../images/fret-saw-2-icon.png";
+import OpenSansLight from "../../../static/fonts/OpenSans-Light.ttf";
+import OpenSansBold from "../../../static/fonts/OpenSans-Bold.ttf";
 
+console.log(OpenSansLight)
 export const ServicesProvidedContainer = styles.div`
     width: 75%;
-    max-width: 1024px;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-
-    
-
-`;
-
-export const FretSaw = styles.img`
-content: url("${fretSaw}");
-display: flex;
-margin: 9px 0;
-align-self: center;
-color: black;
-padding: 0;
-height: 32px;
-width: 50px;
-padding: 0;
-`;
-
-export const EachService = styles.div`
+    max-width: 650px;
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
-    align-items: center;
-    flex-shrink: 0;
-    width: 200px;
-    height: 150px;
-    border: 1px solid #e4c2a1;
-    padding: 10px;
+    margin: 0 auto;
 
-    
+    h2 {
+        text-align: center;
+        font-family: "OpenSans";
+    }
+
+    span {
+        font-family: "OpenSans";
+        font-weight: bold;
+        font-size: 1rem;
+        text-align: center;
+    }
+
+    p {
+        margin: 0;
+    }
+
+    ul {
+        margin: 0;
+    }
+
+    a {
+        text-decoration: none;
+        color: black;
+    }
 `;
+
+export const Button = styles.div`
+    font-family: "OpenSans";
+    margin: 40px auto 20px auto;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid black;
+    text-align: center;
+    background: #2291ec;
+    width: 100px;
+
+    &:hover {
+        background: #6db1e8;
+    }
+`

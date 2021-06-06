@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Section, Content, HomeDescription } from "./home/homeStyles";
-import ServicesProvided from './home/ServicesProvided'
+import ServicesProvided from "./home/ServicesProvided";
 import ReviewsContainer from "./home/ReviewsContainer";
 import { CSSTransition } from "react-transition-group";
 // StyledTransition needed to be on parent of ReviewsContainer for transition to work properly
@@ -27,7 +27,7 @@ function Home() {
 
   return (
     <Section>
-      <StyledTransition>
+      {/* <StyledTransition>
         <CSSTransition
           in={inProp}
           timeout={8000}
@@ -41,10 +41,10 @@ function Home() {
         >
           <ReviewsContainer review={reviews[index]} />
         </CSSTransition>
-      </StyledTransition>
+      </StyledTransition> */}
       <Content>
         <HomeDescription>
-          <h2>Antiques Restoration & Conservation</h2>
+          <h2>Our Principle</h2>
           <div>
             The Arte Lepre company guarantees its customers the maximum
             professionalism and quality of its meticulous restoration by working
@@ -53,8 +53,9 @@ function Home() {
             parts missing through the use of vintage wood in order to restore
             the restored pieces to their original state.
           </div>
-          <ServicesProvided />
+          <hr style={{ width: "100%" }} />
         </HomeDescription>
+        <ServicesProvided />
         {/* <RightSideImg>
           <div className="home-photo column">
             <img src={case11} alt="before and after of chaise" />

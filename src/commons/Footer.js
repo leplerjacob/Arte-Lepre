@@ -9,9 +9,7 @@ import logo from "../images/logo310.png";
 import { ImLocation, ImPhone } from "react-icons/im";
 import { MdEmail } from "react-icons/md";
 import {
-  FaFacebookSquare,
   FaInstagramSquare,
-  FaTwitterSquare,
 } from "react-icons/fa";
 import { Logo } from "./header/styledHeader";
 

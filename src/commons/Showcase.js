@@ -7,9 +7,9 @@ import SlideShow from "./showcase/SlideShow";
 
 const Showcase = () => {
   return (
-      <StyledShowcase>
-        <SlideShow />
-      </StyledShowcase>
+    <StyledShowcase>
+      <SlideShow />
+    </StyledShowcase>
   );
 };
 

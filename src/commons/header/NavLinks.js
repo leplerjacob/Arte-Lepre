@@ -46,7 +46,7 @@ const NavLinks = ({ open }) => {
         <Link to="/gallery">Gallery</Link>
       </li>
       <li>
-        <Link to="/about">About</Link>
+        <Link to="/history">History</Link>
       </li>
       <li>
         <Link to="/contact">Contact</Link>

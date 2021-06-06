@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Home from "../pages/Home";
-import Gallery from "../components/Gallery";
-import About from "../components/About";
+import Gallery from "../pages/Gallery";
+import History from "../pages/History";
 import Contact from "../components/Contact";
 import ForSale from "../components/ForSale";
 import { default as NavBar } from "./header/Burger";
@@ -42,8 +42,8 @@ function Header() {
         <Route exact path="/gallery">
           <Gallery />
         </Route>
-        <Route exact path="/about">
-          <About />
+        <Route exact path="/history">
+          <History />
         </Route>
         <Route exact path="/contact">
           <Contact />

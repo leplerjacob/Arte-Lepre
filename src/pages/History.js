@@ -42,14 +42,14 @@ function History() {
           </LeftFloat>
           prestigious antiques gallery in Georgetown D.C., he slowly expanded
           his business to focus on the legacy of his family through the love of
-          his craft. 
+          his craft.
           <br />
           <br />
-          Arte Lepre guarantees the quality of antiques through
-          meticulous restoration by hand using exclusively traditional methods
+          Arte Lepre guarantees the quality of antiques through meticulous
+          restoration by hand using exclusively traditional methods
           <RightFloat>
             <img src={article_two} alt="article two" />
-          </RightFloat>
+          </RightFloat>{" "}
           such as: spirit polishing and shellac, beeswax polishing, and the
           possible integration of missing parts through the use of antique wood
           in order to return the restored pieces to the original state.

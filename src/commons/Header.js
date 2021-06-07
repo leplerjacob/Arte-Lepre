@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Home from "../pages/Home";
 import Gallery from "../pages/Gallery";
 import History from "../pages/History";
-import Contact from "../components/Contact";
+import Contact from "../pages/Contact";
 import ForSale from "../components/ForSale";
 import { default as NavBar } from "./header/Burger";
 import Showcase from "./Showcase";

@@ -1,5 +1,6 @@
 import React from "react";
-import { StyledContact, Details, Map } from "./contact/styledContact";
+import { StyledContact, Details, Map, Showcase } from "./contact/styledContact";
+import LoadImage from '../components/LoadImage'
 import map from "../images/map.png";
 
 function Contact() {
@@ -24,9 +25,10 @@ function Contact() {
       </Details>
       <hr style={{ width: "650px" }} />
       <Map>
-        <a href="https://goo.gl/maps/47YRA1be9vieWk7n8" target="_blank">
+        {/* <LoadImage image={map}/> */}
+        {/* <a href="https://goo.gl/maps/47YRA1be9vieWk7n8" target="_blank">
           <img src={map} alt="map" />
-        </a>
+        </a> */}
       </Map>
     </StyledContact>
   );

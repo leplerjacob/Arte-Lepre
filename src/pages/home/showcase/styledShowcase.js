@@ -1,6 +1,6 @@
 import styles from "styled-components";
-import OpenSansLight from "../../static/fonts/OpenSans-Light.ttf";
-import { device } from "../../components/breakpoints";
+import OpenSansLight from "../../../static/fonts/OpenSans-Light.ttf";
+import { device } from "../../../components/breakpoints";
 
 const StyledShowcase = styles.div`
     width: 100vw;

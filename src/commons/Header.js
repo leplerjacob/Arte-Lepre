@@ -5,7 +5,6 @@ import History from "../pages/History";
 import Contact from "../pages/Contact";
 import ForSale from "../components/ForSale";
 import { default as NavBar } from "./header/Burger";
-import Showcase from "./Showcase";
 import { ChevronDownIcon } from "@heroicons/react/outline";
 
 import {
@@ -34,7 +33,6 @@ function Header() {
           <NavBar />
         </StyledNav>
       </NavWrapper>
-      <Showcase />
       <Switch>
         <Route exact path="/">
           <Home />

@@ -1,8 +1,5 @@
 import React from "react";
-import StyledShowcase, {
-  ShowcaseOverlay,
-  ShowcaseText,
-} from "./showcase/styledShowcase.js";
+import StyledShowcase from "./showcase/styledShowcase";
 import SlideShow from "./showcase/SlideShow";
 
 const Showcase = () => {

@@ -1,10 +1,10 @@
 import React from "react";
 import { Slide } from "react-slideshow-image";
-import Image1 from "../../images/1.jpg";
-import Image2 from "../../images/2.jpg";
-import Image3 from "../../images/3.jpg";
-import Image4 from "../../images/4.jpg";
-import Image5 from "../../images/5.jpg";
+import Image1 from "../../../images/1.jpg";
+import Image3 from "../../../images/3.jpg";
+import Image2 from "../../../images/2.jpg";
+import Image4 from "../../../images/4.jpg";
+import Image5 from "../../../images/5.jpg";
 import "react-slideshow-image/dist/styles.css";
 import {
   StyledSlideShowContainer,

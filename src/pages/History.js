@@ -4,6 +4,7 @@ import {
   ArticleContainer,
   LeftFloat,
   RightFloat,
+  Showcase
 } from "./history/styledHistory";
 import shop from "../images/shop.jpg";
 import article_one from "../images/article_1.jpg";
@@ -13,6 +14,7 @@ import article_three from "../images/article_3.jpg";
 function History() {
   return (
     <StyledHistory>
+      <Showcase/>
       <span>
         <h2>History</h2>
       </span>
@@ -33,14 +35,15 @@ function History() {
             <img src={article_three} alt="article one" />
           </RightFloat>
           Mr. Lepre passed his enthusiasm and passion for all things antique to
-          his two sons, Alfredo and Fabio Lepre. Fabio Lepre emigrated to the
+          his two sons, Alfredo and Fabio Lepre.
+          <br /> <br /> Fabio Lepre emigrated to the
           Greater Washington D.C. area in the 2010's for a special someone that
           won his heart. He brought with him over 20 years in the antique
           restoration, conservation and trading business. After working in a
+          prestigious antiques gallery in Georgetown D.C., he slowly expanded
           <LeftFloat>
             <img src={article_one} alt="article one" />
           </LeftFloat>
-          prestigious antiques gallery in Georgetown D.C., he slowly expanded
           his business to focus on the legacy of his family through the love of
           his craft.
           <br />
@@ -49,7 +52,7 @@ function History() {
           restoration by hand using exclusively traditional methods
           <RightFloat>
             <img src={article_two} alt="article two" />
-          </RightFloat>{" "}
+          </RightFloat>
           such as: spirit polishing and shellac, beeswax polishing, and the
           possible integration of missing parts through the use of antique wood
           in order to return the restored pieces to the original state.

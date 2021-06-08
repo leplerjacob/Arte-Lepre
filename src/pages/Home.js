@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import Showcase from './home/Showcase'
 import { Section, Content, HomeDescription } from "./home/homeStyles";
 import ServicesProvided from "./home/ServicesProvided";
 import ReviewsContainer from "./home/ReviewsContainer";
@@ -27,21 +28,7 @@ function Home() {
 
   return (
     <Section>
-      {/* <StyledTransition>
-        <CSSTransition
-          in={inProp}
-          timeout={8000}
-          classNames="review"
-          onEntering={() => {
-            console.log("This entered");
-          }}
-          onExiting={() => {
-            console.log("This exitted");
-          }}
-        >
-          <ReviewsContainer review={reviews[index]} />
-        </CSSTransition>
-      </StyledTransition> */}
+      <Showcase/>
       <Content>
         <HomeDescription>
           <h2>Our Principle</h2>

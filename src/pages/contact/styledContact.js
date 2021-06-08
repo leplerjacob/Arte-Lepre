@@ -19,9 +19,9 @@ export const Details = styles.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-
+    
     h2 {
-        margin: 0;
+        color: #d6af63; // Gold
     }
 
     div {

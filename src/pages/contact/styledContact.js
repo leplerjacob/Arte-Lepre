@@ -1,5 +1,6 @@
 import styles from "styled-components";
 import OpenSansLight from "../../static/fonts/OpenSans-Light.ttf";
+import background from '../../images/banner_3.jpeg'
 
 export const StyledContact = styles.div`
     @font-face {
@@ -8,31 +9,50 @@ export const StyledContact = styles.div`
     }  
 
     width: 100%;
+    height: 1024px;
     background: #fffefa; // white
-    padding: 30px 0;
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: url(${background}) no-repeat center;
+    background-size: 1024px;
+
 `;
 
 export const Details = styles.div`
+    height: 411px;
+    width: 411px;
+    border-radius: 50%;
+    margin-bottom: 5px;
     font-family: "OpenSans";
     display: flex;
     flex-direction: column;
     align-items: center;
+    background: whitesmoke;
+    overflow: hidden;
+
+    span {
+        margin-top: 3rem;
+    }
     
     h2 {
         color: #d6af63; // Gold
+        margin: 0;
     }
 
-    div {
-        width: 400px;
+    & > div {
+        height: 250px;
+        text-align: center;
         display: flex;
-        margin: 10px auto;
+        flex-direction: column;
+        align-items: space-between;
 
-        span:first-child {
-            margin-right: 20px;
+        div {
+            margin: auto;
         }
     }
+
 `
 
 export const Map = styles.div`

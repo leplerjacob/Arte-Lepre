@@ -1,6 +1,11 @@
-import React from "react";
-import { StyledContact, Details, Map, Showcase } from "./contact/styledContact";
-import LoadImage from '../components/LoadImage'
+import React, { useEffect } from "react";
+import {
+  StyledContact,
+  Details,
+  Map,
+  ImageContainer,
+} from "./contact/styledContact";
+import LoadImage from "../components/LoadImage";
 import map from "../images/map.png";
 
 function Contact() {
@@ -8,28 +13,33 @@ function Contact() {
     <StyledContact>
       <Details>
         <span>
-          <h2>Contact Arte Lepre</h2>
+          <h2>Contact</h2>
         </span>
         <div>
-          <span>Address: </span>
-          <span>5130 Howard Avenue, Kensington, MD 20895</span>
-        </div>
-        <div>
-          <span>Phone: </span>
-          <span>202-550-5312</span>
-        </div>
-        <div>
-          <span>Email: </span>
-          <span>artelepre@gmail.com</span>
+          <div>
+            {/* <span>Address: </span> */}
+            <span>
+              5130 Howard Avenue,
+              <br /> Kensington, MD 20895
+            </span>
+          </div>
+          <div>
+            {/* <span>Call: </span> */}
+            <span>202-550-5312</span>
+          </div>
+          <div>
+            {/* <span>Email: </span> */}
+            <span>artelepre@gmail.com</span>
+          </div>
         </div>
       </Details>
-      <hr style={{ width: "650px" }} />
-      <Map>
-        {/* <LoadImage image={map}/> */}
-        {/* <a href="https://goo.gl/maps/47YRA1be9vieWk7n8" target="_blank">
+      {/* <hr style={{ width: "650px" }} /> */}
+      {/* <Map> */}
+      {/* <LoadImage image={map}/> */}
+      {/* <a href="https://goo.gl/maps/47YRA1be9vieWk7n8" target="_blank">
           <img src={map} alt="map" />
         </a> */}
-      </Map>
+      {/* </Map> */}
     </StyledContact>
   );
 }

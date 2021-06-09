@@ -15,7 +15,7 @@ export const StyledLoader = styles.div`
 
 export const LoaderBackground = styles.div`
     display: block;
-    background-color: #282c34;
+    background-color: #1d3356;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -30,7 +30,7 @@ export const LoaderBackground = styles.div`
 export const Logo = styles.div`
     height: 40vmin;
     pointer-events: none;
-
+    margin: 40px 0;
     img {
         @media  (prefers-reduced-motion: no-preference) {
             animation: ${rotate} infinite 2s linear;

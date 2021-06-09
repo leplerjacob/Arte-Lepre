@@ -4,9 +4,12 @@ import {
   Details,
   Map,
   ImageContainer,
+  StyledIcons
 } from "./contact/styledContact";
 import LoadImage from "../components/LoadImage";
 import map from "../images/map.png";
+import { FaInstagramSquare, FaMapMarkerAlt } from "react-icons/fa";
+import quarterMap from '../images/quarter-map.png'
 
 function Contact() {
   return (
@@ -17,21 +20,21 @@ function Contact() {
         </span>
         <div>
           <div>
-            {/* <span>Address: </span> */}
             <span>
-              5130 Howard Avenue,
+              4130 Howard Avenue,
               <br /> Kensington, MD 20895
             </span>
           </div>
           <div>
-            {/* <span>Call: </span> */}
-            <span>202-550-5312</span>
+            <span>By Appointment:</span>
           </div>
           <div>
-            {/* <span>Email: </span> */}
+            <span>(202)-550-5312</span>
+            <br />
             <span>artelepre@gmail.com</span>
           </div>
         </div>
+        <img src={quarterMap} alt="" />
       </Details>
       {/* <hr style={{ width: "650px" }} /> */}
       {/* <Map> */}

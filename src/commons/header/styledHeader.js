@@ -9,8 +9,8 @@ export const NavWrapper = styles.header`
     top: 0;
     width: 100%;
     max-width: 1024px;
-    background: #282e5f; // blue
     background: #2e373d; // black
+    background: #1d3356; // blue
     z-index: 100;
     `;
     
@@ -37,52 +37,48 @@ export const NavWrapper = styles.header`
         color: #d6af63; // Gold
         text-decoration: none;
         font-family: Lora;
+        padding: 1rem;
     }
-
+    
     a:hover {
         color: whitesmoke;
     }
-
+    
     ul {
         list-style: none;
         float: right;
         justify-self: flex-end;
         padding: 0;
     }
-
-    li {
-        padding: 1rem 1rem;
-    }
-
+    
     div:first-child {
         display: flex;
         flex-direction: row;
     }
-`;
-
-export const Logo = styles.span`
+    `;
+    
+    export const Logo = styles.span`
     @font-face {
         font-family: "CloisterBlack";
         src: url(${CloisterBlack}) format("truetype")
     }
-
+    
     @media ${device.mobile} {
         position: absolute;
         width: 100%;
         top: 13px;
         margin: auto;
     }
-
+    
     font-family: CloisterBlack;
-    font-weight: 800;
     line-height: 1;
     // color: linear-gradient(to bottom left, #ffffff 0%, #bababa 100%);
-    // background: -webkit-linear-gradient(#eee, #999);
-    // -webkit-background-clip: text;
-    // -webkit-text-fill-color: transparent;
+    background: -webkit-linear-gradient(#eee, #999);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
     color: #952a27;
+    color: #d6af63; // Gold
     font-size: 4rem;
-    letter-spacing: 2px;
     justify-self: flex-start;
 `;
 

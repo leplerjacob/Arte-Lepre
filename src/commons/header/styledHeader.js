@@ -12,6 +12,7 @@ export const NavWrapper = styles.header`
     background: #2e373d; // black
     background: #1d3356; // blue
     z-index: 100;
+    border-bottom: 1px solid white;
     `;
     
     export const StyledNav = styles.nav`

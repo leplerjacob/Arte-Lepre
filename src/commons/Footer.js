@@ -5,40 +5,18 @@ import {
   RightSide,
   EachContact,
 } from "./footer/styledFooter";
-import logo from "../images/logo310.png";
+// import logo from "../images/logo310.png";
 import { ImLocation, ImPhone } from "react-icons/im";
 import { MdEmail } from "react-icons/md";
-import {
-  FaInstagramSquare,
-} from "react-icons/fa";
+import { FaInstagramSquare } from "react-icons/fa";
 import { Logo } from "./header/styledHeader";
+import logo from "../images/Logo.png";
 
 function Footer() {
   return (
     <StyledFooter>
-      <LeftSide>
-        <EachContact>
-          <ImLocation />
-          <span>4130 Howard Avenue Kensington, MD 20895</span>
-        </EachContact>
-        <EachContact>
-          <ImPhone />
-          <span>202-550-5312</span>
-        </EachContact>
-        <EachContact>
-          <MdEmail />
-          <span>artelepre@gmail.com</span>
-        </EachContact>
-      </LeftSide>
       <RightSide>
-        <Logo>Arte Lepre</Logo>
-        <span>Contact us today for a quote</span>
-        <a
-          href="https://instagram.com/artelepre?utm_medium=copy_link"
-          target="_blank"
-        >
-          <FaInstagramSquare></FaInstagramSquare>
-        </a>
+        {"Via Carlo Poerio 80 - 80121 Napoli, Italy | 4130 Howard Ave, Kensington, MD 20895"}
       </RightSide>
     </StyledFooter>
   );

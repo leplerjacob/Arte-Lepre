@@ -4,13 +4,14 @@ import border from '../../images/main-background.png'
 export const StyledFooter = styles.footer`
     width: 100%
     max-width: 1024px;
-    height: 100px;
+    height: 50px;
     background: #2e373d;
     background: #1d3356; // blue
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-around;
+    border-top: 1px solid white;
     
     span {
         color: whitesmoke;
@@ -47,6 +48,8 @@ export const RightSide = styles.div`
     flex-direction: column;
     justify-content: space-around;
     align-items: flex-start;
+    color: #d6af63; // Gold
+    font-size: 1rem;
 
     a {
         padding: 0;

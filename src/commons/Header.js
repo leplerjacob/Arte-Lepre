@@ -6,13 +6,14 @@ import Contact from "../pages/Contact";
 import ForSale from "../components/ForSale";
 import { default as NavBar } from "./header/Burger";
 import { ChevronDownIcon } from "@heroicons/react/outline";
+import logo from '../images/Logo.png'
 
 import {
   NavWrapper,
   StyledNav,
   Logo,
   SinceYear,
-  Icon,
+  // Icon,
   LogoTextContainer,
   SpecialtyText,
 } from "./header/styledHeader";
@@ -23,12 +24,7 @@ function Header() {
       <NavWrapper>
         <StyledNav>
           <div style={{position: "relative"}}>
-            <Icon />
-            <LogoTextContainer>
-              <SinceYear>since 1959</SinceYear>
-              <Logo>Arte Lepre</Logo>
-              <SpecialtyText>Antique Restoration & Conservation</SpecialtyText>
-            </LogoTextContainer>
+            <img src={logo} alt="" style={{width: "450px"}} />
           </div>
           <NavBar />
         </StyledNav>

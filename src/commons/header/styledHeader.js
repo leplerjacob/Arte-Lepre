@@ -54,3 +54,11 @@ export const StyledNav = styles.nav`
     
     `;
 
+export const Flag = styles.div`
+    height: 50px;
+    width: 65px;
+    img {
+        height: 100%;
+        width: auto;
+    }
+`

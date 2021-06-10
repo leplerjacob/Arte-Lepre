@@ -6,26 +6,22 @@ import Contact from "../pages/Contact";
 import ForSale from "../components/ForSale";
 import { default as NavBar } from "./header/Burger";
 import { ChevronDownIcon } from "@heroicons/react/outline";
-import logo from '../images/Logo.png'
+import logo from "../images/Logo.png";
+import italia from "../images/flag-italy.png";
 
-import {
-  NavWrapper,
-  StyledNav,
-  Logo,
-  SinceYear,
-  // Icon,
-  LogoTextContainer,
-  SpecialtyText,
-} from "./header/styledHeader";
+import { NavWrapper, StyledNav, Flag } from "./header/styledHeader";
 
 function Header() {
   return (
     <Router>
       <NavWrapper>
         <StyledNav>
-          <div style={{position: "relative"}}>
-            <img src={logo} alt="" style={{width: "450px"}} />
+          <div style={{ position: "relative" }}>
+            <img src={logo} alt="" style={{ width: "450px" }} />
           </div>
+          <Flag>
+            <img src={italia} alt="italian flag" />
+          </Flag>
           <NavBar />
         </StyledNav>
       </NavWrapper>

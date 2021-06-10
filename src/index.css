@@ -5,7 +5,8 @@ body {
   max-width: 1024px;
   margin:auto;
   /* background: rgb(73, 73, 73); */
-  background: url('./images/main-background.png');
+  background: url('./images/sideboards.jpeg') repeat;
+  background-size: 210px;
 }
 
 body::-webkit-scrollbar{

@@ -23,12 +23,18 @@ export const EachProject = styles.div`
     display: flex;
     margin-top: 50px;
 
-    div:first-child {
+    & > div:first-child {
         width: 300px;
         margin: auto;
     }
+`;
 
+export const StyledImage = styles.div`
+    margin: auto;
     img {
-        margin: auto;
+      height: 450px;
+      width: 450px;
+      max-width: 800px;
+      cursor: zoom-in;
     }
 `;

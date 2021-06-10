@@ -1,5 +1,4 @@
 import styles from "styled-components";
-import border from '../../images/main-background.png'
 
 export const StyledFooter = styles.footer`
     width: 100%

@@ -34,6 +34,11 @@ export const Details = styles.div`
     overflow: hidden;
     color: #306298;
     color: whitesmoke;
+
+    a {
+        padding: 0;
+    }
+
     span {
         margin-top: 3rem;
         text-align: center;

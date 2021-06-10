@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import logo from "../images/logo310.png";
 import { MiniLogo, StyledTransition } from "../components/loader/styledLoader";
-import { CSSTransition } from "react-transition-group";
 
 const LoadImage = ({ image }) => {
   const [loading, setLoading] = useState(true);

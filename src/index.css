@@ -3,7 +3,7 @@ body {
   padding: 0;
   box-sizing: border-box;
   max-width: 1024px;
-  margin:auto;
+  margin:auto !important;
   /* background: rgb(73, 73, 73); */
   background: url('./images/sideboards.jpeg') repeat;
   background-size: 210px;

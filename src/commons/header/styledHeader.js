@@ -27,7 +27,7 @@ export const StyledNav = styles.nav`
     display: flex;
     width: 100vw;
     max-width: 1024px;
-    height: 145px;
+    height: 150px;
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
@@ -41,6 +41,7 @@ export const StyledNav = styles.nav`
     
     a:hover {
         color: whitesmoke;
+        border-bottom: 1px solid white;
     }
     
     ul {

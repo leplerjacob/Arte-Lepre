@@ -1,4 +1,4 @@
-import styles, {keyframes} from "styled-components";
+import styles, { keyframes } from "styled-components";
 
 export const rotate = keyframes`
     from {
@@ -25,8 +25,6 @@ export const LoaderBackground = styles.div`
     color: whitesmoke;
 `;
 
-
-
 export const Logo = styles.div`
     height: 40vmin;
     pointer-events: none;
@@ -36,6 +34,24 @@ export const Logo = styles.div`
             animation: ${rotate} infinite 2s linear;
         }
     }
+`;
+
+export const MiniLogo = styles.div`
+  pointer-events: none;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 450px;
+  width: 450px;
+  margin:auto;
+  img {
+    @media (prefers-reduced-motion: no-preference) {
+      animation: ${rotate} infinite 2s linear;
+    }
+    height: 50px;
+    width: 50px;
+  }
 `;
 
 export const StyledTransition = styles.div`

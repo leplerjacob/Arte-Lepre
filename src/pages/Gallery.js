@@ -11,7 +11,12 @@ import case_9 from "../images/Case_9.png";
 import case_10 from "../images/Case_10.png";
 import case_11 from "../images/Case_11.png";
 import { SRLWrapper } from "simple-react-lightbox";
-import { StyledGallery, EachProject } from "../pages/gallery/styledGallery";
+import {
+  StyledGallery,
+  EachProject,
+  StyledImage,
+} from "../pages/gallery/styledGallery";
+import LoadImage from "../components/LoadImage";
 
 const style = {
   img: {
@@ -40,7 +45,9 @@ function Gallery() {
               </span>
             </div>
             <hr />
-            <img style={style.img} src={case_1} alt="case1" />
+            <StyledImage>
+              <LoadImage image={case_1} />
+            </StyledImage>
           </EachProject>
         </div>
         <EachProject>
@@ -49,7 +56,9 @@ function Gallery() {
             <span>Period 18th century, Tuscany-Lucca</span>
           </div>
           <hr />
-          <img style={style.img} src={case_2} alt="case1" />
+          <StyledImage>
+            <LoadImage image={case_2} />
+          </StyledImage>
         </EachProject>
         <EachProject>
           <div>
@@ -60,7 +69,9 @@ function Gallery() {
             </span>
           </div>
           <hr />
-          <img style={style.img} src={case_3} alt="case1" />
+          <StyledImage>
+            <LoadImage image={case_3} />
+          </StyledImage>
         </EachProject>
         <EachProject>
           <div>
@@ -71,7 +82,9 @@ function Gallery() {
             </span>
           </div>
           <hr />
-          <img style={style.img} src={case_4} alt="case1" />
+          <StyledImage>
+            <LoadImage image={case_4} />
+          </StyledImage>
         </EachProject>
         <EachProject>
           <div>
@@ -82,7 +95,9 @@ function Gallery() {
             </span>
           </div>
           <hr />
-          <img style={style.img} src={case_5} alt="case1" />
+          <StyledImage>
+            <LoadImage image={case_5} />
+          </StyledImage>
         </EachProject>
         <EachProject>
           <div>
@@ -93,7 +108,9 @@ function Gallery() {
             </span>
           </div>
           <hr />
-          <img style={style.img} src={case_6} alt="case1" />
+          <StyledImage>
+            <LoadImage image={case_6} />
+          </StyledImage>
         </EachProject>
         <EachProject>
           <div>
@@ -104,7 +121,9 @@ function Gallery() {
             </span>
           </div>
           <hr />
-          <img style={style.img} src={case_7} alt="case1" />
+          <StyledImage>
+            <LoadImage image={case_7} />
+          </StyledImage>
         </EachProject>
         <EachProject>
           <div>
@@ -115,7 +134,9 @@ function Gallery() {
             </span>
           </div>
           <hr />
-          <img style={style.img} src={case_8} alt="case1" />
+          <StyledImage>
+            <LoadImage image={case_8} />
+          </StyledImage>
         </EachProject>
         <EachProject>
           <div>
@@ -126,7 +147,9 @@ function Gallery() {
             </span>
           </div>
           <hr />
-          <img style={style.img} src={case_9} alt="case1" />
+          <StyledImage>
+            <LoadImage image={case_9} />
+          </StyledImage>
         </EachProject>
         <EachProject>
           <div>
@@ -137,7 +160,9 @@ function Gallery() {
             </span>
           </div>
           <hr />
-          <img style={style.img} src={case_10} alt="case1" />
+          <StyledImage>
+            <LoadImage image={case_10} />
+          </StyledImage>
         </EachProject>
         <EachProject>
           <div>
@@ -148,7 +173,9 @@ function Gallery() {
             </span>
           </div>
           <hr />
-          <img style={style.img} src={case_11} alt="case1" />
+          <StyledImage>
+            <LoadImage image={case_11} />
+          </StyledImage>
         </EachProject>
       </SRLWrapper>
     </StyledGallery>

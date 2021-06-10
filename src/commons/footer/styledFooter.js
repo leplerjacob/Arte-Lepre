@@ -4,7 +4,7 @@ import border from '../../images/main-background.png'
 export const StyledFooter = styles.footer`
     width: 100%
     max-width: 1024px;
-    height: 50px;
+    height: 100px;
     background: #1d3356; // blue
     display: flex;
     flex-direction: row;

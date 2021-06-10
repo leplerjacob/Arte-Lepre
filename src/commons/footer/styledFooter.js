@@ -26,4 +26,8 @@ export const FooterContent = styles.div`
     small {
         align-self: center;
     }
+
+    div > span:last-child {
+        margin-left: 20px;
+    }
 `;

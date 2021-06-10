@@ -17,6 +17,7 @@ function Contact() {
       <Details>
         <span>
           <h2>Contact</h2>
+          <span>Owner: Fabio Lepre</span>
         </span>
         <div>
           <div>

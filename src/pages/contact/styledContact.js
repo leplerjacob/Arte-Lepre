@@ -36,6 +36,7 @@ export const Details = styles.div`
     color: whitesmoke;
     span {
         margin-top: 3rem;
+        text-align: center;
     }
     
     h2 {

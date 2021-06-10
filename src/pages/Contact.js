@@ -4,12 +4,12 @@ import {
   Details,
   Map,
   ImageContainer,
-  StyledIcons
+  StyledIcons,
 } from "./contact/styledContact";
 import LoadImage from "../components/LoadImage";
 import map from "../images/map.png";
 import { FaInstagramSquare, FaMapMarkerAlt } from "react-icons/fa";
-import quarterMap from '../images/quarter-map.png'
+import quarterMap from "../images/quarter-map.png";
 
 function Contact() {
   return (
@@ -35,7 +35,9 @@ function Contact() {
             <span>artelepre@gmail.com</span>
           </div>
         </div>
-        <img src={quarterMap} alt="" />
+        <a href="https://g.page/ArteLepre?share" target="_blank">
+          <img src={quarterMap} alt="" />
+        </a>
       </Details>
       {/* <hr style={{ width: "650px" }} /> */}
       {/* <Map> */}

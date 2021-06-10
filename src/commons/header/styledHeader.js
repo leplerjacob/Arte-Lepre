@@ -1,9 +1,7 @@
 import styles from "styled-components";
 import { device } from "../../components/breakpoints";
-import CloisterBlack from "../../static/fonts/CloisterBlack.ttf";
 import OpenSansLight from "../../static/fonts/OpenSans-Light.ttf";
 import Lora from "../../static/fonts/Lora-Medium.ttf";
-import circle from "../../images/logo310.png";
 
 export const NavWrapper = styles.header`
     top: 0;

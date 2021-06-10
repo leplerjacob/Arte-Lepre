@@ -29,7 +29,7 @@ export const NavWrapper = styles.header`
     display: flex;
     width: 100vw;
     max-width: 1024px;
-    height: 125px;
+    height: 145px;
     flex-direction: row;
     justify-content: space-around;
     align-items: center;

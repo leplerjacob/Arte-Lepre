@@ -23,6 +23,7 @@ export const ArticleContainer = styles.div`
     width: 100%;
     max-width: 650px;
     overflow: hidden;
+    padding-bottom: 30px;
 
     img {
         height: 300px;

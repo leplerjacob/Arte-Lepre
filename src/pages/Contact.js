@@ -1,14 +1,8 @@
-import React, { useEffect } from "react";
+import React from "react";
 import {
   StyledContact,
   Details,
-  Map,
-  ImageContainer,
-  StyledIcons,
 } from "./contact/styledContact";
-import LoadImage from "../components/LoadImage";
-import map from "../images/map.png";
-import { FaInstagramSquare, FaMapMarkerAlt } from "react-icons/fa";
 import quarterMap from "../images/quarter-map.png";
 
 function Contact() {
@@ -39,13 +33,6 @@ function Contact() {
           <img src={quarterMap} alt="" />
         </a>
       </Details>
-      {/* <hr style={{ width: "650px" }} /> */}
-      {/* <Map> */}
-      {/* <LoadImage image={map}/> */}
-      {/* <a href="https://goo.gl/maps/47YRA1be9vieWk7n8" target="_blank">
-          <img src={map} alt="map" />
-        </a> */}
-      {/* </Map> */}
     </StyledContact>
   );
 }

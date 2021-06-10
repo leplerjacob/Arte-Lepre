@@ -35,9 +35,7 @@ export const Details = styles.div`
     color: #306298;
     color: whitesmoke;
 
-    a {
-        padding: 0;
-    }
+
 
     span {
         margin-top: 3rem;
@@ -50,7 +48,8 @@ export const Details = styles.div`
     }
     
     & > div {
-        height: 250px;
+        height: 214px;
+        max-height: 214px;
         text-align: center;
         display: flex;
         flex-direction: column;
@@ -67,7 +66,8 @@ export const Details = styles.div`
 
     }
     img {
-        width: 120%;
+        width: 100%;
+        height: 100%;
         overflow: hidden;
     }
     img:hover {
@@ -78,19 +78,4 @@ export const Details = styles.div`
         -o-transform:scale(1.2);
     }
 
-`
-
-export const Map = styles.div`
-    margin: auto;
-
-    img {
-        width: 650px;
-        max-width: 650px;
-        cursor: pointer;
-    }
-`
-
-export const StyledIcons = styles.div`
-    font-size: 3rem;
-    color: #306298;
 `

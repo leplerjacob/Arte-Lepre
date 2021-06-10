@@ -1,25 +1,21 @@
 import React from "react";
 import {
   StyledFooter,
-  LeftSide,
-  RightSide,
-  EachContact,
+  FooterContent,
 } from "./footer/styledFooter";
-// import logo from "../images/logo310.png";
-import { ImLocation, ImPhone } from "react-icons/im";
-import { MdEmail } from "react-icons/md";
-import { FaInstagramSquare } from "react-icons/fa";
-import { Logo } from "./header/styledHeader";
-import logo from "../images/Logo.png";
 
 function Footer() {
+  const date = new Date().getFullYear()
   return (
     <StyledFooter>
-      <RightSide>
+      <FooterContent>
         {"Via Carlo Poerio 80 - 80121 Napoli, Italy | 4130 Howard Ave, Kensington, MD 20895"}
-      </RightSide>
+        <small>Copyright &copy; {date} Arte Lepre. All Rights Reserved</small>
+      </FooterContent>
     </StyledFooter>
   );
 }
+
+// Copyright <small>&copy; Copyright 2018, Example Corporation</small>
 
 export default Footer;

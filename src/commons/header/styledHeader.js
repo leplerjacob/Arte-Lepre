@@ -2,7 +2,7 @@ import styles from "styled-components";
 import { device } from "../../components/breakpoints";
 import CloisterBlack from "../../static/fonts/CloisterBlack.ttf";
 import OpenSansLight from "../../static/fonts/OpenSans-Light.ttf";
-import Lora from '../../static/fonts/Lora-Medium.ttf'
+import Lora from "../../static/fonts/Lora-Medium.ttf";
 import circle from "../../images/logo310.png";
 
 export const NavWrapper = styles.header`
@@ -14,8 +14,8 @@ export const NavWrapper = styles.header`
     z-index: 100;
     border-bottom: 1px solid white;
     `;
-    
-    export const StyledNav = styles.nav`
+
+export const StyledNav = styles.nav`
     @font-face {
         font-family: "OpenSans";
         src: url(${OpenSansLight}) format("truetype")
@@ -52,71 +52,5 @@ export const NavWrapper = styles.header`
         padding: 0;
     }
     
-    div:first-child {
-        display: flex;
-        flex-direction: row;
-    }
     `;
-    
-    export const Logo = styles.span`
-    @font-face {
-        font-family: "CloisterBlack";
-        src: url(${CloisterBlack}) format("truetype")
-    }
-    
-    @media ${device.mobile} {
-        position: absolute;
-        width: 100%;
-        top: 13px;
-        margin: auto;
-    }
-    
-    font-family: CloisterBlack;
-    line-height: 1;
-    // color: linear-gradient(to bottom left, #ffffff 0%, #bababa 100%);
-    background: -webkit-linear-gradient(#eee, #999);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    color: #952a27;
-    color: #d6af63; // Gold
-    font-size: 4rem;
-    justify-self: flex-start;
-`;
 
-export const LogoTextContainer = styles.div`
-    display: flex; 
-    flex-direction: column;
-`
-
-export const Icon = styles.div`
-    background: url(${circle});
-    margin: 0 20px;
-    height: 80px;
-    width: 80px;
-    display: block;
-    background-size: contain;
-`;
-
-export const SinceYear = styles.span`
-    @font-face {
-        font-family: "CloisterBlack";
-        src: url(${CloisterBlack}) format("truetype")
-    }
-    font-family: CloisterBlack;
-    font-size: 1rem;
-    color: linear-gradient(to bottom left, #ffffff 0%, #bababa 100%);
-    background: -webkit-linear-gradient(#eee, #999);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    align-items: start;
-    position: absolute;
-    right: -10px;
-`;
-
-export const SpecialtyText = styles.div`
-    background: -webkit-linear-gradient(#eee, #999);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    font-size: 1.2rem;
-    margin-top: 5px;
-`

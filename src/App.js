@@ -20,10 +20,10 @@ function App() {
         <Loader />
       ) : (
         <div>
-          <div className="App-header">
+          <div>
             <Header />
           </div>
-          <div className="App-footer">
+          <div>
             <Footer />
           </div>
         </div>

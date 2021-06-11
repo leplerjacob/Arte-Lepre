@@ -35,11 +35,15 @@ export const Details = styles.div`
     color: #306298;
     color: whitesmoke;
 
-
+    
 
     span {
         margin-top: 3rem;
         text-align: center;
+    }
+
+    span:first-child > span {
+        color: gray;
     }
     
     h2 {

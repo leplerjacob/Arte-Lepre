@@ -56,7 +56,7 @@ export const MiniLogo = styles.div`
 
 export const StyledTransition = styles.div`
 .loader-enter {
-    opacity: 0;
+    opacity: 1;
         z-index: 999;
     }
 

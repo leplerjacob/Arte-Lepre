@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import "./App.css";
 import Header from "./commons/Header";
 import Footer from "./commons/Footer";
 import Loader from "./components/Loader";

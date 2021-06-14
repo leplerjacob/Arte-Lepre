@@ -31,6 +31,7 @@ export const StyledNav = styles.nav`
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
+    position: relative;
 
     a {
         color: #d6af63; // Gold
@@ -50,14 +51,44 @@ export const StyledNav = styles.nav`
         justify-self: flex-end;
         padding: 0;
     }
+
+    @media ${device.mobile} {
+        display: block;
+    }
     
     `;
 
 export const Flag = styles.div`
     height: 50px;
     width: 65px;
-    img {
-        height: 100%;
-        width: auto;
+    
+    @media ${device.mobile} {
+        img {
+            width: 65px;
+            height: 50px;
+            z-index: 5;
+            position: absolute;
+            right: 5px;
+            bottom: 0;
+        }
     }
-`
+`;
+
+export const Logo = styles.div`
+
+    height: 100%;
+    display: flex;
+    justify-content: center;
+
+    img {
+        width: 450px;
+        max-width: 450px;
+    }
+
+    @media ${device.mobile} {
+        img {
+            height: 100%;
+            max-width: 80vw;
+        }
+    }
+`;

@@ -39,7 +39,6 @@ const NavLinks = ({ open }) => {
   return (
     <Ul open={open}>
       <li>
-          {console.log(device.laptop)}
         <Link to="/">Home</Link>
       </li>
       <li>

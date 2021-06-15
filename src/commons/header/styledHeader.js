@@ -7,7 +7,6 @@ export const NavWrapper = styles.header`
     top: 0;
     width: 100%;
     max-width: 1024px;
-    background: #2e373d; // black
     background: #1d3356; // blue
     z-index: 100;
     border-bottom: 1px solid white;
@@ -38,36 +37,37 @@ export const StyledNav = styles.nav`
         text-decoration: none;
         font-family: Lora;
         padding: 1rem;
+        display: block;
     }
     
     a:hover {
         color: whitesmoke;
         border-bottom: 1px solid white;
     }
-    
-    ul {
-        list-style: none;
-        float: right;
-        justify-self: flex-end;
-        padding: 0;
-    }
 
     @media ${device.mobile} {
         display: block;
+    }
+
+    @media ${device.tablet} {
+        justify-content: center;
     }
     
     `;
 
 export const Flag = styles.div`
-    height: 50px;
-    width: 65px;
+
+    img {
+        height: 50px;
+        width: 65px;
+    }
     
-    @media ${device.mobile} {
+    @media ${device.tablet} {
         img {
+            position: absolute;
             width: 65px;
             height: 50px;
             z-index: 5;
-            position: absolute;
             right: 5px;
             bottom: 0;
         }
@@ -76,7 +76,6 @@ export const Flag = styles.div`
 
 export const Logo = styles.div`
 
-    height: 100%;
     display: flex;
     justify-content: center;
 

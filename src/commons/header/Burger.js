@@ -9,13 +9,16 @@ import styled from "styled-components";
 import NavLinks from "./NavLinks";
 
 const StyledBurger = styled.div`
-  width: 2rem;
-  height: 2rem;
+  width: 2.2rem;
+  height: 2.2rem;
   position: fixed;
   top: 30px;
   right: 20px;
   z-index: 20;
   display: none;
+  &:hover {
+    cursor: pointer;
+  }
   @media (max-width: 768px) {
     display: flex;
     justify-content: space-around;

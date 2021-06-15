@@ -27,10 +27,8 @@ const Ul = styled.ul`
       flex-direction: column;
     }
     li {
-      padding: 1rem;
-    }
-    a {
-      width: 100%;
+      text-align: center;
+      padding: 0 1rem;
     }
   }
 `;

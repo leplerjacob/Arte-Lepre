@@ -1,6 +1,7 @@
 import styles from "styled-components";
 import OpenSansLight from "../../static/fonts/OpenSans-Light.ttf";
 import background from '../../images/banner_3.jpeg'
+import {device} from '../../components/breakpoints'
 
 export const StyledContact = styles.div`
     @font-face {
@@ -18,6 +19,10 @@ export const StyledContact = styles.div`
     background: url(${background}) no-repeat center;
     background-size: 1024px;
 
+    @media ${device.mobile} {
+        overflow: hidden;
+    }
+
 `;
 
 export const Details = styles.div`
@@ -34,14 +39,12 @@ export const Details = styles.div`
     overflow: hidden;
     color: #306298;
     color: whitesmoke;
-
     
-
     span {
         margin-top: 3rem;
         text-align: center;
     }
-
+    
     span:first-child > span {
         color: gray;
     }
@@ -58,7 +61,16 @@ export const Details = styles.div`
         display: flex;
         flex-direction: column;
         align-items: space-between;
+        
+        a {
+            text-decoration: none;
+            color: whitesmoke;
+        }
 
+        a:hover {
+            color: #888888;
+        }
+        
         div {
             margin: auto;
         }
@@ -81,5 +93,6 @@ export const Details = styles.div`
         -moz-transform:scale(1.2);
         -o-transform:scale(1.2);
     }
+
 
 `

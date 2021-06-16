@@ -72,6 +72,10 @@ export const Flag = styles.div`
             bottom: 0;
         }
     }
+
+    @media only screen and (min-width: 768px) and (max-width: 1024px) {
+        display: none;
+    }
 `;
 
 export const Logo = styles.div`
@@ -88,6 +92,12 @@ export const Logo = styles.div`
         img {
             height: 100%;
             max-width: 80vw;
+        }
+    }
+
+    @media only screen and (min-width: 768px) and (max-width: 1024px) {
+        img {
+            width: 350px;
         }
     }
 `;

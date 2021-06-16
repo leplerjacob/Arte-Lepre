@@ -7,10 +7,10 @@ function Footer() {
     <StyledFooter>
       <FooterContent>
         <div>
-          <span>Raffaele Lepre - Napoli: Via Carlo Poerio 80 - 80121 Napoli, Italy</span>
+          <span>Napoli: Via Carlo Poerio 80 - 80121 Napoli, Italy - Raffaele Lepre</span>
         </div>
         <div>
-          <span>Fabio Lepre - DC: 4130 Howard Ave, Kensington, MD 20895</span>
+          <span>Washington, D.C.: 4130 Howard Ave, Kensington, MD 20895 - Fabio Lepre</span>
         </div>
 
         <small>Copyright &copy; {date} Arte Lepre. All Rights Reserved</small>

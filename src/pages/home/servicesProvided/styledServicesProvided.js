@@ -33,21 +33,24 @@ export const ServicesProvidedContainer = styles.div`
     a {
         text-decoration: none;
         color: black;
+        margin: 40px auto;
+        display: flex;
     }
 `;
 
 export const Button = styles.div`
     font-family: "OpenSans";
-    margin: 40px auto 20px auto;
     cursor: pointer;
     padding: 10px;
     border-radius: 5px;
     border: 1px solid black;
     text-align: center;
     background: #2291ec;
-    width: 100px;
+    width: 120px;
 
     &:hover {
         background: #6db1e8;
     }
+
+
 `

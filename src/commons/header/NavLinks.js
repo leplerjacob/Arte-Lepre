@@ -30,7 +30,11 @@ const Ul = styled.ul`
       text-align: center;
       padding: 0 1rem;
     }
+
   }
+    @media only screen and (min-width: 768px) and (max-width: 1024px) {
+      padding: 0;
+    }
 `;
 
 const NavLinks = ({ open }) => {

@@ -1,4 +1,5 @@
 import styles, { keyframes } from "styled-components";
+import {device} from '../breakpoints'
 
 export const rotate = keyframes`
     from {
@@ -33,6 +34,10 @@ export const Logo = styles.div`
         @media  (prefers-reduced-motion: no-preference) {
             animation: ${rotate} infinite 2s linear;
         }
+    }
+
+    @media ${device.tablet} {
+        height: 100%;
     }
 `;
 

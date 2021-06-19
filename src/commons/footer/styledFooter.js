@@ -33,5 +33,19 @@ export const StyledFooter = styles.footer`
     @media ${device.mobile} {
         width: 100%;
         padding: 1rem 3rem;
+        div {
+            padding-bottom: 3px;
+            border-bottom: 1px solid whitesmoke;
+        }
+    }
+    span {
+        span:last-child {
+            color: whitesmoke;
+        }
     }
 `;
+
+
+export const ClrPomp = styles.span`
+    color: #A42A2E
+`

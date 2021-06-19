@@ -44,8 +44,8 @@ function Gallery() {
                 Period late 18th century. With marquetry in walnut, rosewood,
                 bois de rose, maple and olive the rectangular top above a
                 conforming case enclosing three full drawers, raised on straight
-                tapering legs, the whole elaborately decorated with scrolling
-                leafage
+                tapering legs, the whole elaborately decorated with scrollingwda
+                leafage.
               </span>
             </div>
             <hr />
@@ -57,7 +57,7 @@ function Gallery() {
         <EachProject>
           <div>
             <h2>Walnut Writing Desk</h2>
-            <span>Period 18th century, Tuscany-Lucca</span>
+            <span>Period 18th century, Tuscany-Lucca.</span>
           </div>
           <hr />
           <StyledImage>
@@ -68,8 +68,8 @@ function Gallery() {
           <div>
             <h2>Neapolitan Louis XV Writing Desk</h2>
             <span>
-              Period mid-18th century Walnut-plated, with bois de rose
-              marquetry, and purple ebony sliding top
+              Period mid-18th century, walnut-plated, with bois de rose
+              marquetry, and purple ebony sliding top.
             </span>
           </div>
           <hr />
@@ -81,8 +81,7 @@ function Gallery() {
           <div>
             <h2>Neapolitan Louis Philippe Coffee Table</h2>
             <span>
-              Period mid-18th century Walnut-plated, with bois de rose
-              marquetry, and purple ebony sliding top
+              Period early 19th century, octagonal top with boss wood marquetry.
             </span>
           </div>
           <hr />
@@ -92,9 +91,9 @@ function Gallery() {
         </EachProject>
         <EachProject>
           <div>
-            <h2>Neapolitan Louis Phillipe Coffe Table</h2>
+            <h2>Napoleone III Chest with 3 drawers</h2>
             <span>
-              Period Mid-19th century, feather mahogany
+              Period Mid-19th century chest in bois de rose wood, decordated with rich marquetry of different fruitwood with a musical motifs.
             </span>
           </div>
           <hr />
@@ -106,7 +105,7 @@ function Gallery() {
           <div>
             <h2>Charles X Smith Console</h2>
             <span>
-              Italian Mid-19th century, federal mahogany, finely inlaid maple wood
+              Period Mid-19th century. Feather mahogany with fine maple wood inlay.
             </span>
           </div>
           <hr />
@@ -116,10 +115,9 @@ function Gallery() {
         </EachProject>
         <EachProject>
           <div>
-            <h2>Neapolitan Louis XV Writing Desk</h2>
+            <h2>Jardiere Napolean III</h2>
             <span>
-              Period mid-18th century Walnut-plated, with bois de rose
-              marquetry, and purple ebony sliding top
+              Period Mid-19ths century. In bois de rose, mahogany and rosewood, elegantly inlaid and threaded in various previous wood. Original gilded bronze.
             </span>
           </div>
           <hr />
@@ -131,7 +129,7 @@ function Gallery() {
           <div>
             <h2>Italian Armchairs</h2>
             <span>
-              Pair of armchairs from the residence of the Italian Embassy
+              Pair of armchairs from the residence of the Italian Embassy in Washington, D.C.
             </span>
           </div>
           <hr />
@@ -141,10 +139,9 @@ function Gallery() {
         </EachProject>
         <EachProject>
           <div>
-            <h2>Neapolitan </h2>
+            <h2>Neapolitan Louis XVI Bedside Table</h2>
             <span>
-              Period mid-18th century Walnut-plated, with bois de rose
-              marquetry, and purple ebony Sliding top
+              Period Mid-18th century. In bois de rose, yellow Siena marble, with two drawers.
             </span>
           </div>
           <hr />
@@ -154,10 +151,9 @@ function Gallery() {
         </EachProject>
         <EachProject>
           <div>
-            <h2>Neapolitan Louis</h2>
+            <h2>Shaped Jewelry Box</h2>
             <span>
-              Period mid-18th century Walnut-plated, with bois de rose
-              marquetry, and purple ebony Sliding top
+              In bois de rose and walnut.
             </span>
           </div>
           <hr />
@@ -167,10 +163,9 @@ function Gallery() {
         </EachProject>
         <EachProject>
           <div>
-            <h2>Neapolitan Louis as</h2>
+            <h2>Charles X Dourmosa</h2>
             <span>
-              Period mid-18th century Walnut-plated, with bois de rose
-              marquetry, and purple ebony Sliding top
+              In rosewood and maple inlay.
             </span>
           </div>
           <hr />

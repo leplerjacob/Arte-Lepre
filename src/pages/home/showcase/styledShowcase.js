@@ -12,6 +12,10 @@ const StyledShowcase = styles.div`
     background-size: cover;
     overflow: hidden;
     border-bottom: 1px solid#1d3356;
+
+    @media ${device.mobile} {
+        height: 200px;
+    }
 `;
 
 export const ShowcaseOverlay = styles.div`

@@ -11,7 +11,7 @@ function Home() {
         <HomeDescription>
           <h2>Our Principle</h2>
           <div>
-            Arte Lepre guarantees the maximum quality of restoration and conservation by
+            Arte Lepre guarantees the maximum quality of Restoration and Conservation by
             adhering to traditional methods, natural materials and above and
             beyond customer service.
           </div>

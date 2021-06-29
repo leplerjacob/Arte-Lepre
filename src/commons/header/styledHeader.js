@@ -90,8 +90,11 @@ export const Logo = styles.div`
 
     @media ${device.mobile} {
         img {
-            height: 100%;
-            max-width: 80vw;
+            position: absolute;
+            top: -20px;
+            left: -15px;
+            height: 125%;
+            max-width: 100vw;
         }
     }
 

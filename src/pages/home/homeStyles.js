@@ -30,5 +30,6 @@ export const HomeDescription = styles.div`
   
   div {
     color: black;
+    margin-bottom: 10px;
   }
 `;

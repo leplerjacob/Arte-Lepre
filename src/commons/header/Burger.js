@@ -53,7 +53,6 @@ const Burger = () => {
         _.target.closest(".navlinks") === null &&
         !_.target.closest("burger")
       ) { 
-        console.log("Burger is: ", open)
         setOpen(false);
       }
     },
@@ -66,10 +65,9 @@ const Burger = () => {
     } else {
       document.removeEventListener("click", toggleNav);
     }
-  }, [setOpen]);
+  }, [open]);
 
   const test = () => {
-    console.log("Open")
     setOpen(!open)
   }
 

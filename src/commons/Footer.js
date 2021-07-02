@@ -1,16 +1,8 @@
 import React from "react";
 import {
   StyledFooter,
-  LeftSide,
   RightSide,
-  EachContact,
 } from "./footer/styledFooter";
-// import logo from "../images/logo310.png";
-import { ImLocation, ImPhone } from "react-icons/im";
-import { MdEmail } from "react-icons/md";
-import { FaInstagramSquare } from "react-icons/fa";
-import { Logo } from "./header/styledHeader";
-import logo from "../images/Logo.png";
 
 function Footer() {
   return (

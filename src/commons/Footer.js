@@ -8,14 +8,20 @@ function Footer() {
       <FooterContent>
         <div>
           <span>
+            <ClrPomp>Washington, DC:</ClrPomp> 4130 Howard Ave, Kensington, MD
+            20895 - <span>Fabio Lepre</span>
+          </span>
+        </div>
+        <div>
+          <span>
             <ClrPomp>Napoli:</ClrPomp> Via Carlo Poerio 80 - 80121 Napoli, Italy
             - <span>Raffaele Lepre</span>
           </span>
         </div>
         <div>
           <span>
-            <ClrPomp>Washington, DC:</ClrPomp> 4130 Howard Ave, Kensington, MD
-            20895 - <span>Fabio Lepre</span>
+            <ClrPomp>Napoli:</ClrPomp> Vico Santa Maria a Cappella Vecchia, 12 -
+            80132 Napoli Italy -<span>Alfredo Lepre</span>
           </span>
         </div>
         <small>

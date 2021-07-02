@@ -1,5 +1,6 @@
 import styles from "styled-components";
 import OpenSansLight from "../../static/fonts/OpenSans-Light.ttf";
+import { device } from "../../components/breakpoints";
 
 export const StyledGallery = styles.div`
     @font-face {
@@ -27,14 +28,25 @@ export const EachProject = styles.div`
         width: 300px;
         margin: auto;
     }
-`;
 
-export const StyledImage = styles.div`
+    @media ${device.tablet} {
+        flex-direction: column;
+    }
+    `;
+    
+    export const StyledImage = styles.div`
     margin: auto;
     img {
-      height: 450px;
-      width: 450px;
-      max-width: 800px;
-      cursor: zoom-in;
+        height: 450px;
+        width: 450px;
+        max-width: 800px;
+        cursor: zoom-in;
+    }
+    
+    @media ${device.tablet} {
+        img {
+            height: 200px;
+            width: 200px;
+        }
     }
 `;

@@ -1,4 +1,5 @@
 import styles, { keyframes } from "styled-components";
+import {device} from '../breakpoints'
 
 export const rotate = keyframes`
     from {
@@ -34,6 +35,10 @@ export const Logo = styles.div`
             animation: ${rotate} infinite 2s linear;
         }
     }
+
+    @media ${device.tablet} {
+        height: 100%;
+    }
 `;
 
 export const MiniLogo = styles.div`
@@ -56,7 +61,7 @@ export const MiniLogo = styles.div`
 
 export const StyledTransition = styles.div`
 .loader-enter {
-    opacity: 0;
+    opacity: 1;
         z-index: 999;
     }
 

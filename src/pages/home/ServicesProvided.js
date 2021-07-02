@@ -83,6 +83,8 @@ const ServicesProvided = () => {
         </li>
       </ul>
       <a href="mailto: artelepre@gmail.com"><Button>Email Us</Button></a>
+      <span>or</span>
+      <a href="tel: 2025505312"><Button>Call Us</Button></a>
     </ServicesProvidedContainer>
   );
 };

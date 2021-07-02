@@ -27,19 +27,20 @@ const Ul = styled.ul`
       flex-direction: column;
     }
     li {
-      padding: 1rem;
+      text-align: center;
+      padding: 0 1rem;
     }
-    a {
-      width: 100%;
-    }
+
   }
+    @media only screen and (min-width: 768px) and (max-width: 1024px) {
+      padding: 0;
+    }
 `;
 
 const NavLinks = ({ open }) => {
   return (
     <Ul open={open}>
       <li>
-          {console.log(device.laptop)}
         <Link to="/">Home</Link>
       </li>
       <li>

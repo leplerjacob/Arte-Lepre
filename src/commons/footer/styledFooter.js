@@ -1,69 +1,51 @@
 import styles from "styled-components";
-import border from '../../images/main-background.png'
+import {device} from '../../components/breakpoints'
 
 export const StyledFooter = styles.footer`
     width: 100%
     max-width: 1024px;
-    height: 50px;
-    background: #2e373d;
+    height: 150px;
     background: #1d3356; // blue
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-around;
     border-top: 1px solid white;
+    @media ${device.mobile} {
+        // height: 250px;
+    }
+    `;
     
-    span {
-        color: whitesmoke;
-    }
-`;
-
-export const EachContact = styles.div`
+    export const FooterContent = styles.div`
     display: flex;
-    flex-direction;
+    width: 650px;
+    height: 100px;
+    flex-direction: column;
+    justify-content: space-around;
     align-items: center;
-    justify-content: flex-start;
-`
-
-export const LeftSide = styles.div`
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: flex-start;
-    height: 60%;
-
-    svg {
-        margin-right: 5px;
-        font-size: 1.5rem;
-        padding: 5px;
-        background: rgb(69, 76, 82);
-        border-radius: 50%;
-        color: whitesmoke;
-    }
-`;
-
-export const RightSide = styles.div`
-    height: 50%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: flex-start;
     color: #d6af63; // Gold
     font-size: 1rem;
-
-    a {
-        padding: 0;
-        margin: 0;
+    
+    small {
+        align-self: center;
     }
 
-    svg {
-        font-size: 2.5rem;
-        color: whitesmoke;
-        padding: 5px;
-        cursor: pointer;
+    @media ${device.mobile} {
+        width: 100%;
+        padding: 1rem 3rem;
+        div {
+            padding-bottom: 3px;
+            border-bottom: 1px solid whitesmoke;
+        }
     }
-
     span {
-        color: grey;
+        span:last-child {
+            color: whitesmoke;
+        }
     }
 `;
+
+
+export const ClrPomp = styles.span`
+    color: #A42A2E
+`

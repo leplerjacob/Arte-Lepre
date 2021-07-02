@@ -1,6 +1,7 @@
 import styles from "styled-components";
 import OpenSansLight from "../../static/fonts/OpenSans-Light.ttf";
 import background from '../../images/banner_3.jpeg'
+import {device} from '../../components/breakpoints'
 
 export const StyledContact = styles.div`
     @font-face {
@@ -18,6 +19,10 @@ export const StyledContact = styles.div`
     background: url(${background}) no-repeat center;
     background-size: 1024px;
 
+    @media ${device.mobile} {
+        overflow: hidden;
+    }
+
 `;
 
 export const Details = styles.div`
@@ -34,8 +39,14 @@ export const Details = styles.div`
     overflow: hidden;
     color: #306298;
     color: whitesmoke;
+    
     span {
         margin-top: 3rem;
+        text-align: center;
+    }
+    
+    span:first-child > span {
+        color: gray;
     }
     
     h2 {
@@ -44,12 +55,22 @@ export const Details = styles.div`
     }
     
     & > div {
-        height: 250px;
+        height: 214px;
+        max-height: 214px;
         text-align: center;
         display: flex;
         flex-direction: column;
         align-items: space-between;
+        
+        a {
+            text-decoration: none;
+            color: whitesmoke;
+        }
 
+        a:hover {
+            color: #888888;
+        }
+        
         div {
             margin: auto;
         }
@@ -61,7 +82,8 @@ export const Details = styles.div`
 
     }
     img {
-        width: 120%;
+        width: 100%;
+        height: 100%;
         overflow: hidden;
     }
     img:hover {
@@ -72,19 +94,5 @@ export const Details = styles.div`
         -o-transform:scale(1.2);
     }
 
-`
 
-export const Map = styles.div`
-    margin: auto;
-
-    img {
-        width: 650px;
-        max-width: 650px;
-        cursor: pointer;
-    }
-`
-
-export const StyledIcons = styles.div`
-    font-size: 3rem;
-    color: #306298;
 `

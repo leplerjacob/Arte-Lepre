@@ -17,7 +17,7 @@ const SlideShow = () => {
     <StyledSlideShowContainer>
       <Slide
         easing="ease"
-        style={{ width: "100vw", height: "100%" }}
+        style={{ width: "100%", height: "100%" }}
         arrows={false}
         duration={3000}
       >

@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import case_1 from "../images/Case_1.png";
 import case_2 from "../images/Case_2.png";
 import case_3 from "../images/Case_3.png";
@@ -10,6 +10,7 @@ import case_8 from "../images/Case_8.png";
 import case_9 from "../images/Case_9.png";
 import case_10 from "../images/Case_10.png";
 import case_11 from "../images/Case_11.png";
+import images from './gallery/images';
 import { SRLWrapper } from "simple-react-lightbox";
 import {
   StyledGallery,
@@ -28,8 +29,11 @@ const style = {
 };
 
 function Gallery() {
+
+
   return (
     <StyledGallery>
+      <img src='' alt="" style={{height: "10px", width: "10px"}} />
       <h2>Gallery</h2>
       <SRLWrapper>
         <div>
@@ -40,8 +44,8 @@ function Gallery() {
                 Period late 18th century. With marquetry in walnut, rosewood,
                 bois de rose, maple and olive the rectangular top above a
                 conforming case enclosing three full drawers, raised on straight
-                tapering legs, the whole elaborately decorated with scrolling
-                leafage
+                tapering legs, the whole elaborately decorated with scrollingwda
+                leafage.
               </span>
             </div>
             <hr />
@@ -53,7 +57,7 @@ function Gallery() {
         <EachProject>
           <div>
             <h2>Walnut Writing Desk</h2>
-            <span>Period 18th century, Tuscany-Lucca</span>
+            <span>Period 18th century, Tuscany-Lucca.</span>
           </div>
           <hr />
           <StyledImage>
@@ -64,8 +68,8 @@ function Gallery() {
           <div>
             <h2>Neapolitan Louis XV Writing Desk</h2>
             <span>
-              Period mid-18th century Walnut-plated, with bois de rose
-              marquetry, and purple ebony Sliding top
+              Period mid-18th century, walnut-plated, with bois de rose
+              marquetry, and purple ebony sliding top.
             </span>
           </div>
           <hr />
@@ -77,8 +81,7 @@ function Gallery() {
           <div>
             <h2>Neapolitan Louis Philippe Coffee Table</h2>
             <span>
-              Period mid-18th century Walnut-plated, with bois de rose
-              marquetry, and purple ebony Sliding top
+              Period early 19th century, octagonal top with boss wood marquetry.
             </span>
           </div>
           <hr />
@@ -88,10 +91,9 @@ function Gallery() {
         </EachProject>
         <EachProject>
           <div>
-            <h2>Neapolitan Louis XV Writing Desk</h2>
+            <h2>Napoleone III Chest with 3 drawers</h2>
             <span>
-              Period mid-18th century Walnut-plated, with bois de rose
-              marquetry, and purple ebony Sliding top
+              Period Mid-19th century chest in bois de rose wood, decordated with rich marquetry of different fruitwood with a musical motifs.
             </span>
           </div>
           <hr />
@@ -101,10 +103,9 @@ function Gallery() {
         </EachProject>
         <EachProject>
           <div>
-            <h2>Neapolitan Louis XV Writing Desk</h2>
+            <h2>Charles X Smith Console</h2>
             <span>
-              Period mid-18th century Walnut-plated, with bois de rose
-              marquetry, and purple ebony Sliding top
+              Period Mid-19th century. Feather mahogany with fine maple wood inlay.
             </span>
           </div>
           <hr />
@@ -114,10 +115,9 @@ function Gallery() {
         </EachProject>
         <EachProject>
           <div>
-            <h2>Neapolitan Louis XV Writing Desk</h2>
+            <h2>Jardiere Napolean III</h2>
             <span>
-              Period mid-18th century Walnut-plated, with bois de rose
-              marquetry, and purple ebony Sliding top
+              Period Mid-19ths century. In bois de rose, mahogany and rosewood, elegantly inlaid and threaded in various previous wood. Original gilded bronze.
             </span>
           </div>
           <hr />
@@ -127,10 +127,9 @@ function Gallery() {
         </EachProject>
         <EachProject>
           <div>
-            <h2>Neapolitan Louis XV Writing Desk</h2>
+            <h2>Italian Armchairs</h2>
             <span>
-              Period mid-18th century Walnut-plated, with bois de rose
-              marquetry, and purple ebony Sliding top
+              Pair of armchairs from the residence of the Italian Embassy in Washington, D.C.
             </span>
           </div>
           <hr />
@@ -140,10 +139,9 @@ function Gallery() {
         </EachProject>
         <EachProject>
           <div>
-            <h2>Neapolitan Louis XV Writing Desk</h2>
+            <h2>Neapolitan Louis XVI Bedside Table</h2>
             <span>
-              Period mid-18th century Walnut-plated, with bois de rose
-              marquetry, and purple ebony Sliding top
+              Period Mid-18th century. In bois de rose, yellow Siena marble, with two drawers.
             </span>
           </div>
           <hr />
@@ -153,10 +151,9 @@ function Gallery() {
         </EachProject>
         <EachProject>
           <div>
-            <h2>Neapolitan Louis XV Writing Desk</h2>
+            <h2>Shaped Jewelry Box</h2>
             <span>
-              Period mid-18th century Walnut-plated, with bois de rose
-              marquetry, and purple ebony Sliding top
+              In bois de rose and walnut.
             </span>
           </div>
           <hr />
@@ -166,10 +163,9 @@ function Gallery() {
         </EachProject>
         <EachProject>
           <div>
-            <h2>Neapolitan Louis XV Writing Desk</h2>
+            <h2>Charles X Dourmosa</h2>
             <span>
-              Period mid-18th century Walnut-plated, with bois de rose
-              marquetry, and purple ebony Sliding top
+              In rosewood and maple inlay.
             </span>
           </div>
           <hr />

@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import "./App.css";
 import Header from "./commons/Header";
 import Footer from "./commons/Footer";
 import Loader from "./components/Loader";
@@ -20,10 +19,10 @@ function App() {
         <Loader />
       ) : (
         <div>
-          <div className="App-header">
+          <div>
             <Header />
           </div>
-          <div className="App-footer">
+          <div>
             <Footer />
           </div>
         </div>

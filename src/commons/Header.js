@@ -1,12 +1,10 @@
-import { useRef, useEffect, createRef } from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { HashRouter, Route } from "react-router-dom";
 import Home from "../pages/Home";
 import Gallery from "../pages/Gallery";
 import History from "../pages/History";
 import Contact from "../pages/Contact";
 import ForSale from "../components/ForSale";
 import { default as NavBar } from "./header/Burger";
-import { ChevronDownIcon } from "@heroicons/react/outline";
 import logo from "../images/Logo.png";
 import italia from "../images/flag-italy.png";
 

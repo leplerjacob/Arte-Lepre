@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import logo from "../images/logo310.png";
 import { MiniLogo, StyledTransition } from "../components/loader/styledLoader";
 
-const LoadImage = ({ image }) => {
+const LoadImage = ({ image, alt }) => {
   const [loading, setLoading] = useState(true);
   const imageLoaded = () => {
     setLoading(false);
@@ -19,16 +19,15 @@ const LoadImage = ({ image }) => {
   return (
     <>
       <StyledTransition
-        ref={spinner}
         style={{ display: loading ? "block" : "none" }}
       >
         <MiniLogo>
-          <img src={logo} alt="logo" />
+          <img ref={spinner} src={logo} alt="logo" />
         </MiniLogo>
       </StyledTransition>
       <img
         src={image}
-        alt={`${image}`}
+        alt={`${alt}`}
         style={{ display: loading ? "none" : "block" }}
         onLoad={() => imageLoaded()}
       />

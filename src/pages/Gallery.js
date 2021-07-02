@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import case_1 from "../images/Case_1.png";
 import case_2 from "../images/Case_2.png";
 import case_3 from "../images/Case_3.png";
@@ -10,7 +10,6 @@ import case_8 from "../images/Case_8.png";
 import case_9 from "../images/Case_9.png";
 import case_10 from "../images/Case_10.png";
 import case_11 from "../images/Case_11.png";
-import images from './gallery/images';
 import { SRLWrapper } from "simple-react-lightbox";
 import {
   StyledGallery,
@@ -19,21 +18,10 @@ import {
 } from "../pages/gallery/styledGallery";
 import LoadImage from "../components/LoadImage";
 
-const style = {
-  img: {
-    height: "450px",
-    width: "450px",
-    maxWidth: "800px",
-    cursor: "zoom-in",
-  },
-};
-
 function Gallery() {
-
-
   return (
     <StyledGallery>
-      <img src='' alt="" style={{height: "10px", width: "10px"}} />
+      <img src="" alt="" style={{ height: "10px", width: "10px" }} />
       <h2>Gallery</h2>
       <SRLWrapper>
         <div>
@@ -50,7 +38,14 @@ function Gallery() {
             </div>
             <hr />
             <StyledImage>
-              <LoadImage image={case_1} />
+              <LoadImage
+                image={case_1}
+                alt={`Period late 18th century. With marquetry in walnut, rosewood,
+                bois de rose, maple and olive the rectangular top above a
+                conforming case enclosing three full drawers, raised on straight
+                tapering legs, the whole elaborately decorated with scrollingwda
+                leafage.`}
+              />
             </StyledImage>
           </EachProject>
         </div>
@@ -61,7 +56,10 @@ function Gallery() {
           </div>
           <hr />
           <StyledImage>
-            <LoadImage image={case_2} />
+            <LoadImage
+              image={case_2}
+              alt={`Period 18th century, Tuscany-Lucca.`}
+            />
           </StyledImage>
         </EachProject>
         <EachProject>
@@ -74,7 +72,11 @@ function Gallery() {
           </div>
           <hr />
           <StyledImage>
-            <LoadImage image={case_3} />
+            <LoadImage
+              image={case_3}
+              alt={`Period mid-18th century, walnut-plated, with bois de rose
+              marquetry, and purple ebony sliding top.`}
+            />
           </StyledImage>
         </EachProject>
         <EachProject>
@@ -86,91 +88,117 @@ function Gallery() {
           </div>
           <hr />
           <StyledImage>
-            <LoadImage image={case_4} />
+            <LoadImage
+              image={case_4}
+              alt={`Period early 19th century, octagonal top with boss wood marquetry.`}
+            />
           </StyledImage>
         </EachProject>
         <EachProject>
           <div>
             <h2>Napoleone III Chest with 3 drawers</h2>
             <span>
-              Period Mid-19th century chest in bois de rose wood, decordated with rich marquetry of different fruitwood with a musical motifs.
+              Period Mid-19th century chest in bois de rose wood, decordated
+              with rich marquetry of different fruitwood with a musical motifs.
             </span>
           </div>
           <hr />
           <StyledImage>
-            <LoadImage image={case_5} />
+            <LoadImage
+              image={case_5}
+              alt={`Period Mid-19th century chest in bois de rose wood, decordated
+              with rich marquetry of different fruitwood with a musical motifs.`}
+            />
           </StyledImage>
         </EachProject>
         <EachProject>
           <div>
             <h2>Charles X Smith Console</h2>
             <span>
-              Period Mid-19th century. Feather mahogany with fine maple wood inlay.
+              Period Mid-19th century. Feather mahogany with fine maple wood
+              inlay.
             </span>
           </div>
           <hr />
           <StyledImage>
-            <LoadImage image={case_6} />
+            <LoadImage
+              image={case_6}
+              alt={`Period Mid-19th century. Feather mahogany with fine maple wood
+              inlay.`}
+            />
           </StyledImage>
         </EachProject>
         <EachProject>
           <div>
             <h2>Jardiere Napolean III</h2>
             <span>
-              Period Mid-19ths century. In bois de rose, mahogany and rosewood, elegantly inlaid and threaded in various previous wood. Original gilded bronze.
+              Period Mid-19ths century. In bois de rose, mahogany and rosewood,
+              elegantly inlaid and threaded in various previous wood. Original
+              gilded bronze.
             </span>
           </div>
           <hr />
           <StyledImage>
-            <LoadImage image={case_7} />
+            <LoadImage
+              image={case_7}
+              alt={`Period Mid-19ths century. In bois de rose, mahogany and rosewood,
+              elegantly inlaid and threaded in various previous wood. Original
+              gilded bronze.`}
+            />
           </StyledImage>
         </EachProject>
         <EachProject>
           <div>
             <h2>Italian Armchairs</h2>
             <span>
-              Pair of armchairs from the residence of the Italian Embassy in Washington, D.C.
+              Pair of armchairs from the residence of the Italian Embassy in
+              Washington, D.C.
             </span>
           </div>
           <hr />
           <StyledImage>
-            <LoadImage image={case_8} />
+            <LoadImage
+              image={case_8}
+              alt={`Pair of armchairs from the residence of the Italian Embassy in
+              Washington, D.C.`}
+            />
           </StyledImage>
         </EachProject>
         <EachProject>
           <div>
             <h2>Neapolitan Louis XVI Bedside Table</h2>
             <span>
-              Period Mid-18th century. In bois de rose, yellow Siena marble, with two drawers.
+              Period Mid-18th century. In bois de rose, yellow Siena marble,
+              with two drawers.
             </span>
           </div>
           <hr />
           <StyledImage>
-            <LoadImage image={case_9} />
+            <LoadImage
+              image={case_9}
+              alt={`Period Mid-18th century. In bois de rose, yellow Siena marble,
+              with two drawers.`}
+            />
           </StyledImage>
         </EachProject>
         <EachProject>
           <div>
             <h2>Shaped Jewelry Box</h2>
-            <span>
-              In bois de rose and walnut.
-            </span>
+            <span>In bois de rose and walnut.</span>
           </div>
           <hr />
           <StyledImage>
-            <LoadImage image={case_10} />
+            <LoadImage image={case_10} alt={`In bois de rose and walnut.`} />
           </StyledImage>
         </EachProject>
         <EachProject>
           <div>
             <h2>Charles X Dourmosa</h2>
-            <span>
-              In rosewood and maple inlay.
-            </span>
+            <span>In rosewood and maple inlay.</span>
           </div>
           <hr />
           <StyledImage>
-            <LoadImage image={case_11} />
+            <LoadImage image={case_11} alt={`In rosewood and maple inlay.`} />
           </StyledImage>
         </EachProject>
       </SRLWrapper>

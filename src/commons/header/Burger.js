@@ -1,6 +1,5 @@
 import React, {
   useState,
-  useRef,
   createRef,
   useEffect,
   useCallback,
@@ -53,7 +52,8 @@ const Burger = () => {
       if (
         _.target.closest(".navlinks") === null &&
         !_.target.closest("burger")
-      ) {
+      ) { 
+        console.log("Burger is: ", open)
         setOpen(false);
       }
     },
@@ -66,14 +66,19 @@ const Burger = () => {
     } else {
       document.removeEventListener("click", toggleNav);
     }
-  }, [open]);
+  }, [setOpen]);
+
+  const test = () => {
+    console.log("Open")
+    setOpen(!open)
+  }
 
   return (
     <>
       <StyledBurger
         className="burger"
         open={open}
-        onClick={() => setOpen(!open)}
+        onClick={test}
       >
         <div />
         <div />

@@ -5,6 +5,8 @@
 /.pnp
 .pnp.js
 
+cgi-bin.zip
+
 # testing
 /coverage
 

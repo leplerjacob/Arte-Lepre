@@ -53,7 +53,7 @@ const NavLinks = ({ open }) => {
         <Link to="/contact">Contact</Link>
       </li>
       <li>
-        <Link to="/for-sale">Purchase</Link>
+        <Link to="/inventory">Purchase</Link>
       </li>
     </Ul>
   );

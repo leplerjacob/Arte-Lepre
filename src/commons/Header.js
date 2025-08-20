@@ -3,7 +3,7 @@ import Home from "../pages/Home";
 import Gallery from "../pages/Gallery";
 import History from "../pages/History";
 import Contact from "../pages/Contact";
-import ForSale from "../components/ForSale";
+import Purchase from "../pages/Purchase";
 import { default as NavBar } from "./header/Burger";
 import logo from "../images/Logo.png";
 import italia from "../images/flag-italy.png";
@@ -37,8 +37,8 @@ function Header() {
       <Route exact path="/contact">
         <Contact />
       </Route>
-      <Route exact path="/for-sale">
-        <ForSale />
+      <Route exact path="/inventory">
+        <Purchase />
       </Route>
     </HashRouter>
   );

@@ -11,3 +11,8 @@ Built using HTML, CSS-in-JS, ReactJS, and open-source libraries.
 1. fork/clone repo
 2. npm install
 3. npm start
+
+## Fixed OpenSSL error
+
+I had to add "--openssl-legacy-provider" to the npm script command.
+I will detail how to upload the static webpage to HostGator

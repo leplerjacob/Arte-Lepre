@@ -19,14 +19,30 @@ export const StyledGallery = styles.div`
         text-align: center;
     }
     `;
-
-export const EachProject = styles.div`
+    
+    export const EachProject = styles.div`
     display: flex;
     margin-top: 50px;
-
+    
     & > div:first-child {
         width: 300px;
         margin: auto;
+    }
+    a {
+        text-align: center;
+        text-decoration: none;
+        color: black;
+        p {
+            font-family: OpenSans;
+            border-radius: 5px;
+            border: 1px solid black;
+        }
+        p:hover {
+            border: 1px solid #d6af63;
+            color: #d6af63; // Gold
+        }
+    }
+    a:hover {
     }
 
     @media ${device.tablet} {

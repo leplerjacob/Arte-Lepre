@@ -1,0 +1,46 @@
+/* Base styles for nav links */
+.ul {
+  list-style: none;
+  display: flex;
+  flex-flow: row nowrap;
+  margin: 0;
+  transform: translate(0);
+}
+
+/* Tablet styles (device.tablet: max-width: 768px) */
+@media (max-width: 768px) {
+  .ul {
+    border-radius: 2px;
+    box-shadow: 10px 5px 5px rgba(0, 0, 0, 0.6);
+    background-color: #0d2538;
+    padding: 0;
+    margin-top: 70px;
+    position: fixed;
+    z-index: 10;
+    top: 0;
+    right: 0;
+    width: 200px;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease-in-out;
+    transform: translate(100vw);
+  }
+  .open {
+    transform: translateX(0); /* visible when open */
+  }
+  .ul li {
+    text-align: center;
+    padding: 0 1rem;
+  }
+}
+
+/* Laptop styles (min-width: 768px and max-width: 1024px) */
+@media only screen and (min-width: 768px) and (max-width: 1024px) {
+  .ul {
+    padding: 0;
+    transform: translate(100vw);
+  }
+  .open {
+    transform: translateX(0); /* visible when open */
+  }
+}

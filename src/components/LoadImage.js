@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import logo from "../images/logo310.png";
-import { MiniLogo, StyledTransition } from "../components/loader/styledLoader";
+import styles from "./loader/Loader.module.css";
 
 const LoadImage = ({ image, alt }) => {
   const [loading, setLoading] = useState(true);
@@ -18,13 +18,14 @@ const LoadImage = ({ image, alt }) => {
 
   return (
     <>
-      <StyledTransition
+      <div
+        className={styles.loaderTransition}
         style={{ display: loading ? "block" : "none" }}
       >
-        <MiniLogo>
+        <div className={styles.miniLogo}>
           <img ref={spinner} src={logo} alt="logo" />
-        </MiniLogo>
-      </StyledTransition>
+        </div>
+      </div>
       <img
         src={image}
         alt={`${alt}`}

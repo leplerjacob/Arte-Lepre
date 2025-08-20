@@ -8,23 +8,23 @@ import { default as NavBar } from "./header/Burger";
 import logo from "../images/Logo.png";
 import italia from "../images/flag-italy.png";
 
-import { NavWrapper, StyledNav, Flag, Logo } from "./header/styledHeader";
+import styles from "./header/Header.module.css";
 
 function Header() {
 
   return (
     <HashRouter>
-      <NavWrapper>
-        <StyledNav>
-          <Logo>
+      <header className={styles.navWrapper}>
+        <nav className={styles.styledNav}>
+          <div className={styles.logo}>
             <img src={logo} alt="logo" />
-          </Logo>
-          <Flag>
+          </div>
+          <div className={styles.flag}>
             <img src={italia} alt="italian flag" />
-          </Flag>
+          </div>
           <NavBar />
-        </StyledNav>
-      </NavWrapper>
+        </nav>
+      </header>
       <Route exact path="/">
         <Home />
       </Route>

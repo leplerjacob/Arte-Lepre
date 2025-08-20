@@ -65,7 +65,7 @@ const Burger = () => {
     } else {
       document.removeEventListener("click", toggleNav);
     }
-  }, [open]);
+  },);
 
   const test = () => {
     setOpen(!open)

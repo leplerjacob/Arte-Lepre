@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import logo from "../images/logo310.png";
 import { CSSTransition } from "react-transition-group";
-import { StyledTransition, LoaderBackground, Logo } from "./loader/styledLoader";
+import styles from "./loader/Loader.module.css";
 
 function Loader() {
   const [inProp, setInProp] = useState(false);
@@ -14,24 +14,29 @@ function Loader() {
   }, []);
 
   return (
-    <StyledTransition>
+    <div className={styles.loaderTransition}>
       <CSSTransition
         in={inProp}
         timeout={2000}
-        classNames="loader"
+        classNames={{
+          enter: styles.loaderEnter,
+          enterActive: styles.loaderEnterActive,
+          exit: styles.loaderExit,
+          exitActive: styles.loaderExitActive,
+        }}
         onClose={() => {
           setInProp(false);
         }}
       >
-        <LoaderBackground>
-            {"WELCOME"}
-            <Logo>
-              <img src={logo} alt="logo" />
-            </Logo>
-            {"BENVENUTO"}
-        </LoaderBackground>
+        <div className={styles.loaderBackground}>
+          {"WELCOME"}
+          <div className={styles.logo}>
+            <img src={logo} alt="logo" />
+          </div>
+          {"BENVENUTO"}
+        </div>
       </CSSTransition>
-    </StyledTransition>
+    </div>
   );
 }
 

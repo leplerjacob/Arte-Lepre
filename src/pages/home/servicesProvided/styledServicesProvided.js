@@ -1,6 +1,5 @@
 import styles from "styled-components";
 import OpenSansLight from "../../../static/fonts/OpenSans-Light.ttf";
-import OpenSansBold from "../../../static/fonts/OpenSans-Bold.ttf";
 
 console.log(OpenSansLight)
 export const ServicesProvidedContainer = styles.div`

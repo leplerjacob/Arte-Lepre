@@ -1,0 +1,77 @@
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.loaderBackground {
+  display: block;
+  background-color: #1d3356;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  color: whitesmoke;
+}
+
+.logo {
+  height: 40vmin;
+  pointer-events: none;
+  margin: 40px 0;
+}
+
+.logo img {
+  animation: rotate infinite 2s linear;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .logo img {
+    animation: rotate infinite 2s linear;
+  }
+}
+
+@media (max-width: 1024px) { /* Example for tablet breakpoint */
+  .logo {
+    height: 100%;
+  }
+}
+
+.miniLogo {
+  pointer-events: none;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 450px;
+  width: 450px;
+}
+
+.miniLogo img {
+  animation: rotate infinite 2s linear;
+  height: 50px;
+  width: 50px;
+}
+
+.loaderEnter {
+  opacity: 1;
+  z-index: 999;
+}
+
+.loaderEnterActive {
+  opacity: 1;
+  transition: opacity 800ms;
+}
+
+.loaderExit {
+  opacity: 1;
+}
+
+.loaderExitActive {
+  opacity: 0;
+  transition: opacity 2000ms;
+}

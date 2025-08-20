@@ -1,0 +1,36 @@
+.burger {
+  width: 2.2rem;
+  height: 2.2rem;
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 20;
+  display: none;
+}
+.burger:hover {
+  cursor: pointer;
+}
+@media (max-width: 768px) {
+  .burger {
+    display: flex;
+    justify-content: space-around;
+    flex-flow: column nowrap;
+  }
+}
+.burger div {
+  width: 2rem;
+  height: 0.25rem;
+  background-color: #ccc;
+  border-radius: 10px;
+  transform-origin: 1px;
+  transition: all 0.3s linear;
+}
+.burger.open div:nth-child(1) {
+  transform: rotate(45deg);
+}
+.burger.open div:nth-child(2) {
+  opacity: 0;
+}
+.burger.open div:nth-child(3) {
+  transform: rotate(-45deg);
+}

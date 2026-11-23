@@ -1,6 +1,6 @@
 ---
 import { Image } from "astro:assets";
-import logo from "../assets/images/Logo.png";
+import logo from "../assets/images/logo-wordmark.png";
 import { navLinks, site } from "../data/site";
 import { url } from "../lib/paths";
 
@@ -17,7 +17,7 @@ const current = Astro.url.pathname.replace(/\/?$/, "/");
 <header class="header" data-header>
   <div class="wrap header__inner">
     <a class="logo" href={url("/")} aria-label="Arte Lepre home">
-      <Image src={logo} alt="Arte Lepre, Antique Restoration & Conservation, since 1959" widths={[210, 420]} sizes="210px" loading="eager" />
+      <Image src={logo} alt="Arte Lepre, Antique Restoration & Conservation, since 1959" widths={[200, 300, 600]} sizes="(max-width: 960px) 200px, 300px" loading="eager" />
     </a>
 
     <nav class="nav" aria-label="Main">
@@ -149,11 +149,11 @@ const current = Astro.url.pathname.replace(/\/?$/, "/");
   .header.is-scrolled .header__inner { height: var(--header-h); }
 
   .logo img {
-    width: 210px;
+    width: 300px;
     height: auto;
     transition: width 0.3s var(--ease);
   }
-  .header.is-scrolled .logo img { width: 150px; }
+  .header.is-scrolled .logo img { width: 230px; }
 
   .nav {
     display: flex;
@@ -198,6 +198,7 @@ const current = Astro.url.pathname.replace(/\/?$/, "/");
 
   /* ---------- tablet & phone ---------- */
   @media (max-width: 1100px) {
+    .logo img { width: 240px; }
     .nav ul { gap: 1.4rem; }
     .nav { gap: 1.5rem; }
   }
@@ -207,7 +208,7 @@ const current = Astro.url.pathname.replace(/\/?$/, "/");
     .nav { display: none; }
     .header__inner { height: 76px; }
     .header.is-scrolled .header__inner { height: 68px; }
-    .logo img, .header.is-scrolled .logo img { width: 150px; }
+    .logo img, .header.is-scrolled .logo img { width: min(200px, 55vw); }
 
     .burger {
       position: relative;

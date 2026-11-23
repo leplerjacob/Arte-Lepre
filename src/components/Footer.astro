@@ -1,0 +1,57 @@
+---
+import { locations, site } from "../data/site";
+const year = new Date().getFullYear();
+---
+
+<footer class="footer">
+  <ul>
+    {
+      locations.map(({ label, address, person }) => (
+        <li>
+          <span class="label">{label}:</span> {address} – <span class="person">{person}</span>
+        </li>
+      ))
+    }
+  </ul>
+  <small>Copyright &copy; {year} {site.name}. All Rights Reserved.</small>
+</footer>
+
+<style>
+  .footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.9rem;
+    padding: 1.75rem 1.5rem;
+    background: var(--navy);
+    border-top: 1px solid rgb(255 255 255 / 0.85);
+    color: var(--gold);
+    font-family: var(--font-serif);
+    font-size: 0.95rem;
+    text-align: center;
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    gap: 0.35rem;
+  }
+
+  .label { color: var(--pompeii-light); font-weight: 500; }
+  .person { color: var(--smoke); }
+
+  small {
+    font-size: 0.8rem;
+    color: rgb(214 175 99 / 0.8);
+  }
+
+  @media (max-width: 600px) {
+    .footer { padding-inline: 1.25rem; }
+    li {
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid rgb(245 245 245 / 0.25);
+    }
+    .label { display: block; }
+  }
+</style>

@@ -1,0 +1,19 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PieceList from "../components/PieceList.astro";
+import { galleryPieces } from "../data/pieces";
+---
+
+<BaseLayout
+  title="Gallery"
+  description="Antique furniture restored by Arte Lepre: Neapolitan, Louis XV and XVI, Napoleon III and Charles X commodes, writing desks, consoles and more."
+>
+  <section class="wrap">
+    <h1 class="section-title">Gallery</h1>
+    <PieceList pieces={galleryPieces} />
+  </section>
+</BaseLayout>
+
+<style>
+  .wrap { padding: 2.5rem 0 4rem; }
+</style>

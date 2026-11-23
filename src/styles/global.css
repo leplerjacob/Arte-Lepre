@@ -1,0 +1,117 @@
+@import "@fontsource/open-sans/latin-300.css";
+@import "@fontsource/open-sans/latin-600.css";
+@import "@fontsource/lora/latin-400.css";
+@import "@fontsource/lora/latin-500.css";
+
+/* ---------- Design tokens (taken from the original site) ---------- */
+:root {
+  --navy: #1d3356;
+  --navy-deep: #0d2538;
+  --gold: #d6af63;
+  --gold-soft: #e6cb93;
+  --pompeii: #a42a2e;
+  --pompeii-light: #d0605f; /* same red, lifted so it reads on navy */
+  --cream: #fffefa;
+  --ink: #1b1b1b;
+  --muted: #6b6b6b;
+  --smoke: #f5f5f5;
+  --rule: rgb(29 51 86 / 0.18);
+  --backdrop: #232c3b;
+
+  --font-sans: "Open Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-serif: "Lora", Georgia, "Times New Roman", serif;
+
+  --page-max: 1024px;
+  --text-max: 650px;
+  --header-h: 150px;
+  --radius: 6px;
+  --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --shadow-page: 0 0 60px rgb(0 0 0 / 0.45);
+}
+
+@media (max-width: 768px) {
+  :root { --header-h: 96px; }
+}
+
+/* ---------- Reset ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body, h1, h2, h3, p, ul, figure { margin: 0; }
+img, picture, svg { display: block; max-width: 100%; }
+button { font: inherit; color: inherit; }
+a { color: inherit; }
+
+/* ---------- Page frame: centred 1024px column over the damask wallpaper ---------- */
+body {
+  min-height: 100vh;
+  background: var(--backdrop) url("/patterns/damask.svg") repeat;
+  background-size: 140px 200px;
+  background-attachment: fixed;
+  font-family: var(--font-sans);
+  font-weight: 300;
+  line-height: 1.6;
+  color: var(--ink);
+}
+
+.page {
+  max-width: var(--page-max);
+  margin-inline: auto;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--cream);
+  box-shadow: var(--shadow-page);
+}
+
+main { flex: 1; }
+
+/* ---------- Shared typography ---------- */
+.section-title {
+  font-family: var(--font-sans);
+  font-weight: 300;
+  font-size: clamp(1.5rem, 1.2rem + 1vw, 1.85rem);
+  letter-spacing: 0.02em;
+  color: var(--gold);
+  text-align: center;
+}
+
+.rule {
+  border: 0;
+  border-top: 1px solid var(--rule);
+  width: 100%;
+  margin: 2rem 0;
+}
+
+/* ---------- Buttons ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 150px;
+  padding: 0.7rem 1.4rem;
+  border: 1px solid var(--navy);
+  border-radius: var(--radius);
+  background: var(--navy);
+  color: var(--gold);
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: 0.95rem;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.2s var(--ease), color 0.2s var(--ease), border-color 0.2s var(--ease);
+}
+.btn:hover { background: var(--gold); border-color: var(--gold); color: var(--navy); }
+.btn--outline { background: transparent; color: var(--navy); }
+.btn--outline:hover { background: var(--navy); border-color: var(--navy); color: var(--gold); }
+
+:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+
+.visually-hidden {
+  position: absolute !important;
+  width: 1px; height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}

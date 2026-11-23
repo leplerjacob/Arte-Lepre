@@ -1,0 +1,45 @@
+---
+// "WELCOME / BENVENUTO" intro from the original site. Shown once per visit (see BaseLayout),
+// fades out on its own after ~1.6s and never blocks the page from loading.
+---
+
+<div class="splash" aria-hidden="true">
+  <span>WELCOME</span>
+  <img src="/logo310.png" alt="" width="310" height="310" />
+  <span>BENVENUTO</span>
+</div>
+
+<style>
+  .splash {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2.5rem;
+    background: var(--navy);
+    color: var(--smoke);
+    font-family: var(--font-sans);
+    font-weight: 300;
+    font-size: clamp(1.5rem, 1rem + 2vw, 2rem);
+    letter-spacing: 0.3em;
+    animation: splash-out 0.7s var(--ease) 1.1s forwards;
+  }
+  :global(html.show-splash) .splash { display: flex; }
+
+  img {
+    width: min(40vmin, 220px);
+    height: auto;
+    animation: spin 2s linear infinite;
+  }
+
+  @keyframes spin { to { transform: rotate(360deg); } }
+  @keyframes splash-out { to { opacity: 0; visibility: hidden; } }
+
+  @media (prefers-reduced-motion: reduce) {
+    img { animation: none; }
+    .splash { animation-delay: 0.6s; }
+  }
+</style>

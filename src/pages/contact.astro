@@ -1,0 +1,108 @@
+---
+import { Image, getImage } from "astro:assets";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import background from "../assets/images/banner_3.jpeg";
+import map from "../assets/images/quarter-map.png";
+import { site } from "../data/site";
+
+// Background photo, converted to WebP and passed to CSS as a custom property.
+const bgImage = await getImage({ src: background, width: 1449, format: "webp", quality: 78 });
+---
+
+<BaseLayout
+  title="Contact"
+  description={`Contact Arte Lepre in Kensington, MD. Antique furniture restoration by appointment: ${site.phone.display}, ${site.email}.`}
+  businessSchema
+>
+  <section class="contact" style={`--bg: url(${bgImage.src})`}>
+    <div class="medallion">
+      <header>
+        <h1>Contact</h1>
+        <p class="name">{site.contactName}</p>
+      </header>
+
+      <address>
+        <a href={site.mapsUrl} target="_blank" rel="noopener noreferrer">
+          {site.address.street},<br />
+          {site.address.city}, {site.address.region} {site.address.postalCode}
+        </a>
+        <span class="appt">By Appointment:</span>
+        <a href={site.phone.href}>{site.phone.display}</a>
+        <a href={`mailto:${site.email}`}>{site.email}</a>
+      </address>
+
+      <a class="map" href={site.mapsUrl} target="_blank" rel="noopener noreferrer" aria-label="Open the workshop location in Google Maps">
+        <Image src={map} alt="Map showing the workshop in Kensington, MD" widths={[420, 840]} sizes="420px" format="webp" />
+      </a>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .contact {
+    display: grid;
+    place-items: center;
+    min-height: 1024px;
+    padding: 3rem 1rem;
+    background: var(--navy) var(--bg) no-repeat center / cover;
+  }
+
+  .medallion {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 411px;
+    height: 411px;
+    overflow: hidden;
+    border-radius: 50%;
+    background: var(--navy);
+    color: var(--smoke);
+    text-align: center;
+    box-shadow: 0 0 0 6px rgb(214 175 99 / 0.35), 0 20px 50px rgb(0 0 0 / 0.5);
+  }
+
+  header { margin-top: 3rem; }
+  h1 {
+    font-family: var(--font-sans);
+    font-weight: 300;
+    font-size: 1.5rem;
+    color: var(--gold);
+    line-height: 1.2;
+  }
+  .name { color: #a9a9a9; font-size: 0.9rem; }
+
+  address {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    font-style: normal;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    font-size: 0.9rem;
+  }
+  address a {
+    color: var(--smoke);
+    text-decoration: none;
+    transition: color 0.2s var(--ease);
+  }
+  address a:hover { color: var(--gold); }
+  .appt { color: var(--gold); font-weight: 300; }
+
+  .map { display: block; width: 100%; height: 72px; overflow: hidden; }
+  .map img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s var(--ease);
+  }
+  .map:hover img { transform: scale(1.15); }
+
+  @media (max-width: 600px) {
+    .contact { min-height: 640px; }
+    .medallion { width: min(340px, 88vw); height: min(340px, 88vw); }
+    header { margin-top: 2.2rem; }
+    address { letter-spacing: 0.08em; font-size: 0.85rem; }
+    .map { height: 56px; }
+  }
+</style>

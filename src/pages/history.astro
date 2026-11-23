@@ -1,0 +1,101 @@
+---
+import { Image } from "astro:assets";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import vesuvius from "../assets/images/vesuvius.jpg";
+import shop from "../assets/images/shop.jpg";
+import article1 from "../assets/images/article_1.jpg";
+import article2 from "../assets/images/article_2.jpg";
+import article3 from "../assets/images/article_3.jpg";
+
+const figure = { widths: [240, 480], sizes: "(max-width: 600px) 70vw, 240px", format: "webp" as const };
+---
+
+<BaseLayout
+  title="History"
+  description="Three generations of the Lepre family have restored antique furniture in Naples since 1959. Fabio Lepre brought the family craft to Washington, D.C."
+>
+  <Image class="banner" src={vesuvius} alt="The Bay of Naples with Mount Vesuvius" widths={[640, 1024, 2048]} sizes="(max-width: 1024px) 100vw, 1024px" loading="eager" />
+
+  <article class="article">
+    <h1 class="section-title">History</h1>
+
+    <Image class="float left" src={shop} alt="The Lepre family workshop in Naples" {...figure} />
+    <p>
+      With over 60 years of experience and three generations later, the Lepre family run artisan restoration workshop
+      has been a staple in Naples, Italy since 1959 specializing in the restoration of Italian, French and English style
+      antique furniture and cabinet making.
+    </p>
+
+    <Image class="float right" src={article3} alt="Newspaper article about the Lepre workshop" {...figure} />
+    <p>
+      Raffaele Lepre learned this craft from a young age, thanks to his uncle Sassano Giacomo who was an artisan
+      cabinet maker. Since then, Mr. Lepre passed his enthusiasm and passion for all things antique to his two sons,
+      Alfredo and Fabio Lepre.
+    </p>
+
+    <Image class="float left" src={article1} alt="Newspaper article featuring Raffaele Lepre" {...figure} />
+    <p>
+      Fabio Lepre emigrated to the Greater Washington D.C. area in the 2010s for a special someone that won his heart.
+      He brought with him over 20 years in the antique restoration, conservation and trading business. After working in
+      a prestigious antiques gallery in Georgetown D.C., he slowly expanded his business to focus on the legacy of his
+      family through the love of his craft.
+    </p>
+
+    <Image class="float right" src={article2} alt="Newspaper article on the restoration work" {...figure} />
+    <p>
+      Arte Lepre guarantees the quality of antiques through meticulous restoration by hand using exclusively
+      traditional methods such as: spirit polishing and shellac, beeswax polishing, and the possible integration of
+      missing parts through the use of antique wood in order to return the restored pieces to the original state.
+    </p>
+  </article>
+</BaseLayout>
+
+<style>
+  .banner {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+  }
+
+  .article {
+    max-width: var(--text-max);
+    margin: 0 auto;
+    padding: 2rem 1.5rem 4rem;
+    font-size: 1.35rem;
+    line-height: 1.65;
+    display: flow-root; /* contains the floats */
+  }
+  .article h1 { margin-bottom: 1.5rem; }
+  .article p + p, .article :global(img) + p { margin-top: 1.25rem; }
+
+  .float {
+    width: 220px;
+    height: auto;
+    margin-block: 0.4rem 1rem;
+  }
+  .left {
+    float: left;
+    margin-right: 1.75rem;
+    padding-right: 1.75rem;
+    border-right: 1px solid var(--rule);
+  }
+  .right {
+    float: right;
+    margin-left: 1.75rem;
+    padding-left: 1.75rem;
+    border-left: 1px solid var(--rule);
+  }
+
+  @media (max-width: 600px) {
+    .banner { height: 200px; }
+    .article { font-size: 1.15rem; text-align: center; }
+    .float, .left, .right {
+      float: none;
+      width: min(240px, 70vw);
+      margin: 1.75rem auto 1rem;
+      padding: 0;
+      border: 0;
+      box-shadow: 0 6px 20px rgb(29 51 86 / 0.18);
+    }
+  }
+</style>

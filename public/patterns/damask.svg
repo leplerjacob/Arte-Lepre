@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="140" height="200" viewBox="0 0 140 200">
+  <!-- Original ogee-lattice damask tile for Arte Lepre: a tulip in each cell, small rosettes where the lattice meets.
+       Kept low-contrast so it frames the page without competing with it. -->
+  <defs>
+    <g id="rosette">
+      <path id="petal" d="M0 -14 C6 -8 6 -3 0 0 C-6 -3 -6 -8 0 -14Z"/>
+      <use href="#petal" transform="rotate(90)"/>
+      <use href="#petal" transform="rotate(180)"/>
+      <use href="#petal" transform="rotate(270)"/>
+    </g>
+    <g id="side">
+      <!-- one side of the ogee lattice -->
+      <path d="M70 0 C70 26 26 34 22 62 C18 88 0 92 0 100" fill="none"/>
+      <path d="M70 200 C70 174 26 166 22 138 C18 112 0 108 0 100" fill="none"/>
+      <!-- leaf sprigs growing off the lattice -->
+      <path d="M22 62 C31 59 37 63 40 70 C31 72 25 68 22 62Z"/>
+      <path d="M22 138 C31 141 37 137 40 130 C31 128 25 132 22 138Z"/>
+      <!-- tulip side petal + leaf -->
+      <path d="M70 112 C58 108 50 96 53 84 C60 89 67 98 70 112Z"/>
+      <path d="M70 124 C62 121 56 126 54 133 C61 134 67 130 70 124Z"/>
+    </g>
+  </defs>
+  <rect width="140" height="200" fill="#222b3a"/>
+  <g fill="#cdb78c" fill-opacity=".17" stroke="#cdb78c" stroke-opacity=".26" stroke-width="1.2" stroke-linecap="round">
+    <use href="#side"/>
+    <use href="#side" transform="translate(140 0) scale(-1 1)"/>
+  </g>
+  <g fill="#cdb78c" fill-opacity=".2">
+    <!-- tulip centre petal and stem -->
+    <path d="M70 76 C78 88 77 101 70 112 C63 101 62 88 70 76Z"/>
+    <rect x="69.3" y="112" width="1.4" height="16" rx=".7"/>
+    <circle cx="70" cy="69" r="2"/>
+    <circle cx="70" cy="135" r="1.6"/>
+    <!-- rosettes at the lattice joints -->
+    <use href="#rosette" transform="translate(0 0) scale(.75)"/>
+    <use href="#rosette" transform="translate(140 0) scale(.75)"/>
+    <use href="#rosette" transform="translate(0 200) scale(.75)"/>
+    <use href="#rosette" transform="translate(140 200) scale(.75)"/>
+    <circle cx="0" cy="100" r="2.4"/>
+    <circle cx="140" cy="100" r="2.4"/>
+  </g>
+</svg>

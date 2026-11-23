@@ -1,0 +1,19 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PieceList from "../components/PieceList.astro";
+import { inventoryPieces } from "../data/pieces";
+---
+
+<BaseLayout
+  title="For Sale"
+  description="Restored antique furniture for sale from Arte Lepre: Dutch, German, Italian and Continental bureaus, commodes, cabinets and more. Call to purchase."
+>
+  <section class="wrap">
+    <h1 class="section-title">For Sale</h1>
+    <PieceList pieces={inventoryPieces} forSale />
+  </section>
+</BaseLayout>
+
+<style>
+  .wrap { padding: 2.5rem 0 4rem; }
+</style>

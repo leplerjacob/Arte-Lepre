@@ -1,0 +1,147 @@
+---
+// One shared lightbox for the page. Any <a data-lightbox href="big.webp" data-caption="..."> opens in it.
+// Without JavaScript those links simply open the full-size photo.
+---
+
+<dialog class="lightbox" aria-label="Photo viewer">
+  <figure>
+    <img alt="" />
+    <figcaption></figcaption>
+  </figure>
+  <button class="lb-btn lb-close" type="button" aria-label="Close">&times;</button>
+  <button class="lb-btn lb-prev" type="button" aria-label="Previous photo">&#8249;</button>
+  <button class="lb-btn lb-next" type="button" aria-label="Next photo">&#8250;</button>
+  <p class="lb-count" aria-live="polite"></p>
+</dialog>
+
+<script>
+  const dialog = document.querySelector<HTMLDialogElement>(".lightbox")!;
+  const img = dialog.querySelector("img")!;
+  const caption = dialog.querySelector("figcaption")!;
+  const count = dialog.querySelector(".lb-count")!;
+  const links = [...document.querySelectorAll<HTMLAnchorElement>("a[data-lightbox]")];
+  let index = 0;
+  let swiped = false;
+
+  function show(i: number) {
+    index = (i + links.length) % links.length;
+    const link = links[index];
+    img.src = link.href;
+    img.alt = link.dataset.caption ?? "";
+    caption.textContent = link.dataset.caption ?? "";
+    count.textContent = `${index + 1} / ${links.length}`;
+  }
+
+  links.forEach((link, i) =>
+    link.addEventListener("click", (e) => {
+      e.preventDefault();
+      show(i);
+      dialog.showModal();
+    }),
+  );
+
+  dialog.querySelector(".lb-close")!.addEventListener("click", () => dialog.close());
+  dialog.querySelector(".lb-prev")!.addEventListener("click", () => show(index - 1));
+  dialog.querySelector(".lb-next")!.addEventListener("click", () => show(index + 1));
+  // Clicking the dark backdrop (the dialog itself, not its contents) closes it.
+  dialog.addEventListener("click", (e) => {
+    if (swiped) return void (swiped = false);
+    if (e.target === dialog) dialog.close();
+  });
+  dialog.addEventListener("keydown", (e) => {
+    if (e.key === "ArrowLeft") show(index - 1);
+    if (e.key === "ArrowRight") show(index + 1);
+  });
+
+  // Swipe left/right on touch screens.
+  let startX: number | null = null;
+  dialog.addEventListener("pointerdown", (e) => (startX = e.clientX));
+  dialog.addEventListener("pointerup", (e) => {
+    if (startX === null) return;
+    const dx = e.clientX - startX;
+    if (Math.abs(dx) > 50) {
+      swiped = true;
+      show(index + (dx < 0 ? 1 : -1));
+    }
+    startX = null;
+  });
+</script>
+
+<style>
+  .lightbox {
+    width: 100vw;
+    height: 100vh;
+    max-width: none;
+    max-height: none;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: var(--smoke);
+  }
+  .lightbox[open] {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: fade-in 0.2s var(--ease);
+  }
+  .lightbox::backdrop { background: rgb(10 16 26 / 0.92); }
+
+  figure {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    max-width: min(92vw, 1400px);
+    pointer-events: none;
+  }
+  img {
+    max-width: 100%;
+    max-height: 82vh;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    box-shadow: 0 10px 40px rgb(0 0 0 / 0.5);
+    pointer-events: auto;
+  }
+  figcaption {
+    font-family: var(--font-serif);
+    color: var(--gold);
+    text-align: center;
+  }
+
+  .lb-btn {
+    position: fixed;
+    display: grid;
+    place-items: center;
+    width: 48px;
+    height: 48px;
+    border: 0;
+    border-radius: 50%;
+    background: rgb(255 255 255 / 0.08);
+    color: var(--smoke);
+    font-size: 2rem;
+    line-height: 1;
+    cursor: pointer;
+    transition: background-color 0.2s var(--ease), color 0.2s var(--ease);
+  }
+  .lb-btn:hover { background: rgb(214 175 99 / 0.25); color: var(--gold); }
+  .lb-close { top: 1rem; right: 1rem; }
+  .lb-prev { left: 1rem; top: 50%; translate: 0 -50%; }
+  .lb-next { right: 1rem; top: 50%; translate: 0 -50%; }
+  .lb-count {
+    position: fixed;
+    top: 1.6rem;
+    left: 1.25rem;
+    font-size: 0.85rem;
+    letter-spacing: 0.1em;
+    opacity: 0.7;
+  }
+
+  @media (max-width: 600px) {
+    .lb-prev, .lb-next { top: auto; bottom: 1rem; translate: none; }
+  }
+
+  @keyframes fade-in { from { opacity: 0; } }
+  @media (prefers-reduced-motion: reduce) { .lightbox[open] { animation: none; } }
+</style>

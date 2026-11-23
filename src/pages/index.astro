@@ -1,0 +1,132 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Slideshow from "../components/Slideshow.astro";
+import { site } from "../data/site";
+import s1 from "../assets/images/1.jpg";
+import s2 from "../assets/images/2.jpg";
+import s3 from "../assets/images/3.jpg";
+import s4 from "../assets/images/4.jpg";
+import s5 from "../assets/images/5.jpg";
+
+const services = [
+  {
+    name: "Conservative Restoration",
+    text: "Consolidation intervention on the existing parts of the furniture (worm-eaten, detached or degraded), without the necessary restoration of the original conditions.",
+  },
+  {
+    name: "Integrative Restoration",
+    text: "Reconstruction intervention on furniture that lacks fundamental parts.",
+  },
+];
+
+const stages = [
+  {
+    name: "Stripping",
+    text: "Removal, if necessary, of old paint and dirt from the surface of the furniture, trying to preserve the original patina as much as possible. It takes place only in integrative interventions. This is a delicate operation in which the integrity of the patina must be safeguarded, that is, the color acquired by the piece of furniture over time. Abrasive and overly aggressive substances containing acid are limited, or better still, avoided entirely.",
+  },
+  {
+    name: "Woodworm treatment",
+    text: "Injection of anti-woodworm products into the holes in the wood. An odorless and colorless insecticide is permethrin.",
+  },
+  {
+    name: "Restoration of the veneer",
+    text: "Integration, where necessary, of ancient material using natural hot glue. The veneer is the finishing wood layer, consisting of a thin sheet of precious material, with a thickness of no more than one millimeter.",
+  },
+  {
+    name: "Reconstruction of the missing parts",
+    text: "Interventions which, in the case of integrative restorations, restore the furniture to its original structure.",
+  },
+  {
+    name: "Filler",
+    text: "Performed with a mixture of colored earth pigments that are as close as possible to the original tone of the wood.",
+  },
+  {
+    name: "Shellac finish",
+    text: "Smoothing and polishing treatment that restores the patina of the past to the furniture. It consists in the application of shellac, a natural resinous substance that, dissolved in alcohol and mixed with other resins, allows the wood to be polished.",
+  },
+  {
+    name: "Beeswax coating",
+    text: "Application of a layer of beeswax to obtain a uniform patina that will protect the surface of the wood.",
+  },
+];
+---
+
+<BaseLayout
+  description="Arte Lepre restores and conserves antique Italian, French and English furniture by hand, using traditional methods. A Lepre family workshop since 1959, in Naples and Kensington, MD."
+  businessSchema
+>
+  <Slideshow images={[s1, s2, s3, s4, s5]} />
+
+  <div class="content">
+    <section class="principle">
+      <h1 class="section-title">Our Principle</h1>
+      <p>
+        Arte Lepre guarantees the maximum quality of Restoration and Conservation by adhering to traditional methods,
+        natural materials and above and beyond customer service.
+      </p>
+    </section>
+
+    <hr class="rule" />
+
+    <section>
+      <h2 class="subhead">Restoration and Conservation Services Offered</h2>
+      <ul class="list">
+        {services.map(({ name, text }) => <li><strong>{name}:</strong> {text}</li>)}
+      </ul>
+    </section>
+
+    <hr class="rule" />
+
+    <section>
+      <h2 class="subhead">Stages of Restoration</h2>
+      <ol class="list">
+        {stages.map(({ name, text }) => <li><strong>{name}:</strong> {text}</li>)}
+      </ol>
+    </section>
+
+    <div class="cta">
+      <a class="btn" href={`mailto:${site.email}`}>Email Us</a>
+      <span>or</span>
+      <a class="btn" href={site.phone.href}>Call Us</a>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .content {
+    max-width: var(--text-max);
+    margin: 0 auto;
+    padding: 2.5rem 1.5rem 3.5rem;
+  }
+
+  .principle { text-align: center; }
+  .principle p { margin-top: 0.75rem; }
+
+  .subhead {
+    font-family: var(--font-sans);
+    font-weight: 300;
+    font-size: 1.5rem;
+    text-align: center;
+    color: var(--ink);
+    margin-bottom: 1.25rem;
+  }
+
+  .list {
+    display: grid;
+    gap: 1.1rem;
+    padding-left: 1.25rem;
+    font-size: 1rem;
+  }
+  .list li::marker { color: var(--gold); }
+  .list strong { font-weight: 600; color: var(--navy); }
+
+  .cta {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1rem 1.25rem;
+    margin-top: 3rem;
+    color: var(--muted);
+  }
+</style>

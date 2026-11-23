@@ -1,18 +1,45 @@
-# ArteLepre
+# Arte Lepre
 
-Website for local furniture restoration business.
+Website for Arte Lepre, a Lepre family antique furniture restoration workshop (Naples since 1959, and Kensington, MD).
 
-Built using HTML, CSS-in-JS, ReactJS, and open-source libraries. 
+Built with [Astro](https://astro.build): every page is plain HTML and CSS, with a few small scripts for the slideshow, photo lightbox and mobile menu.
 
-![image](https://user-images.githubusercontent.com/59655536/124958419-228ced80-dfe8-11eb-9df8-4c250d8142c0.png)
+## Run it locally
 
-## Setup
+Requires Node 20 or newer.
 
-1. fork/clone repo
-2. npm install
-3. npm start
+```bash
+npm install
+npm run dev        # http://localhost:4321
+```
 
-## Fixed OpenSSL error
+## Edit content
 
-I had to add "--openssl-legacy-provider" to the npm script command.
-I will detail how to upload the static webpage to HostGator
+| What | Where |
+| --- | --- |
+| Phone, email, address, footer locations, menu links | `src/data/site.ts` |
+| Gallery pieces and pieces for sale | `src/data/pieces.ts` |
+| Page text | `src/pages/*.astro` |
+| Colors, fonts, buttons | `src/styles/global.css` |
+
+To add a piece: put the photo in `src/assets/images/` (gallery) or `src/assets/images/inventory/` (for sale), then add an entry to `src/data/pieces.ts`. Give a piece two photos (e.g. closed and open) and they will cross-fade. Photos can be any size; the build resizes and compresses them.
+
+## Deploy to HostGator
+
+```bash
+npm run build
+```
+
+Upload the **contents** of the `dist/` folder to `public_html` (File Manager or FTP), replacing the old files. Each page is its own folder (`/gallery/index.html` and so on), so clean URLs like `artelepre.com/gallery` work without any server configuration. Old links such as `artelepre.com/#/gallery` are redirected to the new pages automatically.
+
+## Project layout
+
+```
+public/            files copied as-is (favicon, manifest, background pattern)
+src/assets/images/ photos, optimized at build time
+src/components/    Header, Footer, Splash, Slideshow, PieceList, Lightbox
+src/data/          site details and the gallery / inventory lists
+src/layouts/       BaseLayout (page shell, SEO tags)
+src/pages/         one file per page
+src/styles/        global.css (design tokens and shared styles)
+```

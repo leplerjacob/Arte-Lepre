@@ -208,12 +208,16 @@ const current = Astro.url.pathname.replace(/\/?$/, "/");
   @media (max-width: 1120px) {
     .topbar { display: none; }
     .nav { display: none; }
-    .header__inner { height: 76px; }
+    /* logo centred, menu button pinned to the right edge */
+    .header__inner { position: relative; justify-content: center; height: 76px; }
     .header.is-scrolled .header__inner { height: 68px; }
-    .logo img, .header.is-scrolled .logo img { width: min(200px, 55vw); }
+    .logo img, .header.is-scrolled .logo img { width: min(200px, calc(100vw - 10rem)); }
 
     .burger {
-      position: relative;
+      position: absolute;
+      top: 50%;
+      right: 0;
+      translate: 0 -50%;
       z-index: 70;
       display: grid;
       place-content: center;

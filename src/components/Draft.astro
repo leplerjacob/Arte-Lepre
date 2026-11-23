@@ -1,0 +1,54 @@
+---
+// Wraps content that still needs real information from Fabio. Visible in dev and on the preview
+// (with a dashed "To be added" frame); omitted entirely from the production build.
+import { showDrafts } from "../lib/drafts";
+
+interface Props {
+  /** What is needed, e.g. "Typical turnaround time". */
+  note: string;
+  /** Render inline (inside a sentence) instead of as a block. */
+  inline?: boolean;
+}
+const { note, inline = false } = Astro.props;
+const Tag = inline ? "span" : "div";
+---
+
+{
+  showDrafts && (
+    <Tag class:list={["draft", { "draft--inline": inline }]} title={`Placeholder: ${note}`}>
+      <span class="draft__label">To be added</span>
+      <span class="draft__body">
+        <slot>{note}</slot>
+      </span>
+    </Tag>
+  )
+}
+
+<style>
+  .draft {
+    position: relative;
+    display: block;
+    padding: 1.1rem 1.2rem 1rem;
+    border: 1.5px dashed rgb(148 114 47 / 0.6);
+    background: repeating-linear-gradient(135deg, rgb(214 175 99 / 0.07) 0 10px, transparent 10px 20px);
+    color: var(--text-soft);
+    font-style: italic;
+  }
+  .draft__label {
+    display: block;
+    margin-bottom: 0.35rem;
+    font-family: var(--font-label);
+    font-style: normal;
+    font-weight: 600;
+    font-size: 0.62rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+  }
+  .draft--inline {
+    display: inline;
+    padding: 0.05rem 0.4rem;
+  }
+  .draft--inline .draft__label { display: none; }
+  :global(.section--navy) .draft { color: var(--on-navy); border-color: var(--gold-line); }
+</style>

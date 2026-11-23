@@ -13,6 +13,14 @@ export const site = {
   email: "artelepre@gmail.com",
   mapsUrl: "https://g.page/ArteLepre?share",
   contactName: "Fabio Lepre",
+  /**
+   * Where the estimate form sends submissions. Leave empty to have the form open the visitor's
+   * email app with their details filled in (no sign-up needed). To switch to a form service later,
+   * paste its endpoint here, e.g. "https://formsubmit.co/<your-id>", and photos will upload too.
+   */
+  estimateFormEndpoint: "",
+  /** Areas Fabio covers for house calls, pickup and delivery. Empty = shown as a placeholder. */
+  serviceArea: "",
   address: {
     street: "4130 Howard Avenue",
     city: "Kensington",
@@ -31,8 +39,12 @@ export const locations = [
 
 export const navLinks = [
   { href: url("/"), label: "Home" },
+  { href: url("/services/"), label: "Services" },
   { href: url("/gallery/"), label: "Gallery" },
+  { href: url("/history/"), label: "About" },
   { href: url("/inventory/"), label: "For Sale" },
-  { href: url("/history/"), label: "Our History" },
   { href: url("/contact/"), label: "Contact" },
 ] as const;
+
+/** Where every "Request an estimate" button points. */
+export const estimateHref = url("/contact/#estimate");

@@ -2,42 +2,50 @@
 import { Image } from "astro:assets";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import PageHero from "../components/PageHero.astro";
+import EstimateForm from "../components/EstimateForm.astro";
 import ceiling from "../assets/images/banner_3.jpeg";
 import map from "../assets/images/quarter-map.png";
 import { locations, site } from "../data/site";
 ---
 
 <BaseLayout
-  title="Contact"
-  description={`Contact Arte Lepre in Kensington, MD. Antique furniture restoration by appointment: ${site.phone.display}, ${site.email}.`}
+  title="Request an Estimate"
+  description={`Request a restoration estimate from Arte Lepre in Kensington, MD. Send photos of your piece, or call Fabio Lepre at ${site.phone.display}.`}
   businessSchema
 >
   <PageHero
     eyebrow="Contact"
-    title="Visit the <em>workshop</em>"
-    lede="Consultations and viewings are by appointment. Call or write to arrange a visit."
+    title="Request an <em>estimate</em>"
+    lede="Tell Fabio about your piece and he'll reply directly with his assessment. Prefer to talk? Call anytime."
     image={ceiling}
   />
 
   <section class="section">
     <div class="wrap contact">
-      <div class="card" data-reveal>
-        <p class="eyebrow">Washington, D.C. Workshop</p>
-        <h2>{site.contactName}</h2>
+      <div class="card" id="estimate" data-reveal>
+        <p class="eyebrow">Estimate Request</p>
+        <h2>Tell us about your <em>piece</em></h2>
+        <p class="intro">Fields marked <span class="req">*</span> are required. Fabio replies to the email address you give.</p>
+        <EstimateForm />
+      </div>
 
-        <dl>
+      <aside class="side">
+        <div class="call" data-reveal>
+          <p class="eyebrow">Prefer to Talk?</p>
+          <a class="call__number" href={site.phone.href}>{site.phone.display}</a>
+          <p>Call Fabio directly to discuss your piece or book a visit. Consultations by appointment.</p>
+          <a class="btn btn--gold" href={site.phone.href}>Call now</a>
+        </div>
+
+        <dl data-reveal>
           <div>
-            <dt>Address</dt>
+            <dt>Workshop</dt>
             <dd>
               <a href={site.mapsUrl} target="_blank" rel="noopener noreferrer">
                 {site.address.street}<br />
                 {site.address.city}, {site.address.region} {site.address.postalCode}
               </a>
             </dd>
-          </div>
-          <div>
-            <dt>Telephone</dt>
-            <dd><a href={site.phone.href}>{site.phone.display}</a></dd>
           </div>
           <div>
             <dt>Email</dt>
@@ -47,32 +55,31 @@ import { locations, site } from "../data/site";
             <dt>Hours</dt>
             <dd>By appointment</dd>
           </div>
+          <div>
+            <dt>Languages</dt>
+            <dd>English · Italiano</dd>
+          </div>
         </dl>
 
-        <div class="actions">
-          <a class="btn" href={site.phone.href}>Call to book</a>
-          <a class="btn btn--ghost" href={`mailto:${site.email}?subject=${encodeURIComponent("Restoration enquiry")}`}>Send an email</a>
-        </div>
-
-        <a class="map" href={site.mapsUrl} target="_blank" rel="noopener noreferrer">
-          <Image src={map} alt="Map of the Kensington, MD workshop location" widths={[600, 1200]} sizes="(max-width: 860px) 92vw, 600px" format="webp" />
+        <a class="map" href={site.mapsUrl} target="_blank" rel="noopener noreferrer" data-reveal>
+          <Image src={map} alt="Map of the Kensington, MD workshop location" widths={[480, 960]} sizes="(max-width: 960px) 92vw, 420px" format="webp" />
           <span>Open in Google Maps &#8599;</span>
         </a>
-      </div>
 
-      <aside class="locations" data-reveal>
-        <p class="eyebrow">Our Workshops</p>
-        <ul>
-          {
-            locations.map(({ label, address, person }) => (
-              <li>
-                <h3>{label}</h3>
-                <p class="person">{person}</p>
-                <p>{address}</p>
-              </li>
-            ))
-          }
-        </ul>
+        <div class="locations" data-reveal>
+          <p class="eyebrow">The Family Workshops</p>
+          <ul>
+            {
+              locations.map(({ label, address, person }) => (
+                <li>
+                  <strong>{label}</strong> · {person}
+                  <br />
+                  <span>{address}</span>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
       </aside>
     </div>
   </section>
@@ -81,16 +88,17 @@ import { locations, site } from "../data/site";
 <style>
   .contact {
     display: grid;
-    grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
-    gap: clamp(2.5rem, 6vw, 5.5rem);
+    grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
+    gap: clamp(2.5rem, 5vw, 4.5rem);
     align-items: start;
   }
 
   .card {
     position: relative;
-    padding: clamp(2rem, 5vw, 3.5rem);
+    padding: clamp(1.75rem, 4.5vw, 3.25rem);
     background: var(--parchment);
     border: 1px solid var(--rule);
+    scroll-margin-top: calc(var(--header-h) + 1rem);
   }
   .card::before {
     content: "";
@@ -99,39 +107,46 @@ import { locations, site } from "../data/site";
     border: 1px solid rgb(148 114 47 / 0.18);
     pointer-events: none;
   }
-  .card h2 { margin-top: 0.5rem; }
+  .card h2 { margin-top: 0.5rem; font-size: var(--step-3); }
+  .intro { margin: 0.75rem 0 2rem; color: var(--text-soft); font-size: 0.95rem; }
+  .req { color: var(--gold-deep); }
 
-  dl { margin-top: 2rem; display: grid; gap: 1.25rem; }
-  dl div {
-    display: grid;
-    grid-template-columns: 8rem 1fr;
-    gap: 1rem;
-    padding-bottom: 1.25rem;
-    border-bottom: 1px solid var(--rule);
+  .side { display: grid; gap: 2.25rem; }
+  .call {
+    padding: 2rem;
+    background: var(--navy) url("../assets/patterns/parquetry.svg");
+    background-size: 60px 104px;
+    color: var(--on-navy);
   }
+  .call .eyebrow { color: var(--gold); }
+  .call__number {
+    display: block;
+    margin-top: 0.5rem;
+    font-family: var(--font-display);
+    font-size: var(--step-3);
+    line-height: 1.1;
+    color: var(--ivory);
+    text-decoration: none;
+  }
+  .call p { margin-top: 0.75rem; font-size: 0.95rem; }
+  .call .btn { margin-top: 1.25rem; }
+
+  dl { display: grid; gap: 1rem; }
+  dl div { display: grid; grid-template-columns: 6.5rem 1fr; gap: 1rem; padding-bottom: 1rem; border-bottom: 1px solid var(--rule); }
   dt {
     font-family: var(--font-label);
     font-weight: 600;
-    font-size: 0.7rem;
+    font-size: 0.68rem;
     letter-spacing: 0.2em;
     text-transform: uppercase;
     color: var(--gold-deep);
     padding-top: 0.3rem;
   }
-  dd { font-size: var(--step-1); }
-  dd a { text-decoration: none; border-bottom: 1px solid var(--rule); transition: color 0.2s var(--ease), border-color 0.2s var(--ease); }
+  dd a { text-decoration: none; border-bottom: 1px solid var(--rule); }
   dd a:hover { color: var(--gold-deep); border-color: var(--gold-deep); }
 
-  .actions { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 2.25rem; }
-
-  .map {
-    position: relative;
-    display: block;
-    margin-top: 2.25rem;
-    overflow: hidden;
-    border: 1px solid var(--rule);
-  }
-  .map img { width: 100%; aspect-ratio: 16 / 5; object-fit: cover; transition: transform 0.6s var(--ease); }
+  .map { position: relative; display: block; overflow: hidden; border: 1px solid var(--rule); }
+  .map img { width: 100%; aspect-ratio: 16 / 6; object-fit: cover; transition: transform 0.6s var(--ease); }
   .map:hover img { transform: scale(1.05); }
   .map span {
     position: absolute;
@@ -142,21 +157,16 @@ import { locations, site } from "../data/site";
     color: var(--ivory);
     font-family: var(--font-label);
     font-weight: 600;
-    font-size: 0.65rem;
+    font-size: 0.62rem;
     letter-spacing: 0.18em;
     text-transform: uppercase;
   }
 
-  .locations ul { list-style: none; padding: 0; margin-top: 1.25rem; }
-  .locations li { padding-block: 1.5rem; border-top: 1px solid var(--rule); }
-  .locations h3 { font-size: var(--step-2); }
-  .locations .person { margin-top: 0.2rem; font-style: italic; color: var(--gold-deep); }
-  .locations li p:last-child { margin-top: 0.3rem; color: var(--text-soft); }
+  .locations ul { list-style: none; padding: 0; margin-top: 0.75rem; display: grid; gap: 0.9rem; font-size: 0.95rem; }
+  .locations strong { font-family: var(--font-display); font-size: var(--step-1); color: var(--navy); }
+  .locations span { color: var(--text-soft); }
 
-  @media (max-width: 860px) {
+  @media (max-width: 960px) {
     .contact { grid-template-columns: 1fr; }
-  }
-  @media (max-width: 520px) {
-    dl div { grid-template-columns: 1fr; gap: 0.25rem; }
   }
 </style>

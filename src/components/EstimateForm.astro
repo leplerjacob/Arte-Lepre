@@ -1,0 +1,185 @@
+---
+import Draft from "./Draft.astro";
+import { site } from "../data/site";
+import { services } from "../data/services";
+
+// With no form service configured, the form opens the visitor's email app with everything filled
+// in (works with no sign-up). Set site.estimateFormEndpoint to post to a form service instead,
+// which also enables photo uploads.
+const endpoint = site.estimateFormEndpoint;
+const helpOptions = [...services.slice(0, 3).map((s) => s.name), "House call / pickup", "Not sure yet"];
+---
+
+<form
+  class="form"
+  id="estimate-form"
+  action={endpoint || `mailto:${site.email}`}
+  method="post"
+  enctype={endpoint ? "multipart/form-data" : "text/plain"}
+  data-mode={endpoint ? "service" : "email"}
+>
+  {endpoint && <input type="hidden" name="_subject" value="New estimate request from the website" />}
+
+  <div class="row">
+    <label>
+      <span>Your name <em>*</em></span>
+      <input name="name" autocomplete="name" required />
+    </label>
+    <label>
+      <span>Email <em>*</em></span>
+      <input name="email" type="email" autocomplete="email" required />
+    </label>
+  </div>
+  <div class="row">
+    <label>
+      <span>Phone</span>
+      <input name="phone" type="tel" autocomplete="tel" />
+    </label>
+    <label>
+      <span>Town or ZIP code</span>
+      <input name="location" autocomplete="postal-code" />
+    </label>
+  </div>
+
+  <label>
+    <span>What is the piece? <em>*</em></span>
+    <input name="piece" placeholder="e.g. Walnut dresser, about 100 years old" required />
+  </label>
+
+  <fieldset>
+    <legend>What does it need?</legend>
+    <div class="checks">
+      {
+        helpOptions.map((o) => (
+          <label class="check">
+            <input type="checkbox" name="help" value={o} />
+            <span>{o}</span>
+          </label>
+        ))
+      }
+    </div>
+  </fieldset>
+
+  <label>
+    <span>Describe its condition <em>*</em></span>
+    <textarea name="message" rows="5" placeholder="Scratches, loose joints, missing veneer, water marks… anything you've noticed." required></textarea>
+  </label>
+
+  {
+    endpoint ? (
+      <label>
+        <span>Photos of the piece</span>
+        <input name="attachment" type="file" accept="image/*" multiple />
+        <small>A few photos from different angles, plus close-ups of any damage. Up to 10 MB in total.</small>
+      </label>
+    ) : (
+      <div class="photo-note">
+        <strong>Photos:</strong> when you press Send, your email app will open with these details filled in. Attach 2–4
+        photos of the piece (whole piece, plus close-ups of any damage) and send.
+      </div>
+    )
+  }
+  {!endpoint && <Draft note="Photo upload on the form">Photos can be uploaded directly on the form once a form service is connected (see README).</Draft>}
+
+  <div class="submit">
+    <button class="btn" type="submit">Send estimate request</button>
+    <p class="status" role="status" aria-live="polite"></p>
+  </div>
+</form>
+
+<script define:vars={{ email: site.email }}>
+  const form = document.getElementById("estimate-form");
+  if (form && form.dataset.mode === "email") {
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      if (!form.reportValidity()) return;
+      const d = new FormData(form);
+      const help = d.getAll("help").join(", ") || "Not specified";
+      const lines = [
+        `Name: ${d.get("name")}`,
+        `Email: ${d.get("email")}`,
+        `Phone: ${d.get("phone") || "-"}`,
+        `Town / ZIP: ${d.get("location") || "-"}`,
+        `Piece: ${d.get("piece")}`,
+        `Needs: ${help}`,
+        "",
+        `${d.get("message")}`,
+        "",
+        "(Photos attached)",
+      ];
+      const subject = `Estimate request: ${d.get("piece")}`;
+      const href = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(lines.join("\n"))}`;
+      form.querySelector(".status").innerHTML =
+        `Your email app should open with your request. Attach a few photos, then send. ` +
+        `If nothing opened, email <a href="mailto:${email}">${email}</a> directly.`;
+      // Open the email app via a temporary link (more reliable across browsers than setting location).
+      const link = document.createElement("a");
+      link.href = href;
+      document.body.append(link);
+      link.click();
+      link.remove();
+    });
+  }
+</script>
+
+<style>
+  .form { display: grid; gap: 1.25rem; }
+  .row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
+  label, fieldset { display: grid; gap: 0.45rem; }
+  label > span, legend {
+    font-family: var(--font-label);
+    font-weight: 600;
+    font-size: 0.7rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--navy);
+  }
+  em { color: var(--gold-deep); font-style: normal; }
+  input:not([type="checkbox"]):not([type="file"]), textarea {
+    width: 100%;
+    padding: 0.85rem 1rem;
+    border: 1px solid rgb(148 114 47 / 0.45);
+    border-radius: 0;
+    background: var(--ivory);
+    font: inherit;
+    font-size: 1rem;
+    color: var(--text);
+    transition: border-color 0.2s var(--ease), box-shadow 0.2s var(--ease);
+  }
+  input:focus, textarea:focus { outline: none; border-color: var(--gold-deep); box-shadow: 0 0 0 3px rgb(214 175 99 / 0.3); }
+  ::placeholder { color: #9a958b; font-style: italic; }
+  textarea { resize: vertical; min-height: 8rem; }
+  small { color: var(--text-soft); font-size: var(--step--1); }
+
+  fieldset { margin: 0; padding: 0; border: 0; }
+  legend { margin-bottom: 0.6rem; padding: 0; }
+  .checks { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+  .check { position: relative; display: inline-flex; cursor: pointer; }
+  .check input { position: absolute; opacity: 0; pointer-events: none; }
+  .check span {
+    padding: 0.5rem 0.9rem;
+    border: 1px solid rgb(148 114 47 / 0.45);
+    background: var(--ivory);
+    font-size: 0.92rem;
+    transition: background-color 0.2s var(--ease), color 0.2s var(--ease), border-color 0.2s var(--ease);
+  }
+  .check input:checked + span { background: var(--navy); border-color: var(--navy); color: var(--ivory); }
+  .check input:focus-visible + span { outline: 2px solid var(--gold); outline-offset: 2px; }
+
+  .photo-note {
+    padding: 1rem 1.2rem;
+    border-left: 2px solid var(--gold);
+    background: rgb(214 175 99 / 0.1);
+    font-size: 0.95rem;
+    color: var(--text-soft);
+  }
+  .photo-note strong { color: var(--navy); }
+
+  .submit { display: grid; gap: 0.75rem; justify-items: start; margin-top: 0.5rem; }
+  .status { font-size: 0.95rem; color: var(--navy); }
+  .status:empty { display: none; }
+
+  @media (max-width: 600px) {
+    .row { grid-template-columns: 1fr; }
+  }
+</style>

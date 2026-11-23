@@ -24,9 +24,12 @@ const noindex = import.meta.env.PUBLIC_NOINDEX === "1";
 
 const schema = {
   "@context": "https://schema.org",
-  "@type": "FurnitureStore",
+  "@type": "LocalBusiness",
   name: site.name,
-  description: site.tagline,
+  description: "Antique furniture restoration and conservation by hand: French polishing, veneer and marquetry repair, structural and woodworm repair.",
+  founder: site.contactName,
+  knowsLanguage: ["en", "it"],
+  ...(site.serviceArea ? { areaServed: site.serviceArea } : {}),
   url: site.url,
   telephone: site.phone.href.replace("tel:", ""),
   email: site.email,

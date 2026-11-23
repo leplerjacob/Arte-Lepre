@@ -1,5 +1,8 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import Ornament from "../components/Ornament.astro";
+import { estimateHref } from "../data/site";
+import { url } from "../lib/paths";
 import PageHero from "../components/PageHero.astro";
 import GalleryPlates from "../components/GalleryPlates.astro";
 import { galleryPieces } from "../data/pieces";
@@ -17,6 +20,17 @@ import { galleryPieces } from "../data/pieces";
   <section class="section">
     <div class="wrap">
       <GalleryPlates pieces={galleryPieces} />
+    </div>
+  </section>
+  <section class="section section--navy">
+    <div class="wrap--narrow center" data-reveal>
+      <Ornament />
+      <h2 style="margin-top:2rem">Have a piece like <em>these?</em></h2>
+      <p class="lede" style="margin-top:1.25rem">Send Fabio a few photos and he will reply with his assessment.</p>
+      <p style="display:flex;justify-content:center;flex-wrap:wrap;gap:1rem;margin-top:2.25rem">
+        <a class="btn btn--gold" href={estimateHref}>Request an estimate</a>
+        <a class="btn btn--ghost" href={url("/services/")}>Our services</a>
+      </p>
     </div>
   </section>
 </BaseLayout>

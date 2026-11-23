@@ -2,146 +2,117 @@
 import { Image } from "astro:assets";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Ornament from "../components/Ornament.astro";
-import { site } from "../data/site";
-import { url } from "../lib/paths";
+import Draft from "../components/Draft.astro";
+import { estimateHref, site } from "../data/site";
 import { galleryPieces, inventoryPieces, roman, slugify } from "../data/pieces";
-import vesuvius from "../assets/images/vesuvius.jpg";
-import chisel from "../assets/images/4.jpg";
-import heroPiece from "../assets/images/inventory/Italian-Walnut-Commode-late-18th-Century.jpg";
+import { services, steps, testimonials } from "../data/services";
+import { showDrafts } from "../lib/drafts";
+import { url } from "../lib/paths";
+import workshop from "../assets/images/shop.jpg";
 
-const services = [
-  {
-    name: "Conservative Restoration",
-    text: "Consolidation intervention on the existing parts of the furniture (worm-eaten, detached or degraded), without the necessary restoration of the original conditions.",
-  },
-  {
-    name: "Integrative Restoration",
-    text: "Reconstruction intervention on furniture that lacks fundamental parts.",
-  },
-];
-
-const stages = [
-  { name: "Stripping", text: "Removal, if necessary, of old paint and dirt from the surface, preserving the original patina — the colour the piece has acquired over time — as much as possible. It takes place only in integrative interventions, and abrasive or acidic substances are avoided." },
-  { name: "Woodworm treatment", text: "Injection of anti-woodworm products into the holes in the wood. An odorless and colorless insecticide is permethrin." },
-  { name: "Restoration of the veneer", text: "Integration, where necessary, of ancient material using natural hot glue. The veneer is the finishing layer: a thin sheet of precious wood no more than one millimeter thick." },
-  { name: "Reconstruction of missing parts", text: "In integrative restorations, the furniture is returned to its original structure." },
-  { name: "Filler", text: "A mixture of colored earth pigments matched as closely as possible to the original tone of the wood." },
-  { name: "Shellac finish", text: "Shellac, a natural resin dissolved in alcohol and mixed with other resins, is applied to smooth and polish the wood, restoring the patina of the past." },
-  { name: "Beeswax coating", text: "A layer of beeswax gives a uniform patina that protects the surface of the wood." },
-];
-
-const featured = [galleryPieces[0], galleryPieces[6], galleryPieces[4]];
-const forSale = [inventoryPieces[0], inventoryPieces[1], inventoryPieces[4]];
+const heroPiece = galleryPieces[5]; // Charles X console, before & after
+const featured = [galleryPieces[0], galleryPieces[6], galleryPieces[8]];
+const forSale = [inventoryPieces[3], inventoryPieces[1], inventoryPieces[4]];
+const showTestimonials = testimonials.length > 0 || showDrafts;
 ---
 
 <BaseLayout
-  description="Arte Lepre restores and conserves antique Italian, French and English furniture by hand, using traditional methods. A Lepre family workshop since 1959, in Naples and Kensington, MD."
+  description="Antique furniture restoration by hand in the Washington, D.C. area. Fabio Lepre brings three generations of Neapolitan craft to French polishing, veneer and marquetry repair, and structural restoration."
   businessSchema
 >
   <!-- ============ Hero ============ -->
   <section class="hero section--navy">
     <div class="wrap hero__grid">
       <div class="hero__text" data-reveal>
-        <p class="eyebrow">Napoli · 1959 · Washington, D.C.</p>
-        <h1>The <em>art</em> of antique restoration</h1>
+        <p class="eyebrow">Antique furniture restoration · Washington, D.C.</p>
+        <h1>The pieces you treasure, <em>restored</em> by hand</h1>
         <p class="lede">
-          Three generations of the Lepre family restoring Italian, French and English antique furniture by hand — with
-          traditional methods, natural materials and above-and-beyond care.
+          Fabio Lepre brings three generations of Neapolitan craft to your furniture — French polishing, veneer and
+          marquetry repair, and structural restoration, using traditional methods and natural materials.
         </p>
         <div class="hero__actions">
-          <a class="btn btn--gold" href={url("/gallery/")}>View the Gallery</a>
-          <a class="btn btn--ghost" href={url("/contact/")}>Book a Consultation</a>
+          <a class="btn btn--gold" href={estimateHref}>Request an estimate</a>
+          <a class="btn btn--ghost" href={site.phone.href}>Call {site.phone.display}</a>
         </div>
       </div>
 
       <figure class="hero__figure" data-reveal>
-        <div class="mat">
-          <Image src={heroPiece} alt="Italian walnut commode with an inlaid marquetry top, late 18th century" widths={[560, 760, 1120, 1520]} sizes="(max-width: 960px) 92vw, 560px" loading="eager" fetchpriority="high" class="hero__img" />
-        </div>
-        <figcaption>
-          <span class="eyebrow">Available</span>
-          <a href={url(`/inventory/#${slugify(inventoryPieces[3].title)}`)}>Italian walnut commode, late 18th century</a>
-        </figcaption>
+        <a class="mat" href={url(`/gallery/#${slugify(heroPiece.title)}`)}>
+          <Image src={heroPiece.images[0]} alt={`${heroPiece.title}, before (top) and after (bottom) restoration`} widths={[480, 720, 1080]} sizes="(max-width: 960px) 92vw, 500px" loading="eager" fetchpriority="high" format="webp" />
+        </a>
+        <figcaption><span class="eyebrow">Before &amp; after</span> {heroPiece.title}</figcaption>
       </figure>
     </div>
   </section>
 
-  <!-- ============ Principle ============ -->
-  <section class="section principle">
-    <div class="wrap--narrow center" data-reveal>
-      <Ornament />
-      <p class="eyebrow principle__label">Our Principle</p>
-      <blockquote>
-        <p>
-          Arte Lepre guarantees the maximum quality of restoration and conservation by adhering to traditional methods,
-          natural materials and above and beyond customer service.
-        </p>
-      </blockquote>
-    </div>
+  <!-- ============ Trust strip ============ -->
+  <section class="trust" aria-label="Why Arte Lepre">
+    <ul class="wrap trust__list">
+      <li><strong>Since 1959</strong><span>Three generations of the Lepre family</span></li>
+      <li><strong>By hand</strong><span>Traditional methods, natural materials</span></li>
+      <li><strong>Italian Embassy</strong><span>Pieces restored for the Embassy residence in D.C.</span></li>
+      <li><strong>Si parla italiano</strong><span>Fabio is from Naples</span></li>
+    </ul>
   </section>
 
   <!-- ============ Services ============ -->
   <section class="section section--parchment">
     <div class="wrap">
-      <header class="center section-head" data-reveal>
-        <p class="eyebrow">Services</p>
-        <h2>Restoration &amp; <em>Conservation</em></h2>
+      <header class="section-head split" data-reveal>
+        <div>
+          <p class="eyebrow">What Fabio Does</p>
+          <h2>Restoration <em>services</em></h2>
+        </div>
+        <a class="link-arrow" href={url("/services/")}>All services &amp; FAQ</a>
       </header>
       <div class="services">
         {
-          services.map(({ name, text }, i) => (
-            <article class="service" data-reveal>
+          services.map((s, i) => (
+            <a class="service" href={url(`/services/#${s.id}`)} data-reveal>
               <span class="numeral">{roman(i + 1)}</span>
-              <h3>{name}</h3>
-              <p>{text}</p>
-            </article>
+              <h3>{s.name}</h3>
+              <p>{s.summary}</p>
+              <span class="service__more">Learn more</span>
+            </a>
           ))
         }
       </div>
     </div>
   </section>
 
-  <!-- ============ Method ============ -->
+  <!-- ============ How it works ============ -->
   <section class="section">
-    <div class="wrap method">
-      <div class="method__intro">
-        <div class="method__sticky" data-reveal>
-          <p class="eyebrow">Our Method</p>
-          <h2>The stages of <em>restoration</em></h2>
-          <p class="lede">
-            Every piece is restored by hand, using exclusively traditional methods: spirit polishing and shellac, beeswax,
-            and antique wood for any missing parts, returning it to its original state.
-          </p>
-          <div class="mat method__img">
-            <Image src={chisel} alt="A carving chisel lifting curls of wood" widths={[480, 960]} sizes="(max-width: 960px) 92vw, 480px" />
-          </div>
-        </div>
-      </div>
-      <ol class="stages">
+    <div class="wrap">
+      <header class="section-head center" data-reveal>
+        <p class="eyebrow">How It Works</p>
+        <h2>From photo to <em>finished</em> piece</h2>
+      </header>
+      <ol class="steps">
         {
-          stages.map(({ name, text }, i) => (
+          steps.map((s, i) => (
             <li data-reveal>
               <span class="numeral">{roman(i + 1)}</span>
-              <div>
-                <h3>{name}</h3>
-                <p>{text}</p>
-              </div>
+              <h3>{s.name}</h3>
+              <p>{s.text}</p>
             </li>
           ))
         }
       </ol>
+      <div class="center steps__cta" data-reveal>
+        <a class="btn" href={estimateHref}>Start with a few photos</a>
+      </div>
     </div>
   </section>
 
-  <!-- ============ From the gallery ============ -->
+  <!-- ============ Before & after ============ -->
   <section class="section section--parchment">
     <div class="wrap">
       <header class="section-head split" data-reveal>
         <div>
-          <p class="eyebrow">From the Gallery</p>
+          <p class="eyebrow">Recent Work</p>
           <h2>Before <em>&amp;</em> after</h2>
         </div>
-        <a class="link-arrow" href={url("/gallery/")}>See all restorations</a>
+        <a class="link-arrow" href={url("/gallery/")}>See the full gallery</a>
       </header>
       <div class="plates">
         {
@@ -159,36 +130,80 @@ const forSale = [inventoryPieces[0], inventoryPieces[1], inventoryPieces[4]];
     </div>
   </section>
 
-  <!-- ============ Heritage ============ -->
-  <section class="heritage on-navy">
-    <Image class="heritage__bg" src={vesuvius} alt="" widths={[1024, 1600, 2400]} sizes="100vw" />
-    <div class="wrap heritage__inner" data-reveal>
-      <p class="eyebrow">Our Heritage</p>
-      <h2>From Naples <em>to</em> Washington</h2>
-      <p class="lede">
-        With over 60 years of experience and three generations later, the Lepre family workshop has been a staple in
-        Naples since 1959. Fabio Lepre brought the family craft to the Washington, D.C. area.
-      </p>
-      <a class="btn btn--ghost" href={url("/history/")}>Read our history</a>
+  <!-- ============ Meet Fabio ============ -->
+  <section class="section">
+    <div class="wrap fabio">
+      <figure class="fabio__figure" data-reveal>
+        <Draft note="Portrait of Fabio in the Kensington workshop">A photo of Fabio at work will go here.</Draft>
+        <div class="mat">
+          <Image src={workshop} alt="The Lepre family workshop in Naples" widths={[380, 760]} sizes="(max-width: 860px) 80vw, 380px" format="webp" />
+        </div>
+        <figcaption>The family workshop in Naples, where Fabio learned the craft</figcaption>
+      </figure>
+      <div class="fabio__text" data-reveal>
+        <p class="eyebrow">Meet Your Restorer</p>
+        <h2>Fabio <em>Lepre</em></h2>
+        <p class="lede">
+          Fabio grew up in his father Raffaele's restoration workshop in Naples, a family business since 1959. He brought
+          more than 20 years of restoration, conservation and antiques experience to the Washington, D.C. area, worked
+          in a prestigious Georgetown antiques gallery, and now restores furniture for clients from his workshop in
+          Kensington, Maryland.
+        </p>
+        <blockquote>“Arte Lepre guarantees the maximum quality of restoration and conservation by adhering to traditional methods, natural materials and above and beyond customer service.”</blockquote>
+        <a class="link-arrow" href={url("/history/")}>Our family story</a>
+      </div>
     </div>
   </section>
+
+  <!-- ============ Testimonials ============ -->
+  {
+    showTestimonials && (
+      <section class="section section--parchment">
+        <div class="wrap">
+          <header class="section-head center" data-reveal>
+            <p class="eyebrow">Clients</p>
+            <h2>Kind <em>words</em></h2>
+          </header>
+          <div class="quotes">
+            {testimonials.length > 0
+              ? testimonials.map((t) => (
+                  <figure class="quote" data-reveal>
+                    <blockquote>“{t.quote}”</blockquote>
+                    <figcaption>
+                      {t.name}
+                      {t.detail && <span> · {t.detail}</span>}
+                    </figcaption>
+                  </figure>
+                ))
+              : [1, 2, 3].map((n) => (
+                  <Draft note={`Client testimonial ${n}`}>
+                    A short quote from a real client, with their first name and the piece restored (e.g. “— Anna, Bethesda · walnut
+                    writing desk”). Google reviews are a good source.
+                  </Draft>
+                ))}
+          </div>
+        </div>
+      </section>
+    )
+  }
 
   <!-- ============ For sale ============ -->
   <section class="section">
     <div class="wrap">
       <header class="section-head split" data-reveal>
         <div>
-          <p class="eyebrow">Antiques for Sale</p>
-          <h2>Currently <em>available</em></h2>
+          <p class="eyebrow">Also from the Workshop</p>
+          <h2>Antiques <em>for sale</em></h2>
+          <p class="section-sub">Period pieces restored by Fabio and available to purchase.</p>
         </div>
         <a class="link-arrow" href={url("/inventory/")}>View all pieces</a>
       </header>
-      <div class="plates plates--tall">
+      <div class="plates plates--small">
         {
           forSale.map((piece) => (
             <a class="plate" href={url(`/inventory/#${slugify(piece.title)}`)} data-reveal>
               <div class="mat">
-                <Image src={piece.images[0]} alt={piece.title} widths={[360, 720]} sizes="(max-width: 760px) 92vw, 360px" format="webp" />
+                <Image src={piece.images[0]} alt={piece.title} widths={[300, 600]} sizes="(max-width: 760px) 92vw, 300px" format="webp" />
               </div>
               <h3>{piece.title}</h3>
             </a>
@@ -198,19 +213,19 @@ const forSale = [inventoryPieces[0], inventoryPieces[1], inventoryPieces[4]];
     </div>
   </section>
 
-  <!-- ============ Visit ============ -->
-  <section class="section section--parchment visit">
+  <!-- ============ Estimate CTA ============ -->
+  <section class="section section--navy cta">
     <div class="wrap--narrow center" data-reveal>
       <Ornament />
-      <p class="eyebrow visit__label">Visit the Workshop</p>
-      <h2>By <em>appointment</em></h2>
+      <p class="eyebrow cta__label">Restoration Estimates</p>
+      <h2>Have a piece that needs <em>care?</em></h2>
       <p class="lede">
-        {site.address.street}, {site.address.city}, {site.address.region}. Call or write to arrange a consultation for
-        your piece.
+        Send Fabio a few photos and a short description, and he'll reply with an assessment. Consultations at the
+        {site.address.city} workshop are by appointment.
       </p>
-      <div class="visit__actions">
-        <a class="btn" href={site.phone.href}>Call {site.phone.display}</a>
-        <a class="btn btn--ghost" href={`mailto:${site.email}`}>Email us</a>
+      <div class="cta__actions">
+        <a class="btn btn--gold" href={estimateHref}>Request an estimate</a>
+        <a class="btn btn--ghost" href={site.phone.href}>Call {site.phone.display}</a>
       </div>
     </div>
   </section>
@@ -218,19 +233,18 @@ const forSale = [inventoryPieces[0], inventoryPieces[1], inventoryPieces[4]];
 
 <style>
   /* ---------- hero ---------- */
-  .hero { padding-block: clamp(3.5rem, 7vw, 6.5rem); }
+  .hero { padding-block: clamp(3.5rem, 7vw, 6rem); }
   .hero__grid {
     display: grid;
-    grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
     align-items: center;
     gap: clamp(2.5rem, 6vw, 5.5rem);
   }
   .hero h1 { margin-top: 1.25rem; }
-  .hero .lede { margin-top: 1.5rem; max-width: 34rem; }
+  .hero .lede { margin-top: 1.5rem; max-width: 35rem; }
   .hero__actions { display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 2.5rem; }
-
-  .hero__figure .mat { background: #e9dfca; }
-  .hero__img { width: 100%; aspect-ratio: 5 / 3.6; object-fit: cover; object-position: center 88%; }
+  .hero__figure .mat { display: block; background: #e9dfca; }
+  .hero__figure img { width: 100%; aspect-ratio: 1; object-fit: cover; }
   .hero__figure figcaption {
     display: flex;
     gap: 0.75rem;
@@ -239,31 +253,39 @@ const forSale = [inventoryPieces[0], inventoryPieces[1], inventoryPieces[4]];
     font-style: italic;
     color: var(--on-navy);
   }
-  .hero__figure figcaption a { color: inherit; text-decoration: none; border-bottom: 1px solid var(--gold-line); }
-  .hero__figure figcaption a:hover { color: var(--gold); }
 
-  /* ---------- principle ---------- */
-  .principle__label { margin-top: 2rem; }
-  blockquote {
-    margin-top: 1.25rem;
+  /* ---------- trust strip ---------- */
+  .trust { border-bottom: 1px solid var(--rule); background: var(--ivory); }
+  .trust__list {
+    list-style: none;
+    padding-block: 1.75rem;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .trust li {
+    display: grid;
+    gap: 0.15rem;
+    padding-inline: 1.25rem;
+    text-align: center;
+  }
+  .trust li + li { border-left: 1px solid var(--rule); }
+  .trust strong {
     font-family: var(--font-display);
-    font-style: italic;
-    font-size: var(--step-2);
-    line-height: 1.4;
+    font-weight: 600;
+    font-size: var(--step-1);
     color: var(--navy);
   }
-  blockquote p::before { content: "\201C"; color: var(--gold-deep); }
-  blockquote p::after { content: "\201D"; color: var(--gold-deep); }
+  .trust span { font-size: var(--step--1); color: var(--text-soft); line-height: 1.5; }
 
-  /* ---------- shared section header ---------- */
-  .section-head { margin-bottom: clamp(2.5rem, 5vw, 4rem); }
+  /* ---------- shared ---------- */
+  .section-head { margin-bottom: clamp(2.5rem, 5vw, 3.75rem); }
   .section-head h2 { margin-top: 0.75rem; }
+  .section-sub { margin-top: 0.6rem; color: var(--text-soft); font-style: italic; }
   .split { display: flex; justify-content: space-between; align-items: flex-end; gap: 1.5rem; flex-wrap: wrap; }
-
   .numeral {
     font-family: var(--font-display);
     font-style: italic;
-    font-size: 2.6rem;
+    font-size: 2.4rem;
     line-height: 1;
     color: var(--gold-deep);
   }
@@ -271,14 +293,19 @@ const forSale = [inventoryPieces[0], inventoryPieces[1], inventoryPieces[4]];
   /* ---------- services ---------- */
   .services {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: clamp(1.5rem, 3vw, 2.5rem);
+    grid-template-columns: repeat(4, 1fr);
+    gap: clamp(1rem, 2vw, 1.75rem);
   }
   .service {
     position: relative;
-    padding: clamp(2rem, 4vw, 3rem);
+    display: flex;
+    flex-direction: column;
+    padding: 2rem 1.6rem;
     background: var(--ivory);
     border: 1px solid var(--rule);
+    color: inherit;
+    text-decoration: none;
+    transition: transform 0.3s var(--ease), box-shadow 0.3s var(--ease);
   }
   .service::before {
     content: "";
@@ -287,102 +314,113 @@ const forSale = [inventoryPieces[0], inventoryPieces[1], inventoryPieces[4]];
     border: 1px solid rgb(148 114 47 / 0.15);
     pointer-events: none;
   }
-  .service h3 { margin-top: 1rem; }
-  .service p { margin-top: 0.75rem; color: var(--text-soft); }
-
-  /* ---------- method ---------- */
-  .method {
-    display: grid;
-    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
-    gap: clamp(2.5rem, 6vw, 6rem);
+  .service:hover { transform: translateY(-4px); box-shadow: 0 18px 40px -24px rgb(19 35 61 / 0.45); }
+  .service h3 { margin-top: 1rem; font-size: var(--step-1); font-weight: 600; line-height: 1.25; }
+  .service p { margin-top: 0.6rem; flex: 1; font-size: 0.95rem; color: var(--text-soft); }
+  .service__more {
+    margin-top: 1.25rem;
+    font-family: var(--font-label);
+    font-weight: 600;
+    font-size: 0.68rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
   }
-  .method__sticky { position: sticky; top: calc(var(--header-h) + 2rem); }
-  .method h2 { margin-top: 0.75rem; }
-  .method .lede { margin-top: 1.25rem; }
-  .method__img { margin-top: 2rem; }
-  .method__img img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
+  .service__more::after { content: " \2192"; }
 
-  .stages { list-style: none; padding: 0; }
-  .stages li {
+  /* ---------- how it works ---------- */
+  .steps {
+    list-style: none;
+    padding: 0;
     display: grid;
-    grid-template-columns: 4.5rem 1fr;
-    gap: 1rem;
-    padding-block: 1.75rem;
-    border-bottom: 1px solid var(--rule);
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+    counter-reset: step;
   }
-  .stages li:first-child { padding-top: 0; }
-  .stages h3 { font-size: var(--step-1); font-weight: 600; }
-  .stages p { margin-top: 0.4rem; color: var(--text-soft); }
+  .steps li { position: relative; padding-top: 1.5rem; border-top: 1px solid var(--rule); }
+  .steps li::before {
+    content: "";
+    position: absolute;
+    top: -5px;
+    left: 0;
+    width: 9px;
+    height: 9px;
+    background: var(--gold);
+    transform: rotate(45deg);
+  }
+  .steps h3 { margin-top: 0.75rem; font-size: var(--step-1); font-weight: 600; }
+  .steps p { margin-top: 0.5rem; color: var(--text-soft); font-size: 0.95rem; }
+  .steps__cta { margin-top: 3rem; }
 
-  /* ---------- plates (gallery + for-sale teasers) ---------- */
+  /* ---------- plates ---------- */
   .plates {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: clamp(1.5rem, 3vw, 2.75rem);
   }
   .plate { display: block; text-decoration: none; color: inherit; }
-  .plate img {
-    width: 100%;
-    aspect-ratio: 1;
-    object-fit: cover;
-    transition: transform 0.8s var(--ease);
-  }
-  .plates--tall .plate img { aspect-ratio: 4 / 5; }
   .plate .mat { overflow: hidden; }
+  .plate img { width: 100%; aspect-ratio: 1; object-fit: cover; transition: transform 0.8s var(--ease); }
+  .plates--small .plate img { aspect-ratio: 4 / 5; object-fit: contain; background: #f7f3ea; }
   .plate:hover img { transform: scale(1.04); }
   .plate h3 { margin-top: 1.25rem; font-size: var(--step-1); font-weight: 600; transition: color 0.2s var(--ease); }
   .plate:hover h3 { color: var(--gold-deep); }
   .plate p { margin-top: 0.35rem; font-size: var(--step--1); font-style: italic; color: var(--text-soft); }
+  .plates--small { max-width: 960px; }
 
-  /* ---------- heritage ---------- */
-  .heritage {
-    position: relative;
-    isolation: isolate;
-    padding-block: clamp(6rem, 12vw, 10rem);
-    color: var(--on-navy);
-    overflow: hidden;
+  /* ---------- Fabio ---------- */
+  .fabio {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.35fr);
+    gap: clamp(2.5rem, 6vw, 6rem);
+    align-items: center;
   }
-  .heritage__bg {
-    position: absolute;
-    inset: 0;
-    z-index: -2;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+  .fabio__figure { display: grid; gap: 1rem; }
+  .fabio__figure img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; }
+  .fabio__figure figcaption { text-align: center; font-style: italic; font-size: var(--step--1); color: var(--text-soft); }
+  .fabio h2 { margin-top: 0.75rem; }
+  .fabio .lede { margin-top: 1.25rem; }
+  .fabio blockquote {
+    margin: 2rem 0;
+    padding-left: 1.5rem;
+    border-left: 2px solid var(--gold);
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: var(--step-1);
+    line-height: 1.45;
+    color: var(--navy);
   }
-  .heritage::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    z-index: -1;
-    background: linear-gradient(90deg, rgb(19 35 61 / 0.94) 0%, rgb(19 35 61 / 0.82) 45%, rgb(19 35 61 / 0.25) 100%);
-  }
-  .heritage__inner > * { max-width: 36rem; }
-  .heritage h2 { margin-top: 0.75rem; color: var(--ivory); }
-  .heritage h2 em { color: var(--gold); }
-  .heritage .eyebrow { color: var(--gold); }
-  .heritage .lede { margin-top: 1.25rem; color: var(--on-navy); }
-  .heritage .btn { margin-top: 2.25rem; }
 
-  /* ---------- visit ---------- */
-  .visit__label { margin-top: 2rem; }
-  .visit h2 { margin-top: 0.75rem; }
-  .visit .lede { margin-top: 1.25rem; }
-  .visit__actions { display: flex; justify-content: center; flex-wrap: wrap; gap: 1rem; margin-top: 2.5rem; }
+  /* ---------- testimonials ---------- */
+  .quotes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.75rem; }
+  .quote { padding: 2rem; background: var(--ivory); border: 1px solid var(--rule); }
+  .quote blockquote { font-family: var(--font-display); font-style: italic; font-size: var(--step-1); line-height: 1.45; color: var(--navy); }
+  .quote figcaption { margin-top: 1rem; font-family: var(--font-label); font-weight: 600; font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold-deep); }
+
+  /* ---------- CTA ---------- */
+  .cta__label { margin-top: 2rem; }
+  .cta h2 { margin-top: 0.75rem; }
+  .cta .lede { margin-top: 1.25rem; }
+  .cta__actions { display: flex; justify-content: center; flex-wrap: wrap; gap: 1rem; margin-top: 2.5rem; }
 
   /* ---------- responsive ---------- */
+  @media (max-width: 1060px) {
+    .services { grid-template-columns: repeat(2, 1fr); }
+    .steps { grid-template-columns: repeat(2, 1fr); gap: 2.5rem 2rem; }
+  }
   @media (max-width: 960px) {
-    .hero__grid, .method { grid-template-columns: 1fr; }
-    .method__sticky { position: static; }
-    .plates { grid-template-columns: repeat(2, 1fr); }
-    .plates > :nth-child(3) { display: none; }
+    .hero__grid, .fabio { grid-template-columns: 1fr; }
+    .fabio__figure { max-width: 400px; margin-inline: auto; }
+    .trust__list { grid-template-columns: repeat(2, 1fr); row-gap: 1.5rem; }
+    .trust li:nth-child(3) { border-left: 0; }
+    .quotes { grid-template-columns: 1fr; }
   }
   @media (max-width: 760px) {
-    .services { grid-template-columns: 1fr; }
     .plates { grid-template-columns: 1fr; }
-    .plates > :nth-child(3) { display: block; }
-    .stages li { grid-template-columns: 3.25rem 1fr; }
-    .numeral { font-size: 2.1rem; }
-    .heritage::before { background: rgb(19 35 61 / 0.86); }
+  }
+  @media (max-width: 560px) {
+    .services, .steps { grid-template-columns: 1fr; }
+    .trust__list { grid-template-columns: 1fr; }
+    .trust li + li { border-left: 0; border-top: 1px solid var(--rule); padding-top: 1rem; }
   }
 </style>

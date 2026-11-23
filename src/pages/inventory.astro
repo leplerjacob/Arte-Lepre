@@ -1,5 +1,8 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import Ornament from "../components/Ornament.astro";
+import { estimateHref } from "../data/site";
+import { url } from "../lib/paths";
 import PageHero from "../components/PageHero.astro";
 import Catalogue from "../components/Catalogue.astro";
 import { inventoryPieces } from "../data/pieces";
@@ -18,6 +21,17 @@ import { site } from "../data/site";
   <section class="section">
     <div class="wrap">
       <Catalogue pieces={inventoryPieces} />
+    </div>
+  </section>
+  <section class="section section--navy">
+    <div class="wrap--narrow center" data-reveal>
+      <Ornament />
+      <h2 style="margin-top:2rem">Restoring a piece you <em>already own?</em></h2>
+      <p class="lede" style="margin-top:1.25rem">Restoration is the heart of Fabio's work. Send a few photos for an estimate, or call to talk it through.</p>
+      <p style="display:flex;justify-content:center;flex-wrap:wrap;gap:1rem;margin-top:2.25rem">
+        <a class="btn btn--gold" href={estimateHref}>Request an estimate</a>
+        <a class="btn btn--ghost" href={url("/services/")}>Our services</a>
+      </p>
     </div>
   </section>
 </BaseLayout>

@@ -27,12 +27,28 @@ npm run dev        # http://localhost:4321
 
 | What | Where |
 | --- | --- |
-| Phone, email, address, footer locations, menu links | `src/data/site.ts` |
+| Phone, email, address, footer locations, menu links, service area, form endpoint | `src/data/site.ts` |
+| Services, approach, stages, "How it works", FAQ, testimonials | `src/data/services.ts` |
 | Gallery pieces and pieces for sale | `src/data/pieces.ts` |
 | Page text | `src/pages/*.astro` |
 | Colors, fonts, buttons, spacing | `src/styles/global.css` |
 
 To add a piece: put the photo in `src/assets/images/` (gallery) or `src/assets/images/inventory/` (for sale), then add an entry to `src/data/pieces.ts`. Gallery photos are shown as before/after plates; a piece for sale with two photos (e.g. closed and open) cross-fades between them. Photos can be any size; the build resizes and compresses them.
+
+## Placeholders ("To be added")
+
+Content that still needs real information is wrapped in `<Draft>` (`src/components/Draft.astro`) or left empty in the data files. Placeholders show with a dashed "To be added" frame in `npm run dev` and on the shareable preview, and are **left out automatically** from `npm run build`, so customers never see them. Currently waiting on:
+
+- Portrait of Fabio (Home, "Meet your restorer")
+- Client testimonials: `testimonials` in `src/data/services.ts`
+- Service area for house calls / pickup: `serviceArea` in `src/data/site.ts`
+- FAQ answers marked `todo` in `src/data/services.ts` (turnaround time, whether estimates are free, pickup charges, modern pieces, insurance / moving damage)
+
+## Estimate form
+
+With `estimateFormEndpoint` empty (the default), pressing **Send** opens the visitor's email app with their details filled in, addressed to Fabio; they attach photos and send, and Fabio replies straight to them. No sign-up is needed.
+
+To have the form send by itself and accept photo uploads, sign up for a form service (for example FormSubmit, which is free and emails attachments) and paste its endpoint into `estimateFormEndpoint` in `src/data/site.ts`. The form then posts to it and shows a photo-upload field.
 
 ## Deploy to HostGator
 

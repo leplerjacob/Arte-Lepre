@@ -5,6 +5,7 @@ import PageHero from "../components/PageHero.astro";
 import Ornament from "../components/Ornament.astro";
 import { fullSize } from "../lib/images";
 import { url } from "../lib/paths";
+import { estimateHref } from "../data/site";
 import vesuvius from "../assets/images/vesuvius.jpg";
 import shop from "../assets/images/shop.jpg";
 import article1 from "../assets/images/article_1.jpg";
@@ -49,11 +50,11 @@ const press = await Promise.all(
 ---
 
 <BaseLayout
-  title="Our History"
+  title="About"
   description="Three generations of the Lepre family have restored antique furniture in Naples since 1959. Fabio Lepre brought the family craft to Washington, D.C."
 >
   <PageHero
-    eyebrow="Our History"
+    eyebrow="About"
     title="Three generations, <em>one</em> craft"
     lede="From a workshop in Naples in 1959 to Washington, D.C. today."
     image={vesuvius}
@@ -131,7 +132,10 @@ const press = await Promise.all(
         traditional methods such as spirit polishing and shellac, beeswax polishing, and the integration of missing parts
         with antique wood, returning each piece to its original state.
       </p>
-      <a class="btn btn--gold" href={url("/gallery/")}>See our work</a>
+      <div class="method-actions">
+        <a class="btn btn--gold" href={estimateHref}>Request an estimate</a>
+        <a class="btn btn--ghost" href={url("/services/")}>Our services</a>
+      </div>
     </div>
   </section>
 </BaseLayout>
@@ -240,7 +244,7 @@ const press = await Promise.all(
     line-height: 1.4;
     color: var(--ivory);
   }
-  .section--navy .btn { margin-top: 2.25rem; }
+  .method-actions { display: flex; justify-content: center; flex-wrap: wrap; gap: 1rem; margin-top: 2.25rem; }
 
   @media (max-width: 860px) {
     .intro { grid-template-columns: 1fr; }

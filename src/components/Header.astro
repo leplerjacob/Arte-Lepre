@@ -1,7 +1,7 @@
 ---
 import { Image } from "astro:assets";
 import logo from "../assets/images/logo-wordmark.png";
-import { navLinks, site } from "../data/site";
+import { estimateHref, navLinks, site } from "../data/site";
 import { url } from "../lib/paths";
 
 const current = Astro.url.pathname.replace(/\/?$/, "/");
@@ -9,7 +9,7 @@ const current = Astro.url.pathname.replace(/\/?$/, "/");
 
 <div class="topbar">
   <div class="wrap topbar__inner">
-    <span>Napoli &nbsp;·&nbsp; Washington, D.C. &nbsp;·&nbsp; Est. {site.since}</span>
+    <span>Antique furniture restoration &nbsp;·&nbsp; Kensington, MD &nbsp;·&nbsp; Si parla italiano</span>
     <span>By appointment &nbsp;·&nbsp; <a href={site.phone.href}>{site.phone.display}</a></span>
   </div>
 </div>
@@ -30,7 +30,7 @@ const current = Astro.url.pathname.replace(/\/?$/, "/");
           ))
         }
       </ul>
-      <a class="btn btn--gold nav__cta" href={url("/contact/")}>Book a Visit</a>
+      <a class="btn btn--gold nav__cta" href={estimateHref}>Request an Estimate</a>
     </nav>
 
     <button class="burger" type="button" aria-expanded="false" aria-controls="menu" aria-label="Open menu">
@@ -52,7 +52,8 @@ const current = Astro.url.pathname.replace(/\/?$/, "/");
     </ul>
   </nav>
   <div class="menu__foot">
-    <p class="eyebrow">By appointment</p>
+    <a class="btn btn--gold menu__cta" href={estimateHref}>Request an Estimate</a>
+    <p class="eyebrow">Or call · by appointment</p>
     <a href={site.phone.href}>{site.phone.display}</a>
     <a href={`mailto:${site.email}`}>{site.email}</a>
   </div>
@@ -93,7 +94,7 @@ const current = Astro.url.pathname.replace(/\/?$/, "/");
       burger.focus();
     }
   });
-  matchMedia("(min-width: 961px)").addEventListener("change", (e) => e.matches && setOpen(false));
+  matchMedia("(min-width: 1121px)").addEventListener("change", (e) => e.matches && setOpen(false));
 </script>
 
 <style>
@@ -192,18 +193,19 @@ const current = Astro.url.pathname.replace(/\/?$/, "/");
   }
   .nav ul a:hover, .nav ul a[aria-current="page"] { color: var(--gold); }
   .nav ul a:hover::after, .nav ul a[aria-current="page"]::after { transform: scaleX(1); }
+  .nav ul a, .nav__cta { white-space: nowrap; }
   .nav__cta { padding: 0.8rem 1.4rem; }
 
   .burger { display: none; }
 
   /* ---------- tablet & phone ---------- */
-  @media (max-width: 1100px) {
+  @media (max-width: 1300px) {
     .logo img { width: 240px; }
     .nav ul { gap: 1.4rem; }
     .nav { gap: 1.5rem; }
   }
 
-  @media (max-width: 960px) {
+  @media (max-width: 1120px) {
     .topbar { display: none; }
     .nav { display: none; }
     .header__inner { height: 76px; }
@@ -273,7 +275,8 @@ const current = Astro.url.pathname.replace(/\/?$/, "/");
     color: var(--on-navy);
   }
   .menu__foot a { color: var(--on-navy); text-decoration: none; }
-  .menu__foot .eyebrow { color: var(--gold); }
+  .menu__foot .eyebrow { color: var(--gold); margin-top: 1.25rem; }
+  .menu__foot .menu__cta { justify-self: start; color: var(--navy-deep); }
   :global(html.menu-open) { overflow: hidden; }
 
   @media (prefers-reduced-motion: reduce) {

@@ -1,0 +1,244 @@
+---
+import { Image } from "astro:assets";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PageHero from "../components/PageHero.astro";
+import Ornament from "../components/Ornament.astro";
+import Draft from "../components/Draft.astro";
+import { estimateHref, site } from "../data/site";
+import { roman } from "../data/pieces";
+import { approaches, faqs, services, stages } from "../data/services";
+import { showDrafts } from "../lib/drafts";
+import chisel from "../assets/images/4.jpg";
+import tools from "../assets/images/2.jpg";
+import plane from "../assets/images/3.jpg";
+import gouges from "../assets/images/5.jpg";
+
+const serviceImages = [gouges, chisel, plane, tools];
+// Questions still waiting on an answer are only shown on the preview.
+const visibleFaqs = faqs.filter((f) => f.a || showDrafts);
+---
+
+<BaseLayout
+  title="Restoration Services"
+  description="Antique furniture restoration in the Washington, D.C. area: French polishing and refinishing, veneer and marquetry repair, structural and woodworm repair, house calls, pickup and delivery."
+  businessSchema
+>
+  <PageHero
+    eyebrow="Services"
+    title="Restoration &amp; <em>conservation</em>"
+    lede="Every piece is restored by hand in the Kensington workshop, using exclusively traditional methods and natural materials."
+  />
+
+  <!-- ============ Services ============ -->
+  <section class="section">
+    <div class="wrap">
+      <ol class="services">
+        {
+          services.map((s, i) => (
+            <li class="service" id={s.id}>
+              <div class="mat service__img" data-reveal>
+                <Image src={serviceImages[i]} alt="" widths={[420, 840]} sizes="(max-width: 860px) 92vw, 420px" format="webp" />
+              </div>
+              <div class="service__text" data-reveal>
+                <span class="numeral">{roman(i + 1)}</span>
+                <h2>{s.name}</h2>
+                <p class="lede">{s.summary}</p>
+                <ul class="details">{s.details.map((d) => <li>{d}</li>)}</ul>
+                {s.id === "house-calls" && (
+                  <p class="area">
+                    <strong>Service area:</strong>{" "}
+                    {site.serviceArea ? site.serviceArea : <Draft inline note="Areas covered for house calls, pickup and delivery">e.g. Washington, D.C., Montgomery County and Northern Virginia</Draft>}
+                  </p>
+                )}
+              </div>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
+
+  <!-- ============ Approaches ============ -->
+  <section class="section section--parchment">
+    <div class="wrap">
+      <header class="head center" data-reveal>
+        <p class="eyebrow">Our Approach</p>
+        <h2>Two kinds of <em>intervention</em></h2>
+      </header>
+      <div class="approaches">
+        {
+          approaches.map((a, i) => (
+            <article class="approach" data-reveal>
+              <span class="numeral">{roman(i + 1)}</span>
+              <h3>{a.name}</h3>
+              <p>{a.text}</p>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Stages ============ -->
+  <section class="section">
+    <div class="wrap--narrow">
+      <header class="head center" data-reveal>
+        <p class="eyebrow">Our Method</p>
+        <h2>The stages of <em>restoration</em></h2>
+      </header>
+      <ol class="stages">
+        {
+          stages.map(({ name, text }, i) => (
+            <li data-reveal>
+              <span class="numeral">{roman(i + 1)}</span>
+              <div>
+                <h3>{name}</h3>
+                <p>{text}</p>
+              </div>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
+
+  <!-- ============ FAQ ============ -->
+  <section class="section section--parchment" id="faq">
+    <div class="wrap--narrow">
+      <header class="head center" data-reveal>
+        <p class="eyebrow">Questions</p>
+        <h2>Frequently <em>asked</em></h2>
+      </header>
+      <div class="faqs">
+        {
+          visibleFaqs.map((f) => (
+            <details class="faq" data-reveal>
+              <summary>{f.q}</summary>
+              <div class="faq__a">
+                {f.a && <p>{f.a}</p>}
+                {f.todo && <Draft note={f.todo} />}
+              </div>
+            </details>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CTA ============ -->
+  <section class="section section--navy">
+    <div class="wrap--narrow center" data-reveal>
+      <Ornament />
+      <h2 class="cta__title">Ready to bring a piece <em>back to life?</em></h2>
+      <p class="lede">Send a few photos and Fabio will reply with his assessment.</p>
+      <div class="cta__actions">
+        <a class="btn btn--gold" href={estimateHref}>Request an estimate</a>
+        <a class="btn btn--ghost" href={site.phone.href}>Call {site.phone.display}</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .head { margin-bottom: clamp(2.5rem, 5vw, 3.75rem); }
+  .head h2 { margin-top: 0.75rem; }
+  .numeral {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 2.4rem;
+    line-height: 1;
+    color: var(--gold-deep);
+  }
+
+  /* ---------- services ---------- */
+  .services { list-style: none; padding: 0; }
+  .service {
+    display: grid;
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+    gap: clamp(2rem, 6vw, 5.5rem);
+    align-items: center;
+    padding-block: clamp(2.5rem, 5vw, 4rem);
+    border-top: 1px solid var(--rule);
+    scroll-margin-top: calc(var(--header-h) + 1rem);
+  }
+  .service:first-child { border-top: 0; padding-top: 0; }
+  .service:nth-child(even) .service__img { order: 2; }
+  .service__img img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
+  .service h2 { margin-top: 0.6rem; font-size: var(--step-3); }
+  .service .lede { margin-top: 1rem; }
+  .details { margin-top: 1.25rem; padding: 0; list-style: none; display: grid; gap: 0.6rem; }
+  .details li { position: relative; padding-left: 1.5rem; }
+  .details li::before {
+    content: "";
+    position: absolute;
+    left: 0.2rem;
+    top: 0.65em;
+    width: 7px;
+    height: 7px;
+    background: var(--gold);
+    transform: rotate(45deg);
+  }
+  .area { margin-top: 1.5rem; }
+
+  /* ---------- approaches ---------- */
+  .approaches { display: grid; grid-template-columns: repeat(2, 1fr); gap: clamp(1.5rem, 3vw, 2.5rem); }
+  .approach { position: relative; padding: clamp(2rem, 4vw, 3rem); background: var(--ivory); border: 1px solid var(--rule); }
+  .approach::before { content: ""; position: absolute; inset: 6px; border: 1px solid rgb(148 114 47 / 0.15); pointer-events: none; }
+  .approach h3 { margin-top: 1rem; }
+  .approach p { margin-top: 0.75rem; color: var(--text-soft); }
+
+  /* ---------- stages ---------- */
+  .stages { list-style: none; padding: 0; }
+  .stages li {
+    display: grid;
+    grid-template-columns: 4.5rem 1fr;
+    gap: 1rem;
+    padding-block: 1.6rem;
+    border-bottom: 1px solid var(--rule);
+  }
+  .stages h3 { font-size: var(--step-1); font-weight: 600; }
+  .stages p { margin-top: 0.4rem; color: var(--text-soft); }
+
+  /* ---------- FAQ ---------- */
+  .faqs { display: grid; gap: 0.75rem; }
+  .faq { background: var(--ivory); border: 1px solid var(--rule); }
+  .faq summary {
+    position: relative;
+    padding: 1.25rem 3.5rem 1.25rem 1.5rem;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: var(--step-1);
+    color: var(--navy);
+    cursor: pointer;
+    list-style: none;
+  }
+  .faq summary::-webkit-details-marker { display: none; }
+  .faq summary::after {
+    content: "+";
+    position: absolute;
+    right: 1.5rem;
+    top: 50%;
+    translate: 0 -50%;
+    font-family: var(--font-body);
+    font-size: 1.4rem;
+    color: var(--gold-deep);
+    transition: rotate 0.25s var(--ease);
+  }
+  .faq[open] summary::after { rotate: 45deg; }
+  .faq__a { display: grid; gap: 0.9rem; padding: 0 1.5rem 1.5rem; color: var(--text-soft); }
+
+  /* ---------- CTA ---------- */
+  .cta__title { margin-top: 2rem; }
+  .section--navy .lede { margin-top: 1.25rem; }
+  .cta__actions { display: flex; justify-content: center; flex-wrap: wrap; gap: 1rem; margin-top: 2.5rem; }
+
+  @media (max-width: 860px) {
+    .service { grid-template-columns: 1fr; }
+    .service:nth-child(even) .service__img { order: 0; }
+    .approaches { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 560px) {
+    .stages li { grid-template-columns: 3.25rem 1fr; }
+    .numeral { font-size: 2rem; }
+  }
+</style>

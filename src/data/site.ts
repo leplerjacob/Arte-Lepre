@@ -1,3 +1,5 @@
+import { url } from "../lib/paths";
+
 /** Business details used across the site. Edit here, not in the pages. */
 export const site = {
   name: "Arte Lepre",
@@ -28,9 +30,9 @@ export const locations = [
 ] as const;
 
 export const navLinks = [
-  { href: "/", label: "Home" },
-  { href: "/gallery/", label: "Gallery" },
-  { href: "/inventory/", label: "For Sale" },
-  { href: "/history/", label: "Our History" },
-  { href: "/contact/", label: "Contact" },
+  { href: url("/"), label: "Home" },
+  { href: url("/gallery/"), label: "Gallery" },
+  { href: url("/inventory/"), label: "For Sale" },
+  { href: url("/history/"), label: "Our History" },
+  { href: url("/contact/"), label: "Contact" },
 ] as const;

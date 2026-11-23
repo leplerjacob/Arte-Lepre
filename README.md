@@ -42,6 +42,21 @@ npm run build
 
 Upload the **contents** of the `dist/` folder to `public_html` (File Manager or FTP), replacing the old files. Each page is its own folder (`/gallery/index.html` and so on), so clean URLs like `artelepre.com/gallery` work without any server configuration. Old links such as `artelepre.com/#/gallery` are redirected to the new pages automatically.
 
+## Shareable preview (GitHub Pages)
+
+A preview copy is published at https://leplerjacob.github.io/Arte-Lepre/ from the `gh-pages` branch. It is marked `noindex`, so search engines won't list it alongside artelepre.com.
+
+To update it:
+
+```bash
+npm run build:preview      # builds into dist-preview/ for the /Arte-Lepre/ sub-folder
+cd dist-preview
+git init -q && git add -A && git commit -qm "Update preview"
+git push -f https://github.com/leplerjacob/Arte-Lepre.git HEAD:gh-pages
+```
+
+Internal links go through `url()` in `src/lib/paths.ts` so they work both at the domain root and in the sub-folder.
+
 ## Project layout
 
 ```

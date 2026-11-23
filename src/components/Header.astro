@@ -2,6 +2,7 @@
 import { Image } from "astro:assets";
 import logo from "../assets/images/Logo.png";
 import { navLinks, site } from "../data/site";
+import { url } from "../lib/paths";
 
 const current = Astro.url.pathname.replace(/\/?$/, "/");
 ---
@@ -15,7 +16,7 @@ const current = Astro.url.pathname.replace(/\/?$/, "/");
 
 <header class="header" data-header>
   <div class="wrap header__inner">
-    <a class="logo" href="/" aria-label="Arte Lepre home">
+    <a class="logo" href={url("/")} aria-label="Arte Lepre home">
       <Image src={logo} alt="Arte Lepre, Antique Restoration & Conservation, since 1959" widths={[210, 420]} sizes="210px" loading="eager" />
     </a>
 
@@ -29,7 +30,7 @@ const current = Astro.url.pathname.replace(/\/?$/, "/");
           ))
         }
       </ul>
-      <a class="btn btn--gold nav__cta" href="/contact/">Book a Visit</a>
+      <a class="btn btn--gold nav__cta" href={url("/contact/")}>Book a Visit</a>
     </nav>
 
     <button class="burger" type="button" aria-expanded="false" aria-controls="menu" aria-label="Open menu">
@@ -241,7 +242,7 @@ const current = Astro.url.pathname.replace(/\/?$/, "/");
     flex-direction: column;
     justify-content: space-between;
     padding: calc(76px + 3rem) var(--gutter) 2.5rem;
-    background: var(--navy) url("/patterns/parquetry.svg");
+    background: var(--navy) url("../assets/patterns/parquetry.svg");
     background-size: 60px 104px;
     opacity: 0;
     transition: opacity 0.35s var(--ease);

@@ -4,6 +4,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import PageHero from "../components/PageHero.astro";
 import Ornament from "../components/Ornament.astro";
 import { fullSize } from "../lib/images";
+import { url } from "../lib/paths";
 import vesuvius from "../assets/images/vesuvius.jpg";
 import shop from "../assets/images/shop.jpg";
 import article1 from "../assets/images/article_1.jpg";
@@ -130,7 +131,7 @@ const press = await Promise.all(
         traditional methods such as spirit polishing and shellac, beeswax polishing, and the integration of missing parts
         with antique wood, returning each piece to its original state.
       </p>
-      <a class="btn btn--gold" href="/gallery/">See our work</a>
+      <a class="btn btn--gold" href={url("/gallery/")}>See our work</a>
     </div>
   </section>
 </BaseLayout>

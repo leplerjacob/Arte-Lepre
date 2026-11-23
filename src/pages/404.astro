@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Ornament from "../components/Ornament.astro";
+import { url } from "../lib/paths";
 ---
 
 <BaseLayout title="Page not found" description="This page could not be found.">
@@ -10,7 +11,7 @@ import Ornament from "../components/Ornament.astro";
       <p class="eyebrow">Error 404</p>
       <h1>This page has been <em>misplaced</em></h1>
       <p class="lede">The page you were looking for has moved or no longer exists.</p>
-      <p><a class="btn" href="/">Return home</a></p>
+      <p><a class="btn" href={url("/")}>Return home</a></p>
     </div>
   </section>
 </BaseLayout>

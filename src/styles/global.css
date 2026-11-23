@@ -72,7 +72,7 @@ body {
 .section { padding-block: var(--section); }
 .section--parchment { background: var(--parchment); }
 .section--navy {
-  background: var(--navy) url("/patterns/parquetry.svg");
+  background: var(--navy) url("../assets/patterns/parquetry.svg");
   background-size: 60px 104px;
   color: var(--on-navy);
 }

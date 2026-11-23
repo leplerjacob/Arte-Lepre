@@ -2,10 +2,18 @@
   "name": "Arte Lepre - Antique Furniture Restoration",
   "short_name": "Arte Lepre",
   "icons": [
-    { "src": "/small-logo.png", "sizes": "70x70", "type": "image/png" },
-    { "src": "/logo310.png", "sizes": "310x310", "type": "image/png" }
+    {
+      "src": "small-logo.png",
+      "sizes": "70x70",
+      "type": "image/png"
+    },
+    {
+      "src": "logo310.png",
+      "sizes": "310x310",
+      "type": "image/png"
+    }
   ],
-  "start_url": "/",
+  "start_url": "./",
   "display": "standalone",
   "theme_color": "#1d3356",
   "background_color": "#fffefa"

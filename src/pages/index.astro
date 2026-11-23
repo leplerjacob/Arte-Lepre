@@ -3,6 +3,7 @@ import { Image } from "astro:assets";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Ornament from "../components/Ornament.astro";
 import { site } from "../data/site";
+import { url } from "../lib/paths";
 import { galleryPieces, inventoryPieces, roman, slugify } from "../data/pieces";
 import vesuvius from "../assets/images/vesuvius.jpg";
 import chisel from "../assets/images/4.jpg";
@@ -48,8 +49,8 @@ const forSale = [inventoryPieces[0], inventoryPieces[1], inventoryPieces[4]];
           traditional methods, natural materials and above-and-beyond care.
         </p>
         <div class="hero__actions">
-          <a class="btn btn--gold" href="/gallery/">View the Gallery</a>
-          <a class="btn btn--ghost" href="/contact/">Book a Consultation</a>
+          <a class="btn btn--gold" href={url("/gallery/")}>View the Gallery</a>
+          <a class="btn btn--ghost" href={url("/contact/")}>Book a Consultation</a>
         </div>
       </div>
 
@@ -59,7 +60,7 @@ const forSale = [inventoryPieces[0], inventoryPieces[1], inventoryPieces[4]];
         </div>
         <figcaption>
           <span class="eyebrow">Available</span>
-          <a href={`/inventory/#${slugify(inventoryPieces[3].title)}`}>Italian walnut commode, late 18th century</a>
+          <a href={url(`/inventory/#${slugify(inventoryPieces[3].title)}`)}>Italian walnut commode, late 18th century</a>
         </figcaption>
       </figure>
     </div>
@@ -140,12 +141,12 @@ const forSale = [inventoryPieces[0], inventoryPieces[1], inventoryPieces[4]];
           <p class="eyebrow">From the Gallery</p>
           <h2>Before <em>&amp;</em> after</h2>
         </div>
-        <a class="link-arrow" href="/gallery/">See all restorations</a>
+        <a class="link-arrow" href={url("/gallery/")}>See all restorations</a>
       </header>
       <div class="plates">
         {
           featured.map((piece) => (
-            <a class="plate" href={`/gallery/#${slugify(piece.title)}`} data-reveal>
+            <a class="plate" href={url(`/gallery/#${slugify(piece.title)}`)} data-reveal>
               <div class="mat">
                 <Image src={piece.images[0]} alt={`${piece.title}, before and after restoration`} widths={[360, 720]} sizes="(max-width: 760px) 92vw, 360px" format="webp" />
               </div>
@@ -168,7 +169,7 @@ const forSale = [inventoryPieces[0], inventoryPieces[1], inventoryPieces[4]];
         With over 60 years of experience and three generations later, the Lepre family workshop has been a staple in
         Naples since 1959. Fabio Lepre brought the family craft to the Washington, D.C. area.
       </p>
-      <a class="btn btn--ghost" href="/history/">Read our history</a>
+      <a class="btn btn--ghost" href={url("/history/")}>Read our history</a>
     </div>
   </section>
 
@@ -180,12 +181,12 @@ const forSale = [inventoryPieces[0], inventoryPieces[1], inventoryPieces[4]];
           <p class="eyebrow">Antiques for Sale</p>
           <h2>Currently <em>available</em></h2>
         </div>
-        <a class="link-arrow" href="/inventory/">View all pieces</a>
+        <a class="link-arrow" href={url("/inventory/")}>View all pieces</a>
       </header>
       <div class="plates plates--tall">
         {
           forSale.map((piece) => (
-            <a class="plate" href={`/inventory/#${slugify(piece.title)}`} data-reveal>
+            <a class="plate" href={url(`/inventory/#${slugify(piece.title)}`)} data-reveal>
               <div class="mat">
                 <Image src={piece.images[0]} alt={piece.title} widths={[360, 720]} sizes="(max-width: 760px) 92vw, 360px" format="webp" />
               </div>

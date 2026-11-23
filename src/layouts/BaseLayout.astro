@@ -4,6 +4,7 @@ import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import Lightbox from "../components/Lightbox.astro";
 import { site } from "../data/site";
+import { url } from "../lib/paths";
 
 interface Props {
   /** Page name, shown before the site name in the browser tab. Omit on the home page. */
@@ -16,7 +17,10 @@ interface Props {
 const { title, description, businessSchema = false } = Astro.props;
 const fullTitle = title ? `${title} | ${site.name}` : `${site.name} | ${site.tagline}`;
 const canonical = new URL(Astro.url.pathname, Astro.site);
-const ogImage = new URL("/logo310.png", Astro.site);
+const ogImage = new URL(url("/logo310.png"), Astro.site);
+const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+// Preview builds (e.g. GitHub Pages) are kept out of search results so they never compete with the real site.
+const noindex = import.meta.env.PUBLIC_NOINDEX === "1";
 
 const schema = {
   "@context": "https://schema.org",
@@ -46,10 +50,11 @@ const schema = {
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
     <meta name="theme-color" content="#1d3356" />
-    <link rel="icon" type="image/png" href="/small-logo.png" />
-    <link rel="apple-touch-icon" href="/logo310.png" />
-    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="icon" type="image/png" href={url("/small-logo.png")} />
+    <link rel="apple-touch-icon" href={url("/logo310.png")} />
+    <link rel="manifest" href={url("/site.webmanifest")} />
 
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content={site.name} />
@@ -60,7 +65,7 @@ const schema = {
 
     {businessSchema && <script type="application/ld+json" set:html={JSON.stringify(schema)} />}
 
-    <script is:inline>
+    <script is:inline define:vars={{ base }}>
       document.documentElement.classList.add("js");
       // Old links used hash routes (artelepre.com/#/gallery). Send them to the real pages.
       (function () {
@@ -68,7 +73,7 @@ const schema = {
         if (hash.indexOf("#/") !== 0) return;
         var page = hash.slice(2).split("?")[0].replace(/\/$/, "");
         var pages = { gallery: 1, history: 1, contact: 1, inventory: 1 };
-        if (pages[page]) location.replace("/" + page + "/");
+        if (pages[page]) location.replace(base + "/" + page + "/");
         else history.replaceState(null, "", location.pathname);
       })();
     </script>

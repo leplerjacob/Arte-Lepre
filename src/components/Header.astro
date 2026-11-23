@@ -1,6 +1,5 @@
 ---
-import { Image } from "astro:assets";
-import logo from "../assets/images/logo-wordmark.png";
+import Logo from "./Logo.astro";
 import { estimateHref, navLinks, site } from "../data/site";
 import { url } from "../lib/paths";
 
@@ -17,7 +16,8 @@ const current = Astro.url.pathname.replace(/\/?$/, "/");
 <header class="header" data-header>
   <div class="wrap header__inner">
     <a class="logo" href={url("/")} aria-label="Arte Lepre home">
-      <Image src={logo} alt="Arte Lepre, Antique Restoration & Conservation, since 1959" widths={[200, 300, 600]} sizes="(max-width: 960px) 200px, 300px" loading="eager" />
+      <Logo layout="inline" class="logo--wide" />
+      <Logo layout="stacked" class="logo--narrow" />
     </a>
 
     <nav class="nav" aria-label="Main">
@@ -74,6 +74,7 @@ const current = Astro.url.pathname.replace(/\/?$/, "/");
     burger.setAttribute("aria-label", open ? "Close menu" : "Open menu");
     document.documentElement.classList.toggle("menu-open", open);
     if (open) {
+      menu.style.setProperty("--menu-top", `${header.getBoundingClientRect().bottom}px`);
       menu.hidden = false;
       requestAnimationFrame(() => menu.classList.add("is-open"));
     } else {
@@ -149,12 +150,10 @@ const current = Astro.url.pathname.replace(/\/?$/, "/");
   }
   .header.is-scrolled .header__inner { height: var(--header-h); }
 
-  .logo img {
-    width: 300px;
-    height: auto;
-    transition: width 0.3s var(--ease);
-  }
-  .header.is-scrolled .logo img { width: 230px; }
+  .logo { display: block; text-decoration: none; --logo-w: 300px; }
+  .logo :global(.logo-mark) { transition: width 0.3s var(--ease); }
+  .logo :global(.logo--narrow) { display: none; }
+  .header.is-scrolled .logo { --logo-w: 230px; }
 
   .nav {
     display: flex;
@@ -200,7 +199,7 @@ const current = Astro.url.pathname.replace(/\/?$/, "/");
 
   /* ---------- tablet & phone ---------- */
   @media (max-width: 1300px) {
-    .logo img { width: 240px; }
+    .logo { --logo-w: 250px; }
     .nav ul { gap: 1.4rem; }
     .nav { gap: 1.5rem; }
   }
@@ -208,10 +207,15 @@ const current = Astro.url.pathname.replace(/\/?$/, "/");
   @media (max-width: 1120px) {
     .topbar { display: none; }
     .nav { display: none; }
-    /* logo centred, menu button pinned to the right edge */
-    .header__inner { position: relative; justify-content: center; height: 76px; }
-    .header.is-scrolled .header__inner { height: 68px; }
-    .logo img, .header.is-scrolled .logo img { width: min(200px, calc(100vw - 10rem)); }
+    /* stacked crest centred, menu button pinned to the right edge */
+    .header__inner { position: relative; justify-content: center; height: auto; padding-block: 0.75rem; }
+    .header.is-scrolled .header__inner { height: auto; padding-block: 0.5rem; }
+    .logo, .header.is-scrolled .logo { --logo-w: min(200px, calc(100vw - 10rem)); }
+    .logo :global(.logo--wide) { display: none; }
+    .logo :global(.logo--narrow) { display: grid; }
+    /* once scrolled, the crest compacts to medallion + lettering */
+    .header.is-scrolled .logo :global(.logo--narrow) :global(:is(.logo-mark__since, .logo-mark__tagline, .logo-mark__cities)) { display: none; }
+    .header.is-scrolled .logo :global(.logo--narrow .logo-mark__medallion) { width: 16%; margin-bottom: 4px; }
 
     .burger {
       position: absolute;
@@ -248,7 +252,7 @@ const current = Astro.url.pathname.replace(/\/?$/, "/");
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    padding: calc(76px + 3rem) var(--gutter) 2.5rem;
+    padding: calc(var(--menu-top, 76px) + 2.5rem) var(--gutter) 2.5rem;
     background: var(--navy) url("../assets/patterns/parquetry.svg");
     background-size: 60px 104px;
     opacity: 0;
@@ -284,6 +288,7 @@ const current = Astro.url.pathname.replace(/\/?$/, "/");
   :global(html.menu-open) { overflow: hidden; }
 
   @media (prefers-reduced-motion: reduce) {
-    .header, .header__inner, .logo img, .menu, .menu li, .burger span { transition: none; }
+    .header, .header__inner, .menu, .menu li, .burger span { transition: none; }
+    .logo :global(.logo-mark) { transition: none; }
   }
 </style>

@@ -1,0 +1,86 @@
+---
+// The Arte Lepre logo, assembled from its parts so it can be arranged in different ways:
+// the marquetry medallion and gothic lettering are images; the small lines are real text,
+// so they stay crisp and readable at any size.
+import { Image } from "astro:assets";
+import medallion from "../assets/images/logo-medallion.png";
+import lettering from "../assets/images/logo-lettering.png";
+
+interface Props {
+  /** "inline": medallion beside the lettering (the original arrangement). "stacked": centered crest. */
+  layout?: "inline" | "stacked";
+  class?: string;
+}
+const { layout = "inline", class: className } = Astro.props;
+---
+
+<span class:list={["logo-mark", `logo-mark--${layout}`, className]}>
+  <Image class="logo-mark__medallion" src={medallion} alt="" widths={[80, 160]} sizes="80px" loading="eager" />
+  <span class="logo-mark__name">
+    <Image class="logo-mark__lettering" src={lettering} alt="Arte Lepre" widths={[260, 520, 656]} sizes="260px" loading="eager" />
+    <span class="logo-mark__since">since <b>1959</b></span>
+  </span>
+  <span class="logo-mark__tagline">Antique Restoration &amp; Conservation</span>
+  <span class="logo-mark__cities">Napoli <i>|</i> Washington, D.C.</span>
+</span>
+
+<style>
+  /* Everything scales from one width: set --logo-w where the logo is used. */
+  .logo-mark {
+    --w: var(--logo-w, 300px);
+    display: grid;
+    width: var(--w);
+    color: #f4f1ea;
+    font-family: var(--font-body);
+    line-height: 1.15;
+    text-align: center;
+  }
+  .logo-mark img { display: block; width: 100%; height: auto; }
+
+  .logo-mark__name { position: relative; display: block; }
+  .logo-mark__since {
+    position: absolute;
+    right: 0;
+    top: calc(var(--w) * -0.018);
+    font-size: calc(var(--w) * 0.028);
+    white-space: nowrap;
+  }
+  .logo-mark__since b { font-weight: 400; font-size: 1.4em; }
+  .logo-mark__tagline {
+    font-size: calc(var(--w) * 0.043);
+    letter-spacing: 0.035em;
+    white-space: nowrap;
+  }
+  .logo-mark__cities {
+    font-size: calc(var(--w) * 0.036);
+    font-variant: small-caps;
+    letter-spacing: 0.12em;
+    white-space: nowrap;
+  }
+  .logo-mark__cities i { font-style: normal; padding-inline: 0.7em; opacity: 0.85; }
+
+  /* ----- inline: medallion left of the lettering, two lines centered below ----- */
+  .logo-mark--inline {
+    grid-template-columns: 17.5% 1fr;
+    column-gap: 3.2%;
+    align-items: center;
+  }
+  .logo-mark--inline .logo-mark__name { padding-top: calc(var(--w) * 0.03); }
+  .logo-mark--inline .logo-mark__tagline,
+  .logo-mark--inline .logo-mark__cities { grid-column: 1 / -1; }
+  .logo-mark--inline .logo-mark__tagline { margin-top: calc(var(--w) * 0.012); }
+  .logo-mark--inline .logo-mark__cities { margin-top: calc(var(--w) * 0.03); }
+
+  /* ----- stacked: a centered crest ----- */
+  .logo-mark--stacked { justify-items: center; }
+  .logo-mark--stacked .logo-mark__medallion { width: 25%; margin-bottom: calc(var(--w) * 0.035); }
+  .logo-mark--stacked .logo-mark__name { width: 100%; }
+  .logo-mark--stacked .logo-mark__since {
+    position: static;
+    display: block;
+    margin-top: calc(var(--w) * 0.02);
+    font-size: calc(var(--w) * 0.038);
+  }
+  .logo-mark--stacked .logo-mark__tagline { margin-top: calc(var(--w) * 0.03); font-size: calc(var(--w) * 0.052); letter-spacing: 0.01em; }
+  .logo-mark--stacked .logo-mark__cities { margin-top: calc(var(--w) * 0.025); font-size: calc(var(--w) * 0.05); }
+</style>

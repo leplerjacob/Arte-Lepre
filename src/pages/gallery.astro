@@ -1,19 +1,22 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import PieceList from "../components/PieceList.astro";
+import PageHero from "../components/PageHero.astro";
+import GalleryPlates from "../components/GalleryPlates.astro";
 import { galleryPieces } from "../data/pieces";
 ---
 
 <BaseLayout
   title="Gallery"
-  description="Antique furniture restored by Arte Lepre: Neapolitan, Louis XV and XVI, Napoleon III and Charles X commodes, writing desks, consoles and more."
+  description="Before and after: antique furniture restored by Arte Lepre, from Neapolitan Louis XV and XVI desks to Napoleon III and Charles X pieces."
 >
-  <section class="wrap">
-    <h1 class="section-title">Gallery</h1>
-    <PieceList pieces={galleryPieces} />
+  <PageHero
+    eyebrow="The Gallery"
+    title="Before <em>&amp;</em> after"
+    lede="A selection of restorations from our workshops. Each plate shows a piece as it arrived, above, and after restoration, below."
+  />
+  <section class="section">
+    <div class="wrap">
+      <GalleryPlates pieces={galleryPieces} />
+    </div>
   </section>
 </BaseLayout>
-
-<style>
-  .wrap { padding: 2.5rem 0 4rem; }
-</style>

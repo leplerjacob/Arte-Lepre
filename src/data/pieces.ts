@@ -140,3 +140,21 @@ export const inventoryPieces: Piece[] = [
     ],
   },
 ];
+
+/** URL-safe id for a piece, used for #anchors (e.g. /inventory/#italian-walnut-commode-late-18th-century). */
+export function slugify(title: string): string {
+  return title
+    .normalize("NFD")
+    .replace(/[̀-ͯ]/g, "")
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-|-$/g, "");
+}
+
+/** Upper-case Roman numerals for catalogue plate and lot numbers. */
+export function roman(n: number): string {
+  const map: [number, string][] = [[10, "X"], [9, "IX"], [5, "V"], [4, "IV"], [1, "I"]];
+  let out = "";
+  for (const [v, s] of map) while (n >= v) { out += s; n -= v; }
+  return out;
+}

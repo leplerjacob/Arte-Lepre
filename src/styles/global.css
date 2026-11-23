@@ -1,112 +1,182 @@
-@import "@fontsource/open-sans/latin-300.css";
-@import "@fontsource/open-sans/latin-600.css";
+@import "@fontsource/cormorant-garamond/latin-500.css";
+@import "@fontsource/cormorant-garamond/latin-600.css";
+@import "@fontsource/cormorant-garamond/latin-500-italic.css";
 @import "@fontsource/lora/latin-400.css";
-@import "@fontsource/lora/latin-500.css";
+@import "@fontsource/lora/latin-400-italic.css";
+@import "@fontsource/open-sans/latin-600.css";
 
-/* ---------- Design tokens (taken from the original site) ---------- */
+/* =========================================================
+   Arte Lepre: design tokens
+   Palette kept from the original site (navy, gold, cream);
+   type and ornament borrowed from antique catalogues and inlay work.
+   ========================================================= */
 :root {
+  /* colour */
   --navy: #1d3356;
-  --navy-deep: #0d2538;
-  --gold: #d6af63;
-  --gold-soft: #e6cb93;
-  --pompeii: #a42a2e;
-  --pompeii-light: #d0605f; /* same red, lifted so it reads on navy */
-  --cream: #fffefa;
-  --ink: #1b1b1b;
-  --muted: #6b6b6b;
-  --smoke: #f5f5f5;
-  --rule: rgb(29 51 86 / 0.18);
-  --backdrop: #232c3b;
+  --navy-deep: #13233d;
+  --navy-ink: #1c2638;
+  --gold: #d6af63;          /* on navy */
+  --gold-deep: #94722f;     /* gold that reads on ivory */
+  --gold-line: rgb(214 175 99 / 0.55);
+  --ivory: #fcfaf5;
+  --parchment: #f4eee2;
+  --mat: #efe7d6;
+  --text: #2b2b2b;
+  --text-soft: #5d5a54;
+  --on-navy: #e9e4d8;
+  --rule: rgb(148 114 47 / 0.35);
 
-  --font-sans: "Open Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
-  --font-serif: "Lora", Georgia, "Times New Roman", serif;
+  /* type */
+  --font-display: "Cormorant Garamond", "Cormorant", Garamond, "Times New Roman", serif;
+  --font-body: "Lora", Georgia, serif;
+  --font-label: "Open Sans", system-ui, sans-serif;
 
-  --page-max: 1024px;
-  --text-max: 650px;
-  --header-h: 150px;
-  --radius: 6px;
+  --step--1: 0.875rem;
+  --step-0: 1.0625rem;
+  --step-1: clamp(1.25rem, 1.15rem + 0.4vw, 1.45rem);
+  --step-2: clamp(1.6rem, 1.35rem + 1vw, 2.1rem);
+  --step-3: clamp(2.1rem, 1.6rem + 2vw, 3.1rem);
+  --step-4: clamp(2.6rem, 1.8rem + 3.4vw, 4.6rem);
+
+  /* layout */
+  --wrap: 1200px;
+  --wrap-narrow: 760px;
+  --gutter: clamp(1.25rem, 4vw, 3rem);
+  --section: clamp(4rem, 8vw, 7.5rem);
   --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
-  --shadow-page: 0 0 60px rgb(0 0 0 / 0.45);
+  --header-h: 84px;
 }
 
-@media (max-width: 768px) {
-  :root { --header-h: 96px; }
-}
-
-/* ---------- Reset ---------- */
+/* ---------- reset ---------- */
 *, *::before, *::after { box-sizing: border-box; }
-html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
-@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
-body, h1, h2, h3, p, ul, figure { margin: 0; }
+html { -webkit-text-size-adjust: 100%; scroll-padding-top: calc(var(--header-h) + 1rem); }
+body, h1, h2, h3, h4, p, ul, ol, figure, blockquote, dl, dd { margin: 0; }
 img, picture, svg { display: block; max-width: 100%; }
+img { height: auto; }
 button { font: inherit; color: inherit; }
 a { color: inherit; }
 
-/* ---------- Page frame: centred 1024px column over the damask wallpaper ---------- */
 body {
-  min-height: 100vh;
-  background: var(--backdrop) url("/patterns/damask.svg") repeat;
-  background-size: 140px 200px;
-  background-attachment: fixed;
-  font-family: var(--font-sans);
-  font-weight: 300;
-  line-height: 1.6;
-  color: var(--ink);
+  background: var(--ivory);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: var(--step-0);
+  line-height: 1.75;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
 }
 
-.page {
-  max-width: var(--page-max);
-  margin-inline: auto;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  background: var(--cream);
-  box-shadow: var(--shadow-page);
+/* ---------- layout helpers ---------- */
+.wrap { width: min(100% - 2 * var(--gutter), var(--wrap)); margin-inline: auto; }
+.wrap--narrow { width: min(100% - 2 * var(--gutter), var(--wrap-narrow)); margin-inline: auto; }
+.section { padding-block: var(--section); }
+.section--parchment { background: var(--parchment); }
+.section--navy {
+  background: var(--navy) url("/patterns/parquetry.svg");
+  background-size: 60px 104px;
+  color: var(--on-navy);
 }
 
-main { flex: 1; }
-
-/* ---------- Shared typography ---------- */
-.section-title {
-  font-family: var(--font-sans);
-  font-weight: 300;
-  font-size: clamp(1.5rem, 1.2rem + 1vw, 1.85rem);
-  letter-spacing: 0.02em;
-  color: var(--gold);
-  text-align: center;
+/* ---------- type ---------- */
+.display, h1, h2, h3 {
+  font-family: var(--font-display);
+  font-weight: 500;
+  line-height: 1.12;
+  letter-spacing: 0.005em;
+  color: var(--navy);
 }
+.section--navy :is(h1, h2, h3) { color: var(--ivory); }
+h1 { font-size: var(--step-4); }
+h2 { font-size: var(--step-3); }
+h3 { font-size: var(--step-2); }
+em, .italic { font-style: italic; }
+h1 em, h2 em, h3 em { color: var(--gold-deep); }
+.section--navy :is(h1, h2, h3) em { color: var(--gold); }
 
-.rule {
-  border: 0;
-  border-top: 1px solid var(--rule);
-  width: 100%;
-  margin: 2rem 0;
+.eyebrow {
+  display: inline-block;
+  font-family: var(--font-label);
+  font-weight: 600;
+  font-size: 0.72rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--gold-deep);
 }
+.section--navy .eyebrow { color: var(--gold); }
 
-/* ---------- Buttons ---------- */
+.lede { font-size: var(--step-1); line-height: 1.65; color: var(--text-soft); }
+.section--navy .lede { color: var(--on-navy); }
+
+.center { text-align: center; }
+.stack > * + * { margin-top: 1.25rem; }
+
+/* ---------- buttons & links ---------- */
 .btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-width: 150px;
-  padding: 0.7rem 1.4rem;
+  gap: 0.6rem;
+  padding: 0.95rem 1.9rem;
   border: 1px solid var(--navy);
-  border-radius: var(--radius);
   background: var(--navy);
-  color: var(--gold);
-  font-family: var(--font-sans);
+  color: var(--ivory);
+  font-family: var(--font-label);
   font-weight: 600;
-  font-size: 0.95rem;
-  letter-spacing: 0.04em;
+  font-size: 0.74rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
   text-decoration: none;
   cursor: pointer;
-  transition: background-color 0.2s var(--ease), color 0.2s var(--ease), border-color 0.2s var(--ease);
+  transition: background-color 0.25s var(--ease), color 0.25s var(--ease), border-color 0.25s var(--ease);
 }
-.btn:hover { background: var(--gold); border-color: var(--gold); color: var(--navy); }
-.btn--outline { background: transparent; color: var(--navy); }
-.btn--outline:hover { background: var(--navy); border-color: var(--navy); color: var(--gold); }
+.btn:hover { background: var(--gold-deep); border-color: var(--gold-deep); }
+.btn--gold { background: var(--gold); border-color: var(--gold); color: var(--navy-deep); }
+.btn--gold:hover { background: var(--ivory); border-color: var(--ivory); color: var(--navy); }
+.btn--ghost { background: transparent; color: var(--navy); }
+.btn--ghost:hover { background: var(--navy); border-color: var(--navy); color: var(--ivory); }
+.section--navy .btn--ghost, .on-navy .btn--ghost { border-color: var(--gold-line); color: var(--ivory); }
+.section--navy .btn--ghost:hover, .on-navy .btn--ghost:hover { background: var(--gold); border-color: var(--gold); color: var(--navy-deep); }
+
+.link-arrow {
+  font-family: var(--font-label);
+  font-weight: 600;
+  font-size: 0.74rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--gold-deep);
+  border-bottom: 1px solid var(--rule);
+  padding-bottom: 0.3rem;
+  transition: color 0.2s var(--ease), border-color 0.2s var(--ease);
+}
+.link-arrow::after { content: " \2192"; }
+.link-arrow:hover { color: var(--navy); border-color: var(--navy); }
+.section--navy .link-arrow { color: var(--gold); border-color: var(--gold-line); }
+.section--navy .link-arrow:hover { color: var(--ivory); border-color: var(--ivory); }
+
+/* ---------- picture "mat": cream border with a hairline, like a framed print ---------- */
+.mat {
+  position: relative;
+  padding: clamp(0.75rem, 2vw, 1.25rem);
+  background: var(--mat);
+  box-shadow: 0 1px 0 rgb(255 255 255 / 0.6) inset, 0 18px 40px -22px rgb(19 35 61 / 0.45);
+}
+.mat::after {
+  content: "";
+  position: absolute;
+  inset: clamp(0.4rem, 1vw, 0.6rem);
+  border: 1px solid var(--rule);
+  pointer-events: none;
+}
+
+/* ---------- scroll reveal (only when JS is on and motion is welcome) ---------- */
+@media (prefers-reduced-motion: no-preference) {
+  .js [data-reveal] { opacity: 0; transform: translateY(18px); transition: opacity 0.9s var(--ease), transform 0.9s var(--ease); }
+  .js [data-reveal].is-visible { opacity: 1; transform: none; }
+}
 
 :focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+::selection { background: var(--gold); color: var(--navy-deep); }
 
 .visually-hidden {
   position: absolute !important;
@@ -114,4 +184,18 @@ main { flex: 1; }
   overflow: hidden;
   clip: rect(0 0 0 0);
   white-space: nowrap;
+}
+
+.skip:focus {
+  position: fixed !important;
+  top: 0.75rem; left: 0.75rem;
+  z-index: 100;
+  width: auto; height: auto;
+  clip: auto;
+  padding: 0.75rem 1.25rem;
+  background: var(--gold);
+  color: var(--navy-deep);
+  font-family: var(--font-label);
+  font-weight: 600;
+  text-decoration: none;
 }

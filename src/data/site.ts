@@ -30,7 +30,7 @@ export const locations = [
 export const navLinks = [
   { href: "/", label: "Home" },
   { href: "/gallery/", label: "Gallery" },
-  { href: "/history/", label: "History" },
+  { href: "/inventory/", label: "For Sale" },
+  { href: "/history/", label: "Our History" },
   { href: "/contact/", label: "Contact" },
-  { href: "/inventory/", label: "Purchase" },
 ] as const;

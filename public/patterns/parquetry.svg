@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="60" height="104" viewBox="0 0 60 104">
+  <!-- Tumbling-blocks parquetry, the classic inlay pattern on 18th-century case furniture.
+       Three close tones of the brand navy so it reads as texture, not decoration. -->
+  <g stroke="#d6af63" stroke-opacity=".07" stroke-width=".7" stroke-linejoin="round">
+    <!-- cube tops (lightest) -->
+    <g fill="#20375b">
+      <path d="M30 0 L60 17.3 L30 34.6 L0 17.3Z"/>
+      <path d="M0 52 L30 69.3 L0 86.6Z"/>
+      <path d="M60 52 L30 69.3 L60 86.6Z"/>
+    </g>
+    <!-- left faces -->
+    <g fill="#1c3254">
+      <path d="M0 17.3 L30 34.6 L30 69.3 L0 52Z"/>
+      <path d="M30 69.3 L60 86.6 L60 104 L30 104Z"/>
+      <path d="M30 0 L60 0 L60 17.3Z"/>
+    </g>
+    <!-- right faces (darkest) -->
+    <g fill="#1a2e4f">
+      <path d="M60 17.3 L30 34.6 L30 69.3 L60 52Z"/>
+      <path d="M0 86.6 L30 69.3 L30 104 L0 104Z"/>
+      <path d="M0 0 L30 0 L0 17.3Z"/>
+    </g>
+  </g>
+</svg>

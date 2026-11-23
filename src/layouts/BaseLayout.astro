@@ -1,6 +1,5 @@
 ---
 import "../styles/global.css";
-import Splash from "../components/Splash.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import Lightbox from "../components/Lightbox.astro";
@@ -62,6 +61,7 @@ const schema = {
     {businessSchema && <script type="application/ld+json" set:html={JSON.stringify(schema)} />}
 
     <script is:inline>
+      document.documentElement.classList.add("js");
       // Old links used hash routes (artelepre.com/#/gallery). Send them to the real pages.
       (function () {
         var hash = location.hash;
@@ -71,24 +71,31 @@ const schema = {
         if (pages[page]) location.replace("/" + page + "/");
         else history.replaceState(null, "", location.pathname);
       })();
-      // Show the welcome splash once per visit, not on every page.
-      try {
-        if (!sessionStorage.getItem("al-welcomed")) {
-          document.documentElement.classList.add("show-splash");
-          sessionStorage.setItem("al-welcomed", "1");
-        }
-      } catch (e) {}
     </script>
   </head>
   <body>
-    <Splash />
-    <div class="page">
-      <Header />
-      <main id="main">
-        <slot />
-      </main>
-      <Footer />
-    </div>
+    <a class="skip visually-hidden" href="#main">Skip to content</a>
+    <Header />
+    <main id="main">
+      <slot />
+    </main>
+    <Footer />
     <Lightbox />
+
+    <script>
+      // Fade sections in as they scroll into view.
+      const items = document.querySelectorAll("[data-reveal]");
+      const io = new IntersectionObserver(
+        (entries) =>
+          entries.forEach((e) => {
+            if (e.isIntersecting) {
+              e.target.classList.add("is-visible");
+              io.unobserve(e.target);
+            }
+          }),
+        { rootMargin: "0px 0px -8% 0px" },
+      );
+      items.forEach((el) => io.observe(el));
+    </script>
   </body>
 </html>

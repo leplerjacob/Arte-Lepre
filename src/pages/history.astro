@@ -1,101 +1,252 @@
 ---
 import { Image } from "astro:assets";
 import BaseLayout from "../layouts/BaseLayout.astro";
+import PageHero from "../components/PageHero.astro";
+import Ornament from "../components/Ornament.astro";
+import { fullSize } from "../lib/images";
 import vesuvius from "../assets/images/vesuvius.jpg";
 import shop from "../assets/images/shop.jpg";
 import article1 from "../assets/images/article_1.jpg";
 import article2 from "../assets/images/article_2.jpg";
 import article3 from "../assets/images/article_3.jpg";
 
-const figure = { widths: [240, 480], sizes: "(max-width: 600px) 70vw, 240px", format: "webp" as const };
+const timeline = [
+  {
+    when: "1959",
+    title: "A workshop in Naples",
+    text: "The Lepre family opens its artisan restoration workshop in Naples, specializing in the restoration of Italian, French and English style antique furniture and cabinet making.",
+  },
+  {
+    when: "Learning the craft",
+    title: "Raffaele Lepre",
+    text: "Raffaele learned the craft from a young age, thanks to his uncle Sassano Giacomo, an artisan cabinet maker.",
+  },
+  {
+    when: "The next generation",
+    title: "Alfredo & Fabio",
+    text: "Mr. Lepre passed his enthusiasm and passion for all things antique to his two sons, Alfredo and Fabio Lepre.",
+  },
+  {
+    when: "The 2010s",
+    title: "Washington, D.C.",
+    text: "Fabio Lepre emigrated to the Greater Washington D.C. area for a special someone that won his heart, bringing over 20 years in antique restoration, conservation and trading. He worked in a prestigious antiques gallery in Georgetown.",
+  },
+  {
+    when: "Today",
+    title: "Arte Lepre",
+    text: "Fabio slowly expanded his business to focus on the legacy of his family through the love of his craft. Today Arte Lepre has workshops in Kensington, Maryland and in Naples.",
+  },
+];
+
+const press = await Promise.all(
+  [
+    { src: article1, alt: "Newspaper feature on the Lepre workshop" },
+    { src: article3, alt: "Newspaper article about the Lepre family" },
+    { src: article2, alt: "Newspaper article on the family's restoration work" },
+  ].map(async (p) => ({ ...p, full: await fullSize(p.src) })),
+);
 ---
 
 <BaseLayout
-  title="History"
+  title="Our History"
   description="Three generations of the Lepre family have restored antique furniture in Naples since 1959. Fabio Lepre brought the family craft to Washington, D.C."
 >
-  <Image class="banner" src={vesuvius} alt="The Bay of Naples with Mount Vesuvius" widths={[640, 1024, 2048]} sizes="(max-width: 1024px) 100vw, 1024px" loading="eager" />
+  <PageHero
+    eyebrow="Our History"
+    title="Three generations, <em>one</em> craft"
+    lede="From a workshop in Naples in 1959 to Washington, D.C. today."
+    image={vesuvius}
+    focus="center 60%"
+  />
 
-  <article class="article">
-    <h1 class="section-title">History</h1>
+  <section class="section">
+    <div class="wrap intro">
+      <div class="intro__text" data-reveal>
+        <p class="eyebrow">Since 1959</p>
+        <p class="dropcap">
+          With over 60 years of experience and three generations later, the Lepre family run artisan restoration
+          workshop has been a staple in Naples, Italy since 1959, specializing in the restoration of Italian, French and
+          English style antique furniture and cabinet making.
+        </p>
+        <blockquote>
+          “…the legacy of his family, through the love of his craft.”
+        </blockquote>
+      </div>
+      <figure class="intro__figure" data-reveal>
+        <div class="mat">
+          <Image src={shop} alt="The Lepre restoration workshop in Naples" widths={[400, 700]} sizes="(max-width: 860px) 80vw, 400px" format="webp" />
+        </div>
+        <figcaption>The family workshop, Naples</figcaption>
+      </figure>
+    </div>
+  </section>
 
-    <Image class="float left" src={shop} alt="The Lepre family workshop in Naples" {...figure} />
-    <p>
-      With over 60 years of experience and three generations later, the Lepre family run artisan restoration workshop
-      has been a staple in Naples, Italy since 1959 specializing in the restoration of Italian, French and English style
-      antique furniture and cabinet making.
-    </p>
+  <section class="section section--parchment">
+    <div class="wrap--narrow">
+      <header class="center head" data-reveal>
+        <p class="eyebrow">The Lepre Family</p>
+        <h2>A family <em>timeline</em></h2>
+      </header>
+      <ol class="timeline">
+        {
+          timeline.map((t) => (
+            <li data-reveal>
+              <p class="when">{t.when}</p>
+              <h3>{t.title}</h3>
+              <p>{t.text}</p>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
 
-    <Image class="float right" src={article3} alt="Newspaper article about the Lepre workshop" {...figure} />
-    <p>
-      Raffaele Lepre learned this craft from a young age, thanks to his uncle Sassano Giacomo who was an artisan
-      cabinet maker. Since then, Mr. Lepre passed his enthusiasm and passion for all things antique to his two sons,
-      Alfredo and Fabio Lepre.
-    </p>
+  <section class="section">
+    <div class="wrap">
+      <header class="center head" data-reveal>
+        <p class="eyebrow">In the Press</p>
+        <h2>From the <em>archive</em></h2>
+      </header>
+      <ul class="press">
+        {
+          press.map((p) => (
+            <li data-reveal>
+              <a class="mat" href={p.full} data-lightbox data-caption={p.alt}>
+                <Image src={p.src} alt={p.alt} widths={[320, 640]} sizes="(max-width: 760px) 80vw, 320px" format="webp" />
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
 
-    <Image class="float left" src={article1} alt="Newspaper article featuring Raffaele Lepre" {...figure} />
-    <p>
-      Fabio Lepre emigrated to the Greater Washington D.C. area in the 2010s for a special someone that won his heart.
-      He brought with him over 20 years in the antique restoration, conservation and trading business. After working in
-      a prestigious antiques gallery in Georgetown D.C., he slowly expanded his business to focus on the legacy of his
-      family through the love of his craft.
-    </p>
-
-    <Image class="float right" src={article2} alt="Newspaper article on the restoration work" {...figure} />
-    <p>
-      Arte Lepre guarantees the quality of antiques through meticulous restoration by hand using exclusively
-      traditional methods such as: spirit polishing and shellac, beeswax polishing, and the possible integration of
-      missing parts through the use of antique wood in order to return the restored pieces to the original state.
-    </p>
-  </article>
+  <section class="section section--navy">
+    <div class="wrap--narrow center" data-reveal>
+      <Ornament />
+      <p class="eyebrow method-label">Our Method</p>
+      <p class="method">
+        Arte Lepre guarantees the quality of antiques through meticulous restoration by hand, using exclusively
+        traditional methods such as spirit polishing and shellac, beeswax polishing, and the integration of missing parts
+        with antique wood, returning each piece to its original state.
+      </p>
+      <a class="btn btn--gold" href="/gallery/">See our work</a>
+    </div>
+  </section>
 </BaseLayout>
 
 <style>
-  .banner {
-    width: 100%;
-    height: 400px;
-    object-fit: cover;
+  .intro {
+    display: grid;
+    grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+    gap: clamp(2.5rem, 6vw, 6rem);
+    align-items: center;
   }
-
-  .article {
-    max-width: var(--text-max);
-    margin: 0 auto;
-    padding: 2rem 1.5rem 4rem;
-    font-size: 1.35rem;
-    line-height: 1.65;
-    display: flow-root; /* contains the floats */
+  .dropcap {
+    margin-top: 1.25rem;
+    font-size: var(--step-1);
+    line-height: 1.7;
   }
-  .article h1 { margin-bottom: 1.5rem; }
-  .article p + p, .article :global(img) + p { margin-top: 1.25rem; }
-
-  .float {
-    width: 220px;
-    height: auto;
-    margin-block: 0.4rem 1rem;
-  }
-  .left {
+  .dropcap::first-letter {
     float: left;
-    margin-right: 1.75rem;
-    padding-right: 1.75rem;
-    border-right: 1px solid var(--rule);
+    margin: 0.35rem 0.6rem 0 0;
+    font-family: var(--font-display);
+    font-size: 5.2rem;
+    line-height: 0.8;
+    color: var(--gold-deep);
   }
-  .right {
-    float: right;
-    margin-left: 1.75rem;
-    padding-left: 1.75rem;
-    border-left: 1px solid var(--rule);
+  blockquote {
+    margin-top: 2.25rem;
+    padding-left: 1.5rem;
+    border-left: 2px solid var(--gold);
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: var(--step-2);
+    line-height: 1.3;
+    color: var(--navy);
+  }
+  .intro__figure img { width: 100%; aspect-ratio: 3 / 4; object-fit: cover; }
+  figcaption {
+    margin-top: 0.9rem;
+    text-align: center;
+    font-style: italic;
+    font-size: var(--step--1);
+    color: var(--text-soft);
   }
 
-  @media (max-width: 600px) {
-    .banner { height: 200px; }
-    .article { font-size: 1.15rem; text-align: center; }
-    .float, .left, .right {
-      float: none;
-      width: min(240px, 70vw);
-      margin: 1.75rem auto 1rem;
-      padding: 0;
-      border: 0;
-      box-shadow: 0 6px 20px rgb(29 51 86 / 0.18);
-    }
+  .head { margin-bottom: clamp(2.5rem, 5vw, 4rem); }
+  .head h2 { margin-top: 0.75rem; }
+
+  /* vertical line with inlaid diamonds */
+  .timeline {
+    position: relative;
+    list-style: none;
+    padding: 0 0 0 2.75rem;
+  }
+  .timeline::before {
+    content: "";
+    position: absolute;
+    left: 0.55rem;
+    top: 0.5rem;
+    bottom: 0.5rem;
+    width: 3px;
+    border-inline: 1px solid var(--gold-deep);
+    opacity: 0.5;
+  }
+  .timeline li { position: relative; padding-bottom: 2.75rem; }
+  .timeline li:last-child { padding-bottom: 0; }
+  .timeline li::before {
+    content: "";
+    position: absolute;
+    left: -2.75rem;
+    top: 0.45rem;
+    width: 14px;
+    height: 14px;
+    margin-left: 0.3rem;
+    background: var(--parchment);
+    border: 1px solid var(--gold-deep);
+    transform: rotate(45deg);
+    box-shadow: inset 0 0 0 3px var(--parchment), inset 0 0 0 7px var(--gold);
+  }
+  .when {
+    font-family: var(--font-label);
+    font-weight: 600;
+    font-size: 0.72rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+  }
+  .timeline h3 { margin-top: 0.3rem; font-size: var(--step-2); }
+  .timeline p:last-child { margin-top: 0.5rem; color: var(--text-soft); }
+
+  .press {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(1.5rem, 4vw, 3rem);
+    align-items: start;
+  }
+  .press .mat { display: block; cursor: zoom-in; }
+  .press img { width: 100%; aspect-ratio: 3 / 4; object-fit: cover; object-position: top; filter: sepia(0.15); }
+  .press li:nth-child(2) { margin-top: 3rem; }
+
+  .method-label { margin-top: 2rem; }
+  .method {
+    margin-top: 1.25rem;
+    font-family: var(--font-display);
+    font-size: var(--step-2);
+    line-height: 1.4;
+    color: var(--ivory);
+  }
+  .section--navy .btn { margin-top: 2.25rem; }
+
+  @media (max-width: 860px) {
+    .intro { grid-template-columns: 1fr; }
+    .intro__figure { max-width: 380px; margin-inline: auto; }
+  }
+  @media (max-width: 760px) {
+    .press { grid-template-columns: 1fr; max-width: 340px; margin-inline: auto; }
+    .press li:nth-child(2) { margin-top: 0; }
   }
 </style>

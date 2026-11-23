@@ -1,0 +1,33 @@
+---
+// Inlay-style divider: two lines of stringing meeting at an eight-point marquetry star.
+interface Props {
+  class?: string;
+  width?: number;
+}
+const { class: className, width = 220 } = Astro.props;
+---
+
+<svg class:list={["ornament", className]} width={width} height="22" viewBox="0 0 220 22" aria-hidden="true">
+  <g fill="none" stroke="currentColor" stroke-width="1">
+    <path d="M0 10.2 H86 M0 11.8 H86 M134 10.2 H220 M134 11.8 H220" stroke-opacity=".7" />
+    <path d="M90 11 L100 6 L110 11 L120 6 L130 11 L120 16 L110 11 L100 16Z" stroke-opacity=".55" />
+  </g>
+  <g fill="currentColor">
+    <path d="M110 0 L112.4 8.6 L121 11 L112.4 13.4 L110 22 L107.6 13.4 L99 11 L107.6 8.6Z" />
+    <path d="M110 4.5 L114.6 6.4 L116.5 11 L114.6 15.6 L110 17.5 L105.4 15.6 L103.5 11 L105.4 6.4Z" fill-opacity=".35" />
+    <circle cx="90" cy="11" r="1.6" />
+    <circle cx="130" cy="11" r="1.6" />
+  </g>
+</svg>
+
+<style>
+  .ornament {
+    display: block;
+    margin-inline: auto;
+    color: var(--gold-deep);
+    max-width: 100%;
+    height: auto;
+  }
+  :global(.section--navy) .ornament,
+  :global(.on-navy) .ornament { color: var(--gold); }
+</style>

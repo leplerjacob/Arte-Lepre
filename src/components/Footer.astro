@@ -1,57 +1,133 @@
 ---
-import { locations, site } from "../data/site";
+import Ornament from "./Ornament.astro";
+import { locations, navLinks, site } from "../data/site";
 const year = new Date().getFullYear();
 ---
 
-<footer class="footer">
-  <ul>
-    {
-      locations.map(({ label, address, person }) => (
-        <li>
-          <span class="label">{label}:</span> {address} – <span class="person">{person}</span>
-        </li>
-      ))
-    }
-  </ul>
-  <small>Copyright &copy; {year} {site.name}. All Rights Reserved.</small>
+<footer class="footer section--navy">
+  <div class="wrap">
+    <div class="brand center">
+      <Ornament />
+      <p class="brand__name">Arte Lepre</p>
+      <p class="brand__tag">Antique restoration &amp; conservation since {site.since}</p>
+    </div>
+
+    <ul class="workshops">
+      {
+        locations.map(({ label, address, person }) => (
+          <li>
+            <p class="eyebrow">{label}</p>
+            <p class="person">{person}</p>
+            <p class="address">{address}</p>
+          </li>
+        ))
+      }
+    </ul>
+
+    <div class="contact center">
+      <a href={site.phone.href}>{site.phone.display}</a>
+      <span aria-hidden="true">·</span>
+      <a href={`mailto:${site.email}`}>{site.email}</a>
+      <span aria-hidden="true">·</span>
+      <span>By appointment</span>
+    </div>
+
+    <div class="bottom">
+      <small>&copy; {year} {site.name}. All rights reserved.</small>
+      <nav aria-label="Footer">
+        <ul>{navLinks.map(({ href, label }) => <li><a href={href}>{label}</a></li>)}</ul>
+      </nav>
+    </div>
+  </div>
 </footer>
 
 <style>
   .footer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.9rem;
-    padding: 1.75rem 1.5rem;
-    background: var(--navy);
-    border-top: 1px solid rgb(255 255 255 / 0.85);
-    color: var(--gold);
-    font-family: var(--font-serif);
-    font-size: 0.95rem;
-    text-align: center;
+    position: relative;
+    padding-block: 4.5rem 2rem;
+  }
+  /* stringing line along the top edge */
+  .footer::before {
+    content: "";
+    position: absolute;
+    inset: 0 0 auto;
+    height: 4px;
+    border-bottom: 1px solid var(--gold-line);
+    background: var(--navy-deep);
   }
 
-  ul {
+  .brand__name {
+    margin-top: 1.25rem;
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: var(--step-3);
+    line-height: 1.1;
+    color: var(--ivory);
+  }
+  .brand__tag {
+    margin-top: 0.35rem;
+    color: rgb(233 228 216 / 0.7);
+    font-style: italic;
+  }
+
+  .workshops {
     list-style: none;
     padding: 0;
+    margin-top: 3.5rem;
     display: grid;
-    gap: 0.35rem;
+    grid-template-columns: repeat(3, 1fr);
+    border-block: 1px solid rgb(214 175 99 / 0.25);
   }
-
-  .label { color: var(--pompeii-light); font-weight: 500; }
-  .person { color: var(--smoke); }
-
-  small {
-    font-size: 0.8rem;
-    color: rgb(214 175 99 / 0.8);
+  .workshops li {
+    padding: 2rem 1.5rem;
+    text-align: center;
   }
+  .workshops li + li { border-left: 1px solid rgb(214 175 99 / 0.25); }
+  .person {
+    margin-top: 0.5rem;
+    font-family: var(--font-display);
+    font-size: var(--step-1);
+    color: var(--ivory);
+  }
+  .address { font-size: var(--step--1); color: rgb(233 228 216 / 0.75); }
 
-  @media (max-width: 600px) {
-    .footer { padding-inline: 1.25rem; }
-    li {
-      padding-bottom: 0.5rem;
-      border-bottom: 1px solid rgb(245 245 245 / 0.25);
-    }
-    .label { display: block; }
+  .contact {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem 1rem;
+    margin-top: 2.25rem;
+    color: var(--on-navy);
+  }
+  .contact a { color: var(--gold); text-decoration: none; }
+  .contact a:hover { color: var(--ivory); }
+
+  .bottom {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgb(214 175 99 / 0.15);
+    font-family: var(--font-label);
+    font-size: 0.7rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgb(233 228 216 / 0.55);
+  }
+  .bottom ul { display: flex; flex-wrap: wrap; gap: 0.5rem 1.5rem; list-style: none; padding: 0; }
+  .bottom a { color: rgb(233 228 216 / 0.75); text-decoration: none; }
+  .bottom a:hover { color: var(--gold); }
+
+  @media (max-width: 760px) {
+    .workshops { grid-template-columns: 1fr; }
+    .workshops li { padding: 1.5rem 0.5rem; }
+    .workshops li + li { border-left: 0; border-top: 1px solid rgb(214 175 99 / 0.25); }
+    .bottom { flex-direction: column-reverse; text-align: center; }
+    .bottom ul { justify-content: center; }
+    .contact span[aria-hidden] { display: none; }
+    .contact { flex-direction: column; align-items: center; }
   }
 </style>

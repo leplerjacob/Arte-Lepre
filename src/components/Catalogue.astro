@@ -1,0 +1,130 @@
+---
+import { Image } from "astro:assets";
+import { type Piece, slugify } from "../data/pieces";
+import { site } from "../data/site";
+import { fullSize } from "../lib/images";
+
+interface Props {
+  pieces: Piece[];
+}
+const lots = await Promise.all(
+  Astro.props.pieces.map(async (piece, i) => ({
+    ...piece,
+    lot: String(i + 1).padStart(2, "0"),
+    id: slugify(piece.title),
+    photos: await Promise.all(piece.images.map(async (src) => ({ src, full: await fullSize(src) }))),
+    mail: `mailto:${site.email}?subject=${encodeURIComponent(`Enquiry: ${piece.title}`)}`,
+  })),
+);
+---
+
+<ol class="lots">
+  {
+    lots.map((lot) => (
+      <li class="lot" id={lot.id}>
+        <div class="lot__media" data-reveal>
+          <div class:list={["mat", { "mat--fade": lot.photos.length > 1 }]} style={`--ar: ${lot.photos[0].src.width} / ${lot.photos[0].src.height}`}>
+            {lot.photos.map((photo, i) => (
+              <a
+                class:list={["photo", { "is-active": i === 0 }]}
+                href={photo.full}
+                data-lightbox
+                data-caption={lot.photos.length > 1 ? `Lot ${lot.lot}. ${lot.title} (${i + 1} of ${lot.photos.length})` : `Lot ${lot.lot}. ${lot.title}`}
+              >
+                <Image src={photo.src} alt={lot.photos.length > 1 ? `${lot.title}, view ${i + 1}` : lot.title} widths={[420, 640, 1000]} sizes="(max-width: 860px) 92vw, 520px" format="webp" />
+              </a>
+            ))}
+          </div>
+          {lot.photos.length > 1 && <p class="views">{lot.photos.length} views · shown closed and open</p>}
+        </div>
+
+        <div class="lot__text" data-reveal>
+          <p class="lot__no">
+            <span class="eyebrow">Lot</span> <span class="num">{lot.lot}</span>
+          </p>
+          <h2>{lot.title}</h2>
+          <p class="desc">{lot.description}</p>
+          <div class="actions">
+            <a class="btn" href={site.phone.href}>Call to enquire</a>
+            <a class="btn btn--ghost" href={lot.mail}>Email</a>
+          </div>
+        </div>
+      </li>
+    ))
+  }
+</ol>
+
+<script>
+  // Pieces photographed closed and open cross-fade between the two every 4s.
+  const sets = [...document.querySelectorAll<HTMLElement>(".mat--fade")];
+  if (sets.length && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    let tick = 0;
+    setInterval(() => {
+      if (document.hidden) return;
+      tick++;
+      sets.forEach((set) => {
+        const photos = set.querySelectorAll(".photo");
+        photos.forEach((p, i) => p.classList.toggle("is-active", i === tick % photos.length));
+      });
+    }, 4000);
+  }
+</script>
+
+<style>
+  .lots { list-style: none; padding: 0; }
+  .lot {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    align-items: center;
+    gap: clamp(2.5rem, 6vw, 6rem);
+    padding-block: clamp(3rem, 6vw, 5rem);
+    border-top: 1px solid var(--rule);
+  }
+  .lot:first-child { border-top: 0; padding-top: 0; }
+  .lot:nth-child(even) .lot__media { order: 2; }
+
+  .mat { display: grid; }
+  .photo {
+    grid-area: 1 / 1;
+    display: grid;
+    place-items: center;
+    cursor: zoom-in;
+    background: #f7f3ea;
+  }
+  /* frame takes the shape of the first photo; a second (open) view is fitted inside it */
+  .photo img {
+    width: 100%;
+    aspect-ratio: var(--ar);
+    object-fit: contain;
+  }
+  .mat--fade .photo { opacity: 0; transition: opacity 1.2s var(--ease); }
+  .mat--fade .photo.is-active { opacity: 1; }
+  .mat--fade .photo:not(.is-active) { pointer-events: none; }
+  .views {
+    margin-top: 0.9rem;
+    text-align: center;
+    font-size: var(--step--1);
+    font-style: italic;
+    color: var(--text-soft);
+  }
+
+  .lot__no { display: flex; align-items: baseline; gap: 0.6rem; }
+  .num {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 2.4rem;
+    line-height: 1;
+    color: var(--gold-deep);
+  }
+  h2 { margin-top: 0.75rem; font-size: var(--step-2); }
+  .desc { margin-top: 1rem; color: var(--text-soft); }
+  .actions { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 2rem; }
+
+  @media (max-width: 860px) {
+    .lot { grid-template-columns: 1fr; }
+    .lot:nth-child(even) .lot__media { order: 0; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .mat--fade .photo { transition: none; }
+  }
+</style>

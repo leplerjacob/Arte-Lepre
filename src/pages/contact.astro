@@ -1,12 +1,10 @@
 ---
-import { Image, getImage } from "astro:assets";
+import { Image } from "astro:assets";
 import BaseLayout from "../layouts/BaseLayout.astro";
-import background from "../assets/images/banner_3.jpeg";
+import PageHero from "../components/PageHero.astro";
+import ceiling from "../assets/images/banner_3.jpeg";
 import map from "../assets/images/quarter-map.png";
-import { site } from "../data/site";
-
-// Background photo, converted to WebP and passed to CSS as a custom property.
-const bgImage = await getImage({ src: background, width: 1449, format: "webp", quality: 78 });
+import { locations, site } from "../data/site";
 ---
 
 <BaseLayout
@@ -14,26 +12,68 @@ const bgImage = await getImage({ src: background, width: 1449, format: "webp", q
   description={`Contact Arte Lepre in Kensington, MD. Antique furniture restoration by appointment: ${site.phone.display}, ${site.email}.`}
   businessSchema
 >
-  <section class="contact" style={`--bg: url(${bgImage.src})`}>
-    <div class="medallion">
-      <header>
-        <h1>Contact</h1>
-        <p class="name">{site.contactName}</p>
-      </header>
+  <PageHero
+    eyebrow="Contact"
+    title="Visit the <em>workshop</em>"
+    lede="Consultations and viewings are by appointment. Call or write to arrange a visit."
+    image={ceiling}
+  />
 
-      <address>
-        <a href={site.mapsUrl} target="_blank" rel="noopener noreferrer">
-          {site.address.street},<br />
-          {site.address.city}, {site.address.region} {site.address.postalCode}
+  <section class="section">
+    <div class="wrap contact">
+      <div class="card" data-reveal>
+        <p class="eyebrow">Washington, D.C. Workshop</p>
+        <h2>{site.contactName}</h2>
+
+        <dl>
+          <div>
+            <dt>Address</dt>
+            <dd>
+              <a href={site.mapsUrl} target="_blank" rel="noopener noreferrer">
+                {site.address.street}<br />
+                {site.address.city}, {site.address.region} {site.address.postalCode}
+              </a>
+            </dd>
+          </div>
+          <div>
+            <dt>Telephone</dt>
+            <dd><a href={site.phone.href}>{site.phone.display}</a></dd>
+          </div>
+          <div>
+            <dt>Email</dt>
+            <dd><a href={`mailto:${site.email}`}>{site.email}</a></dd>
+          </div>
+          <div>
+            <dt>Hours</dt>
+            <dd>By appointment</dd>
+          </div>
+        </dl>
+
+        <div class="actions">
+          <a class="btn" href={site.phone.href}>Call to book</a>
+          <a class="btn btn--ghost" href={`mailto:${site.email}?subject=${encodeURIComponent("Restoration enquiry")}`}>Send an email</a>
+        </div>
+
+        <a class="map" href={site.mapsUrl} target="_blank" rel="noopener noreferrer">
+          <Image src={map} alt="Map of the Kensington, MD workshop location" widths={[600, 1200]} sizes="(max-width: 860px) 92vw, 600px" format="webp" />
+          <span>Open in Google Maps &#8599;</span>
         </a>
-        <span class="appt">By Appointment:</span>
-        <a href={site.phone.href}>{site.phone.display}</a>
-        <a href={`mailto:${site.email}`}>{site.email}</a>
-      </address>
+      </div>
 
-      <a class="map" href={site.mapsUrl} target="_blank" rel="noopener noreferrer" aria-label="Open the workshop location in Google Maps">
-        <Image src={map} alt="Map showing the workshop in Kensington, MD" widths={[420, 840]} sizes="420px" format="webp" />
-      </a>
+      <aside class="locations" data-reveal>
+        <p class="eyebrow">Our Workshops</p>
+        <ul>
+          {
+            locations.map(({ label, address, person }) => (
+              <li>
+                <h3>{label}</h3>
+                <p class="person">{person}</p>
+                <p>{address}</p>
+              </li>
+            ))
+          }
+        </ul>
+      </aside>
     </div>
   </section>
 </BaseLayout>
@@ -41,68 +81,82 @@ const bgImage = await getImage({ src: background, width: 1449, format: "webp", q
 <style>
   .contact {
     display: grid;
-    place-items: center;
-    min-height: 1024px;
-    padding: 3rem 1rem;
-    background: var(--navy) var(--bg) no-repeat center / cover;
+    grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+    gap: clamp(2.5rem, 6vw, 5.5rem);
+    align-items: start;
   }
 
-  .medallion {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 411px;
-    height: 411px;
-    overflow: hidden;
-    border-radius: 50%;
-    background: var(--navy);
-    color: var(--smoke);
-    text-align: center;
-    box-shadow: 0 0 0 6px rgb(214 175 99 / 0.35), 0 20px 50px rgb(0 0 0 / 0.5);
+  .card {
+    position: relative;
+    padding: clamp(2rem, 5vw, 3.5rem);
+    background: var(--parchment);
+    border: 1px solid var(--rule);
   }
-
-  header { margin-top: 3rem; }
-  h1 {
-    font-family: var(--font-sans);
-    font-weight: 300;
-    font-size: 1.5rem;
-    color: var(--gold);
-    line-height: 1.2;
+  .card::before {
+    content: "";
+    position: absolute;
+    inset: 7px;
+    border: 1px solid rgb(148 114 47 / 0.18);
+    pointer-events: none;
   }
-  .name { color: #a9a9a9; font-size: 0.9rem; }
+  .card h2 { margin-top: 0.5rem; }
 
-  address {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    font-style: normal;
+  dl { margin-top: 2rem; display: grid; gap: 1.25rem; }
+  dl div {
+    display: grid;
+    grid-template-columns: 8rem 1fr;
+    gap: 1rem;
+    padding-bottom: 1.25rem;
+    border-bottom: 1px solid var(--rule);
+  }
+  dt {
+    font-family: var(--font-label);
     font-weight: 600;
+    font-size: 0.7rem;
     letter-spacing: 0.2em;
-    font-size: 0.9rem;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+    padding-top: 0.3rem;
   }
-  address a {
-    color: var(--smoke);
-    text-decoration: none;
-    transition: color 0.2s var(--ease);
-  }
-  address a:hover { color: var(--gold); }
-  .appt { color: var(--gold); font-weight: 300; }
+  dd { font-size: var(--step-1); }
+  dd a { text-decoration: none; border-bottom: 1px solid var(--rule); transition: color 0.2s var(--ease), border-color 0.2s var(--ease); }
+  dd a:hover { color: var(--gold-deep); border-color: var(--gold-deep); }
 
-  .map { display: block; width: 100%; height: 72px; overflow: hidden; }
-  .map img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.4s var(--ease);
-  }
-  .map:hover img { transform: scale(1.15); }
+  .actions { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 2.25rem; }
 
-  @media (max-width: 600px) {
-    .contact { min-height: 640px; }
-    .medallion { width: min(340px, 88vw); height: min(340px, 88vw); }
-    header { margin-top: 2.2rem; }
-    address { letter-spacing: 0.08em; font-size: 0.85rem; }
-    .map { height: 56px; }
+  .map {
+    position: relative;
+    display: block;
+    margin-top: 2.25rem;
+    overflow: hidden;
+    border: 1px solid var(--rule);
+  }
+  .map img { width: 100%; aspect-ratio: 16 / 5; object-fit: cover; transition: transform 0.6s var(--ease); }
+  .map:hover img { transform: scale(1.05); }
+  .map span {
+    position: absolute;
+    right: 0.75rem;
+    bottom: 0.75rem;
+    padding: 0.4rem 0.75rem;
+    background: var(--navy);
+    color: var(--ivory);
+    font-family: var(--font-label);
+    font-weight: 600;
+    font-size: 0.65rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+
+  .locations ul { list-style: none; padding: 0; margin-top: 1.25rem; }
+  .locations li { padding-block: 1.5rem; border-top: 1px solid var(--rule); }
+  .locations h3 { font-size: var(--step-2); }
+  .locations .person { margin-top: 0.2rem; font-style: italic; color: var(--gold-deep); }
+  .locations li p:last-child { margin-top: 0.3rem; color: var(--text-soft); }
+
+  @media (max-width: 860px) {
+    .contact { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 520px) {
+    dl div { grid-template-columns: 1fr; gap: 0.25rem; }
   }
 </style>

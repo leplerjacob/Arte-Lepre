@@ -1,0 +1,42 @@
+---
+// Title band for inner pages: navy parquetry (or a darkened photo), eyebrow, title and ornament.
+import { getImage } from "astro:assets";
+import type { ImageMetadata } from "astro";
+import Ornament from "./Ornament.astro";
+
+interface Props {
+  eyebrow: string;
+  /** May contain <em> for the gold italic word. */
+  title: string;
+  lede?: string;
+  image?: ImageMetadata;
+  /** CSS object-position for the photo, e.g. "center 30%". */
+  focus?: string;
+}
+const { eyebrow, title, lede, image, focus = "center" } = Astro.props;
+const bg = image ? await getImage({ src: image, width: Math.min(image.width, 2000), format: "webp", quality: 72 }) : null;
+---
+
+<section class:list={["hero section--navy", { "hero--photo": bg }]} style={bg ? `--bg:url(${bg.src}); --focus:${focus}` : undefined}>
+  <div class="wrap--narrow center hero__inner" data-reveal>
+    <p class="eyebrow">{eyebrow}</p>
+    <h1 set:html={title} />
+    {lede && <p class="lede">{lede}</p>}
+    <Ornament class="hero__orn" />
+  </div>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    padding-block: clamp(4.5rem, 9vw, 7.5rem) clamp(3.5rem, 7vw, 5.5rem);
+    overflow: hidden;
+  }
+  .hero--photo {
+    background: linear-gradient(rgb(19 35 61 / 0.78), rgb(19 35 61 / 0.86)), var(--bg) var(--focus) / cover no-repeat;
+  }
+  .hero__inner { position: relative; }
+  h1 { margin-top: 1rem; }
+  .lede { margin-top: 1.25rem; }
+  .hero__orn { margin-top: 2.25rem; }
+</style>

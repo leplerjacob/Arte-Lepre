@@ -1,0 +1,79 @@
+---
+import { Image } from "astro:assets";
+import { type Piece, roman, slugify } from "../data/pieces";
+import { fullSize } from "../lib/images";
+
+interface Props {
+  pieces: Piece[];
+}
+const plates = await Promise.all(
+  Astro.props.pieces.map(async (piece, i) => ({ ...piece, n: roman(i + 1), id: slugify(piece.title), full: await fullSize(piece.images[0]) })),
+);
+---
+
+<ol class="plates">
+  {
+    plates.map((p) => (
+      <li class="plate" id={p.id} data-reveal>
+        <a class="mat" href={p.full} data-lightbox data-caption={`Plate ${p.n}. ${p.title}: before and after restoration`}>
+          <Image src={p.images[0]} alt={`${p.title}, before (top) and after (bottom) restoration`} widths={[420, 640, 1000]} sizes="(max-width: 760px) 92vw, 540px" format="webp" />
+          <span class="badge">Before &amp; after</span>
+        </a>
+        <div class="caption">
+          <p class="eyebrow">Plate {p.n}</p>
+          <h2>{p.title}</h2>
+          <p class="desc">{p.description}</p>
+        </div>
+      </li>
+    ))
+  }
+</ol>
+
+<style>
+  .plates {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: clamp(3rem, 6vw, 5rem) clamp(2rem, 5vw, 4.5rem);
+  }
+  /* stagger the second column like a hung gallery wall */
+  @media (min-width: 761px) {
+    .plate:nth-child(even) { margin-top: 6rem; }
+  }
+
+  .mat {
+    display: block;
+    cursor: zoom-in;
+    overflow: hidden;
+  }
+  .mat img {
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: contain;
+    background: #1b1b1b;
+    transition: transform 0.8s var(--ease);
+  }
+  .mat:hover img { transform: scale(1.025); }
+  .badge {
+    position: absolute;
+    top: clamp(1.4rem, 3vw, 2rem);
+    left: clamp(1.4rem, 3vw, 2rem);
+    padding: 0.35rem 0.7rem;
+    background: rgb(252 250 245 / 0.92);
+    color: var(--navy);
+    font-family: var(--font-label);
+    font-weight: 600;
+    font-size: 0.62rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
+
+  .caption { margin-top: 1.5rem; padding-inline: 0.25rem; }
+  h2 { margin-top: 0.4rem; font-size: var(--step-2); }
+  .desc { margin-top: 0.6rem; color: var(--text-soft); font-size: 0.98rem; }
+
+  @media (max-width: 760px) {
+    .plates { grid-template-columns: 1fr; }
+  }
+</style>

@@ -1,201 +1,280 @@
 ---
 import { Image } from "astro:assets";
 import logo from "../assets/images/Logo.png";
-import flag from "../assets/images/flag-italy.png";
-import { navLinks } from "../data/site";
+import { navLinks, site } from "../data/site";
 
 const current = Astro.url.pathname.replace(/\/?$/, "/");
 ---
 
-<header class="header">
-  <a class="logo" href="/" aria-label="Arte Lepre home">
-    <Image src={logo} alt="Arte Lepre, Antique Restoration & Conservation, since 1959" widths={[300, 450, 900]} sizes="(max-width: 768px) 260px, 450px" loading="eager" />
-  </a>
-  <Image class="flag" src={flag} alt="Italian flag" width={65} height={50} densities={[1, 2]} />
+<div class="topbar">
+  <div class="wrap topbar__inner">
+    <span>Napoli &nbsp;·&nbsp; Washington, D.C. &nbsp;·&nbsp; Est. {site.since}</span>
+    <span>By appointment &nbsp;·&nbsp; <a href={site.phone.href}>{site.phone.display}</a></span>
+  </div>
+</div>
 
-  <button class="burger" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Open menu">
-    <span></span><span></span><span></span>
-  </button>
+<header class="header" data-header>
+  <div class="wrap header__inner">
+    <a class="logo" href="/" aria-label="Arte Lepre home">
+      <Image src={logo} alt="Arte Lepre, Antique Restoration & Conservation, since 1959" widths={[210, 420]} sizes="210px" loading="eager" />
+    </a>
 
-  <nav id="site-nav" class="nav" aria-label="Main">
+    <nav class="nav" aria-label="Main">
+      <ul>
+        {
+          navLinks.slice(1).map(({ href, label }) => (
+            <li>
+              <a href={href} aria-current={current === href ? "page" : undefined}>{label}</a>
+            </li>
+          ))
+        }
+      </ul>
+      <a class="btn btn--gold nav__cta" href="/contact/">Book a Visit</a>
+    </nav>
+
+    <button class="burger" type="button" aria-expanded="false" aria-controls="menu" aria-label="Open menu">
+      <span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<div class="menu" id="menu" hidden>
+  <nav aria-label="Mobile">
     <ul>
       {
-        navLinks.map(({ href, label }) => (
-          <li>
-            <a href={href} aria-current={current === href ? "page" : undefined}>
-              {label}
-            </a>
+        navLinks.map(({ href, label }, i) => (
+          <li style={`--i:${i}`}>
+            <a href={href} aria-current={current === href ? "page" : undefined}>{label}</a>
           </li>
         ))
       }
     </ul>
   </nav>
-</header>
+  <div class="menu__foot">
+    <p class="eyebrow">By appointment</p>
+    <a href={site.phone.href}>{site.phone.display}</a>
+    <a href={`mailto:${site.email}`}>{site.email}</a>
+  </div>
+</div>
 
 <script>
-  const burger = document.querySelector<HTMLButtonElement>(".burger")!;
-  const nav = document.getElementById("site-nav")!;
+  const header = document.querySelector<HTMLElement>("[data-header]")!;
+  const burger = header.querySelector<HTMLButtonElement>(".burger")!;
+  const menu = document.getElementById("menu")!;
+
+  // Compact, shadowed header once the page has scrolled.
+  const onScroll = () => header.classList.toggle("is-scrolled", window.scrollY > 40);
+  onScroll();
+  window.addEventListener("scroll", onScroll, { passive: true });
 
   function setOpen(open: boolean) {
     burger.setAttribute("aria-expanded", String(open));
     burger.setAttribute("aria-label", open ? "Close menu" : "Open menu");
-    nav.classList.toggle("is-open", open);
+    document.documentElement.classList.toggle("menu-open", open);
+    if (open) {
+      menu.hidden = false;
+      requestAnimationFrame(() => menu.classList.add("is-open"));
+    } else {
+      menu.classList.remove("is-open");
+      setTimeout(() => {
+        if (!menu.classList.contains("is-open")) menu.hidden = true;
+      }, 350);
+    }
   }
 
   burger.addEventListener("click", () => setOpen(burger.getAttribute("aria-expanded") !== "true"));
-  // Close when a link is tapped, when tapping outside the menu, or on Escape.
-  nav.addEventListener("click", (e) => {
+  menu.addEventListener("click", (e) => {
     if ((e.target as Element).closest("a")) setOpen(false);
   });
-  document.addEventListener("click", (e) => {
-    const t = e.target as Node;
-    if (!nav.contains(t) && !burger.contains(t)) setOpen(false);
-  });
   document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape" && nav.classList.contains("is-open")) {
+    if (e.key === "Escape" && menu.classList.contains("is-open")) {
       setOpen(false);
       burger.focus();
     }
   });
+  matchMedia("(min-width: 961px)").addEventListener("change", (e) => e.matches && setOpen(false));
 </script>
 
 <style>
+  /* ---------- top utility bar ---------- */
+  .topbar {
+    background: var(--navy-deep);
+    color: rgb(233 228 216 / 0.75);
+    font-family: var(--font-label);
+    font-weight: 600;
+    font-size: 0.68rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
+  .topbar__inner {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    padding-block: 0.55rem;
+  }
+  .topbar a { color: var(--gold); text-decoration: none; }
+  .topbar a:hover { color: var(--ivory); }
+
+  /* ---------- main bar ---------- */
   .header {
-    position: relative;
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: var(--navy);
+    transition: box-shadow 0.3s var(--ease);
+  }
+  /* double gold "stringing" line under the header */
+  .header::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -4px;
+    height: 4px;
+    border-top: 1px solid var(--gold-line);
+    border-bottom: 1px solid rgb(214 175 99 / 0.25);
+    background: var(--navy);
+  }
+  .header.is-scrolled { box-shadow: 0 10px 30px -12px rgb(0 0 0 / 0.5); }
+
+  .header__inner {
     display: flex;
     align-items: center;
-    justify-content: space-around;
-    gap: 1rem;
-    height: var(--header-h);
-    padding-inline: 1.5rem;
-    background: var(--navy);
-    border-bottom: 1px solid rgb(255 255 255 / 0.85);
+    justify-content: space-between;
+    gap: 2rem;
+    height: 112px;
+    transition: height 0.3s var(--ease);
   }
+  .header.is-scrolled .header__inner { height: var(--header-h); }
 
   .logo img {
-    width: clamp(300px, 36vw, 450px);
+    width: 210px;
     height: auto;
+    transition: width 0.3s var(--ease);
   }
+  .header.is-scrolled .logo img { width: 150px; }
 
-  .flag {
-    width: 65px;
-    height: 50px;
-    object-fit: contain;
+  .nav {
+    display: flex;
+    align-items: center;
+    gap: 2.25rem;
   }
-
   .nav ul {
     display: flex;
+    gap: 2rem;
     list-style: none;
     padding: 0;
   }
-
-  .nav a {
+  .nav ul a {
     position: relative;
     display: block;
-    padding: 1rem;
-    font-family: var(--font-serif);
-    font-weight: 500;
-    color: var(--gold);
+    padding-block: 0.5rem;
+    font-family: var(--font-label);
+    font-weight: 600;
+    font-size: 0.74rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
     text-decoration: none;
+    color: var(--on-navy);
     transition: color 0.2s var(--ease);
   }
-  /* underline that grows from the centre on hover and marks the current page */
-  .nav a::after {
+  .nav ul a::after {
     content: "";
     position: absolute;
-    left: 1rem;
-    right: 1rem;
-    bottom: 0.65rem;
+    left: 0;
+    right: 0.2em;
+    bottom: 0;
     height: 1px;
-    background: currentColor;
+    background: var(--gold);
     transform: scaleX(0);
-    transition: transform 0.25s var(--ease);
+    transition: transform 0.3s var(--ease);
   }
-  .nav a:hover { color: var(--smoke); }
-  .nav a:hover::after,
-  .nav a[aria-current="page"]::after { transform: scaleX(1); }
+  .nav ul a:hover, .nav ul a[aria-current="page"] { color: var(--gold); }
+  .nav ul a:hover::after, .nav ul a[aria-current="page"]::after { transform: scaleX(1); }
+  .nav__cta { padding: 0.8rem 1.4rem; }
 
   .burger { display: none; }
 
-  @media (max-width: 1023px) {
-    .flag { display: none; }
-    .nav a { padding-inline: 0.7rem; }
-    .nav a::after { left: 0.7rem; right: 0.7rem; }
+  /* ---------- tablet & phone ---------- */
+  @media (max-width: 1100px) {
+    .nav ul { gap: 1.4rem; }
+    .nav { gap: 1.5rem; }
   }
 
-  /* ---------- Phone / small tablet: burger + slide-in menu ---------- */
-  @media (max-width: 768px) {
-    .header {
-      justify-content: flex-start;
-      padding-inline: 1rem;
-    }
-    .logo img { width: min(260px, 62vw); }
-
-    .flag {
-      display: block;
-      width: 34px;
-      height: 26px;
-      margin-left: auto;
-      margin-right: 3.75rem;
-    }
+  @media (max-width: 960px) {
+    .topbar { display: none; }
+    .nav { display: none; }
+    .header__inner { height: 76px; }
+    .header.is-scrolled .header__inner { height: 68px; }
+    .logo img, .header.is-scrolled .logo img { width: 150px; }
 
     .burger {
-      position: fixed;
-      top: calc((var(--header-h) - 44px) / 2);
-      right: 1rem;
-      z-index: 30;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      gap: 6px;
-      width: 44px;
-      height: 44px;
-      padding: 0 8px;
-      border: 0;
-      border-radius: var(--radius);
-      background: rgb(13 37 56 / 0.85);
+      position: relative;
+      z-index: 70;
+      display: grid;
+      place-content: center;
+      gap: 7px;
+      width: 46px;
+      height: 46px;
+      padding: 0;
+      border: 1px solid var(--gold-line);
+      background: transparent;
       cursor: pointer;
     }
     .burger span {
-      height: 3px;
-      border-radius: 3px;
-      background: #ccc;
-      transition: transform 0.3s var(--ease), opacity 0.2s;
+      display: block;
+      width: 22px;
+      height: 1.5px;
+      background: var(--gold);
+      transition: transform 0.35s var(--ease);
     }
-    .burger[aria-expanded="true"] span:nth-child(1) { transform: translateY(9px) rotate(45deg); }
-    .burger[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
-    .burger[aria-expanded="true"] span:nth-child(3) { transform: translateY(-9px) rotate(-45deg); }
-
-    .nav {
-      position: fixed;
-      top: calc(var(--header-h) - 10px);
-      right: 0;
-      z-index: 25;
-      width: 220px;
-      border-radius: var(--radius) 0 0 var(--radius);
-      background: var(--navy-deep);
-      box-shadow: -6px 8px 24px rgb(0 0 0 / 0.45);
-      transform: translateX(110%);
-      visibility: hidden;
-      transition: transform 0.3s var(--ease), visibility 0s linear 0.3s;
-    }
-    .nav.is-open {
-      transform: none;
-      visibility: visible;
-      transition: transform 0.3s var(--ease);
-    }
-    .nav ul {
-      flex-direction: column;
-      padding: 0.5rem 0;
-    }
-    .nav a {
-      padding: 0.85rem 1.5rem;
-      text-align: center;
-    }
-    .nav a::after { left: 30%; right: 30%; bottom: 0.5rem; }
+    .burger[aria-expanded="true"] span:first-child { transform: translateY(4.25px) rotate(45deg); }
+    .burger[aria-expanded="true"] span:last-child { transform: translateY(-4.25px) rotate(-45deg); }
   }
 
+  /* ---------- full-screen mobile menu ---------- */
+  .menu {
+    position: fixed;
+    inset: 0;
+    z-index: 45;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: calc(76px + 3rem) var(--gutter) 2.5rem;
+    background: var(--navy) url("/patterns/parquetry.svg");
+    background-size: 60px 104px;
+    opacity: 0;
+    transition: opacity 0.35s var(--ease);
+  }
+  .menu.is-open { opacity: 1; }
+  .menu ul { list-style: none; padding: 0; display: grid; gap: 0.4rem; }
+  .menu li {
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.5s var(--ease), transform 0.5s var(--ease);
+    transition-delay: calc(var(--i) * 60ms + 100ms);
+  }
+  .menu.is-open li { opacity: 1; transform: none; }
+  .menu ul a {
+    font-family: var(--font-display);
+    font-size: clamp(2.2rem, 9vw, 3rem);
+    line-height: 1.25;
+    color: var(--ivory);
+    text-decoration: none;
+  }
+  .menu ul a[aria-current="page"] { color: var(--gold); font-style: italic; }
+  .menu__foot {
+    display: grid;
+    gap: 0.35rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--gold-line);
+    color: var(--on-navy);
+  }
+  .menu__foot a { color: var(--on-navy); text-decoration: none; }
+  .menu__foot .eyebrow { color: var(--gold); }
+  :global(html.menu-open) { overflow: hidden; }
+
   @media (prefers-reduced-motion: reduce) {
-    .nav, .nav.is-open, .burger span, .nav a::after { transition: none; }
+    .header, .header__inner, .logo img, .menu, .menu li, .burger span { transition: none; }
   }
 </style>

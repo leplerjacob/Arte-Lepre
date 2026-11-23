@@ -1,21 +1,16 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import Ornament from "../components/Ornament.astro";
 ---
 
 <BaseLayout title="Page not found" description="This page could not be found.">
-  <section class="nf">
-    <h1 class="section-title">Page not found</h1>
-    <p>The page you were looking for has moved or no longer exists.</p>
-    <a class="btn" href="/">Back to Home</a>
+  <section class="section">
+    <div class="wrap--narrow center stack">
+      <Ornament />
+      <p class="eyebrow">Error 404</p>
+      <h1>This page has been <em>misplaced</em></h1>
+      <p class="lede">The page you were looking for has moved or no longer exists.</p>
+      <p><a class="btn" href="/">Return home</a></p>
+    </div>
   </section>
 </BaseLayout>
-
-<style>
-  .nf {
-    display: grid;
-    justify-items: center;
-    gap: 1.25rem;
-    padding: 6rem 1.5rem;
-    text-align: center;
-  }
-</style>

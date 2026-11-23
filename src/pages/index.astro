@@ -1,12 +1,12 @@
 ---
+import { Image } from "astro:assets";
 import BaseLayout from "../layouts/BaseLayout.astro";
-import Slideshow from "../components/Slideshow.astro";
+import Ornament from "../components/Ornament.astro";
 import { site } from "../data/site";
-import s1 from "../assets/images/1.jpg";
-import s2 from "../assets/images/2.jpg";
-import s3 from "../assets/images/3.jpg";
-import s4 from "../assets/images/4.jpg";
-import s5 from "../assets/images/5.jpg";
+import { galleryPieces, inventoryPieces, roman, slugify } from "../data/pieces";
+import vesuvius from "../assets/images/vesuvius.jpg";
+import chisel from "../assets/images/4.jpg";
+import heroPiece from "../assets/images/inventory/Italian-Walnut-Commode-late-18th-Century.jpg";
 
 const services = [
   {
@@ -20,113 +20,368 @@ const services = [
 ];
 
 const stages = [
-  {
-    name: "Stripping",
-    text: "Removal, if necessary, of old paint and dirt from the surface of the furniture, trying to preserve the original patina as much as possible. It takes place only in integrative interventions. This is a delicate operation in which the integrity of the patina must be safeguarded, that is, the color acquired by the piece of furniture over time. Abrasive and overly aggressive substances containing acid are limited, or better still, avoided entirely.",
-  },
-  {
-    name: "Woodworm treatment",
-    text: "Injection of anti-woodworm products into the holes in the wood. An odorless and colorless insecticide is permethrin.",
-  },
-  {
-    name: "Restoration of the veneer",
-    text: "Integration, where necessary, of ancient material using natural hot glue. The veneer is the finishing wood layer, consisting of a thin sheet of precious material, with a thickness of no more than one millimeter.",
-  },
-  {
-    name: "Reconstruction of the missing parts",
-    text: "Interventions which, in the case of integrative restorations, restore the furniture to its original structure.",
-  },
-  {
-    name: "Filler",
-    text: "Performed with a mixture of colored earth pigments that are as close as possible to the original tone of the wood.",
-  },
-  {
-    name: "Shellac finish",
-    text: "Smoothing and polishing treatment that restores the patina of the past to the furniture. It consists in the application of shellac, a natural resinous substance that, dissolved in alcohol and mixed with other resins, allows the wood to be polished.",
-  },
-  {
-    name: "Beeswax coating",
-    text: "Application of a layer of beeswax to obtain a uniform patina that will protect the surface of the wood.",
-  },
+  { name: "Stripping", text: "Removal, if necessary, of old paint and dirt from the surface, preserving the original patina — the colour the piece has acquired over time — as much as possible. It takes place only in integrative interventions, and abrasive or acidic substances are avoided." },
+  { name: "Woodworm treatment", text: "Injection of anti-woodworm products into the holes in the wood. An odorless and colorless insecticide is permethrin." },
+  { name: "Restoration of the veneer", text: "Integration, where necessary, of ancient material using natural hot glue. The veneer is the finishing layer: a thin sheet of precious wood no more than one millimeter thick." },
+  { name: "Reconstruction of missing parts", text: "In integrative restorations, the furniture is returned to its original structure." },
+  { name: "Filler", text: "A mixture of colored earth pigments matched as closely as possible to the original tone of the wood." },
+  { name: "Shellac finish", text: "Shellac, a natural resin dissolved in alcohol and mixed with other resins, is applied to smooth and polish the wood, restoring the patina of the past." },
+  { name: "Beeswax coating", text: "A layer of beeswax gives a uniform patina that protects the surface of the wood." },
 ];
+
+const featured = [galleryPieces[0], galleryPieces[6], galleryPieces[4]];
+const forSale = [inventoryPieces[0], inventoryPieces[1], inventoryPieces[4]];
 ---
 
 <BaseLayout
   description="Arte Lepre restores and conserves antique Italian, French and English furniture by hand, using traditional methods. A Lepre family workshop since 1959, in Naples and Kensington, MD."
   businessSchema
 >
-  <Slideshow images={[s1, s2, s3, s4, s5]} />
+  <!-- ============ Hero ============ -->
+  <section class="hero section--navy">
+    <div class="wrap hero__grid">
+      <div class="hero__text" data-reveal>
+        <p class="eyebrow">Napoli · 1959 · Washington, D.C.</p>
+        <h1>The <em>art</em> of antique restoration</h1>
+        <p class="lede">
+          Three generations of the Lepre family restoring Italian, French and English antique furniture by hand — with
+          traditional methods, natural materials and above-and-beyond care.
+        </p>
+        <div class="hero__actions">
+          <a class="btn btn--gold" href="/gallery/">View the Gallery</a>
+          <a class="btn btn--ghost" href="/contact/">Book a Consultation</a>
+        </div>
+      </div>
 
-  <div class="content">
-    <section class="principle">
-      <h1 class="section-title">Our Principle</h1>
-      <p>
-        Arte Lepre guarantees the maximum quality of Restoration and Conservation by adhering to traditional methods,
-        natural materials and above and beyond customer service.
-      </p>
-    </section>
-
-    <hr class="rule" />
-
-    <section>
-      <h2 class="subhead">Restoration and Conservation Services Offered</h2>
-      <ul class="list">
-        {services.map(({ name, text }) => <li><strong>{name}:</strong> {text}</li>)}
-      </ul>
-    </section>
-
-    <hr class="rule" />
-
-    <section>
-      <h2 class="subhead">Stages of Restoration</h2>
-      <ol class="list">
-        {stages.map(({ name, text }) => <li><strong>{name}:</strong> {text}</li>)}
-      </ol>
-    </section>
-
-    <div class="cta">
-      <a class="btn" href={`mailto:${site.email}`}>Email Us</a>
-      <span>or</span>
-      <a class="btn" href={site.phone.href}>Call Us</a>
+      <figure class="hero__figure" data-reveal>
+        <div class="mat">
+          <Image src={heroPiece} alt="Italian walnut commode with an inlaid marquetry top, late 18th century" widths={[560, 760, 1120, 1520]} sizes="(max-width: 960px) 92vw, 560px" loading="eager" fetchpriority="high" class="hero__img" />
+        </div>
+        <figcaption>
+          <span class="eyebrow">Available</span>
+          <a href={`/inventory/#${slugify(inventoryPieces[3].title)}`}>Italian walnut commode, late 18th century</a>
+        </figcaption>
+      </figure>
     </div>
-  </div>
+  </section>
+
+  <!-- ============ Principle ============ -->
+  <section class="section principle">
+    <div class="wrap--narrow center" data-reveal>
+      <Ornament />
+      <p class="eyebrow principle__label">Our Principle</p>
+      <blockquote>
+        <p>
+          Arte Lepre guarantees the maximum quality of restoration and conservation by adhering to traditional methods,
+          natural materials and above and beyond customer service.
+        </p>
+      </blockquote>
+    </div>
+  </section>
+
+  <!-- ============ Services ============ -->
+  <section class="section section--parchment">
+    <div class="wrap">
+      <header class="center section-head" data-reveal>
+        <p class="eyebrow">Services</p>
+        <h2>Restoration &amp; <em>Conservation</em></h2>
+      </header>
+      <div class="services">
+        {
+          services.map(({ name, text }, i) => (
+            <article class="service" data-reveal>
+              <span class="numeral">{roman(i + 1)}</span>
+              <h3>{name}</h3>
+              <p>{text}</p>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Method ============ -->
+  <section class="section">
+    <div class="wrap method">
+      <div class="method__intro">
+        <div class="method__sticky" data-reveal>
+          <p class="eyebrow">Our Method</p>
+          <h2>The stages of <em>restoration</em></h2>
+          <p class="lede">
+            Every piece is restored by hand, using exclusively traditional methods: spirit polishing and shellac, beeswax,
+            and antique wood for any missing parts, returning it to its original state.
+          </p>
+          <div class="mat method__img">
+            <Image src={chisel} alt="A carving chisel lifting curls of wood" widths={[480, 960]} sizes="(max-width: 960px) 92vw, 480px" />
+          </div>
+        </div>
+      </div>
+      <ol class="stages">
+        {
+          stages.map(({ name, text }, i) => (
+            <li data-reveal>
+              <span class="numeral">{roman(i + 1)}</span>
+              <div>
+                <h3>{name}</h3>
+                <p>{text}</p>
+              </div>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
+
+  <!-- ============ From the gallery ============ -->
+  <section class="section section--parchment">
+    <div class="wrap">
+      <header class="section-head split" data-reveal>
+        <div>
+          <p class="eyebrow">From the Gallery</p>
+          <h2>Before <em>&amp;</em> after</h2>
+        </div>
+        <a class="link-arrow" href="/gallery/">See all restorations</a>
+      </header>
+      <div class="plates">
+        {
+          featured.map((piece) => (
+            <a class="plate" href={`/gallery/#${slugify(piece.title)}`} data-reveal>
+              <div class="mat">
+                <Image src={piece.images[0]} alt={`${piece.title}, before and after restoration`} widths={[360, 720]} sizes="(max-width: 760px) 92vw, 360px" format="webp" />
+              </div>
+              <h3>{piece.title}</h3>
+              <p>{piece.description.split(".")[0]}.</p>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Heritage ============ -->
+  <section class="heritage on-navy">
+    <Image class="heritage__bg" src={vesuvius} alt="" widths={[1024, 1600, 2400]} sizes="100vw" />
+    <div class="wrap heritage__inner" data-reveal>
+      <p class="eyebrow">Our Heritage</p>
+      <h2>From Naples <em>to</em> Washington</h2>
+      <p class="lede">
+        With over 60 years of experience and three generations later, the Lepre family workshop has been a staple in
+        Naples since 1959. Fabio Lepre brought the family craft to the Washington, D.C. area.
+      </p>
+      <a class="btn btn--ghost" href="/history/">Read our history</a>
+    </div>
+  </section>
+
+  <!-- ============ For sale ============ -->
+  <section class="section">
+    <div class="wrap">
+      <header class="section-head split" data-reveal>
+        <div>
+          <p class="eyebrow">Antiques for Sale</p>
+          <h2>Currently <em>available</em></h2>
+        </div>
+        <a class="link-arrow" href="/inventory/">View all pieces</a>
+      </header>
+      <div class="plates plates--tall">
+        {
+          forSale.map((piece) => (
+            <a class="plate" href={`/inventory/#${slugify(piece.title)}`} data-reveal>
+              <div class="mat">
+                <Image src={piece.images[0]} alt={piece.title} widths={[360, 720]} sizes="(max-width: 760px) 92vw, 360px" format="webp" />
+              </div>
+              <h3>{piece.title}</h3>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Visit ============ -->
+  <section class="section section--parchment visit">
+    <div class="wrap--narrow center" data-reveal>
+      <Ornament />
+      <p class="eyebrow visit__label">Visit the Workshop</p>
+      <h2>By <em>appointment</em></h2>
+      <p class="lede">
+        {site.address.street}, {site.address.city}, {site.address.region}. Call or write to arrange a consultation for
+        your piece.
+      </p>
+      <div class="visit__actions">
+        <a class="btn" href={site.phone.href}>Call {site.phone.display}</a>
+        <a class="btn btn--ghost" href={`mailto:${site.email}`}>Email us</a>
+      </div>
+    </div>
+  </section>
 </BaseLayout>
 
 <style>
-  .content {
-    max-width: var(--text-max);
-    margin: 0 auto;
-    padding: 2.5rem 1.5rem 3.5rem;
-  }
-
-  .principle { text-align: center; }
-  .principle p { margin-top: 0.75rem; }
-
-  .subhead {
-    font-family: var(--font-sans);
-    font-weight: 300;
-    font-size: 1.5rem;
-    text-align: center;
-    color: var(--ink);
-    margin-bottom: 1.25rem;
-  }
-
-  .list {
+  /* ---------- hero ---------- */
+  .hero { padding-block: clamp(3.5rem, 7vw, 6.5rem); }
+  .hero__grid {
     display: grid;
-    gap: 1.1rem;
-    padding-left: 1.25rem;
-    font-size: 1rem;
-  }
-  .list li::marker { color: var(--gold); }
-  .list strong { font-weight: 600; color: var(--navy); }
-
-  .cta {
-    display: flex;
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
     align-items: center;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 1rem 1.25rem;
-    margin-top: 3rem;
-    color: var(--muted);
+    gap: clamp(2.5rem, 6vw, 5.5rem);
+  }
+  .hero h1 { margin-top: 1.25rem; }
+  .hero .lede { margin-top: 1.5rem; max-width: 34rem; }
+  .hero__actions { display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 2.5rem; }
+
+  .hero__figure .mat { background: #e9dfca; }
+  .hero__img { width: 100%; aspect-ratio: 5 / 3.6; object-fit: cover; object-position: center 88%; }
+  .hero__figure figcaption {
+    display: flex;
+    gap: 0.75rem;
+    align-items: baseline;
+    margin-top: 1rem;
+    font-style: italic;
+    color: var(--on-navy);
+  }
+  .hero__figure figcaption a { color: inherit; text-decoration: none; border-bottom: 1px solid var(--gold-line); }
+  .hero__figure figcaption a:hover { color: var(--gold); }
+
+  /* ---------- principle ---------- */
+  .principle__label { margin-top: 2rem; }
+  blockquote {
+    margin-top: 1.25rem;
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: var(--step-2);
+    line-height: 1.4;
+    color: var(--navy);
+  }
+  blockquote p::before { content: "\201C"; color: var(--gold-deep); }
+  blockquote p::after { content: "\201D"; color: var(--gold-deep); }
+
+  /* ---------- shared section header ---------- */
+  .section-head { margin-bottom: clamp(2.5rem, 5vw, 4rem); }
+  .section-head h2 { margin-top: 0.75rem; }
+  .split { display: flex; justify-content: space-between; align-items: flex-end; gap: 1.5rem; flex-wrap: wrap; }
+
+  .numeral {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 2.6rem;
+    line-height: 1;
+    color: var(--gold-deep);
+  }
+
+  /* ---------- services ---------- */
+  .services {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: clamp(1.5rem, 3vw, 2.5rem);
+  }
+  .service {
+    position: relative;
+    padding: clamp(2rem, 4vw, 3rem);
+    background: var(--ivory);
+    border: 1px solid var(--rule);
+  }
+  .service::before {
+    content: "";
+    position: absolute;
+    inset: 6px;
+    border: 1px solid rgb(148 114 47 / 0.15);
+    pointer-events: none;
+  }
+  .service h3 { margin-top: 1rem; }
+  .service p { margin-top: 0.75rem; color: var(--text-soft); }
+
+  /* ---------- method ---------- */
+  .method {
+    display: grid;
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    gap: clamp(2.5rem, 6vw, 6rem);
+  }
+  .method__sticky { position: sticky; top: calc(var(--header-h) + 2rem); }
+  .method h2 { margin-top: 0.75rem; }
+  .method .lede { margin-top: 1.25rem; }
+  .method__img { margin-top: 2rem; }
+  .method__img img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
+
+  .stages { list-style: none; padding: 0; }
+  .stages li {
+    display: grid;
+    grid-template-columns: 4.5rem 1fr;
+    gap: 1rem;
+    padding-block: 1.75rem;
+    border-bottom: 1px solid var(--rule);
+  }
+  .stages li:first-child { padding-top: 0; }
+  .stages h3 { font-size: var(--step-1); font-weight: 600; }
+  .stages p { margin-top: 0.4rem; color: var(--text-soft); }
+
+  /* ---------- plates (gallery + for-sale teasers) ---------- */
+  .plates {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: clamp(1.5rem, 3vw, 2.75rem);
+  }
+  .plate { display: block; text-decoration: none; color: inherit; }
+  .plate img {
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+    transition: transform 0.8s var(--ease);
+  }
+  .plates--tall .plate img { aspect-ratio: 4 / 5; }
+  .plate .mat { overflow: hidden; }
+  .plate:hover img { transform: scale(1.04); }
+  .plate h3 { margin-top: 1.25rem; font-size: var(--step-1); font-weight: 600; transition: color 0.2s var(--ease); }
+  .plate:hover h3 { color: var(--gold-deep); }
+  .plate p { margin-top: 0.35rem; font-size: var(--step--1); font-style: italic; color: var(--text-soft); }
+
+  /* ---------- heritage ---------- */
+  .heritage {
+    position: relative;
+    isolation: isolate;
+    padding-block: clamp(6rem, 12vw, 10rem);
+    color: var(--on-navy);
+    overflow: hidden;
+  }
+  .heritage__bg {
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .heritage::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: linear-gradient(90deg, rgb(19 35 61 / 0.94) 0%, rgb(19 35 61 / 0.82) 45%, rgb(19 35 61 / 0.25) 100%);
+  }
+  .heritage__inner > * { max-width: 36rem; }
+  .heritage h2 { margin-top: 0.75rem; color: var(--ivory); }
+  .heritage h2 em { color: var(--gold); }
+  .heritage .eyebrow { color: var(--gold); }
+  .heritage .lede { margin-top: 1.25rem; color: var(--on-navy); }
+  .heritage .btn { margin-top: 2.25rem; }
+
+  /* ---------- visit ---------- */
+  .visit__label { margin-top: 2rem; }
+  .visit h2 { margin-top: 0.75rem; }
+  .visit .lede { margin-top: 1.25rem; }
+  .visit__actions { display: flex; justify-content: center; flex-wrap: wrap; gap: 1rem; margin-top: 2.5rem; }
+
+  /* ---------- responsive ---------- */
+  @media (max-width: 960px) {
+    .hero__grid, .method { grid-template-columns: 1fr; }
+    .method__sticky { position: static; }
+    .plates { grid-template-columns: repeat(2, 1fr); }
+    .plates > :nth-child(3) { display: none; }
+  }
+  @media (max-width: 760px) {
+    .services { grid-template-columns: 1fr; }
+    .plates { grid-template-columns: 1fr; }
+    .plates > :nth-child(3) { display: block; }
+    .stages li { grid-template-columns: 3.25rem 1fr; }
+    .numeral { font-size: 2.1rem; }
+    .heritage::before { background: rgb(19 35 61 / 0.86); }
   }
 </style>
